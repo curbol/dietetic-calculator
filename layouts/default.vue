@@ -3,7 +3,6 @@
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
-      :clipped="clipped"
       fixed
       app
     >
@@ -27,7 +26,11 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar :clipped-left="clipped" fixed app>
+    <v-toolbar
+      :clipped-left="clipped"
+      fixed
+      app
+    >
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
@@ -57,7 +60,7 @@ export default {
         },
         {
           icon: 'refresh',
-          title: 'Converter',
+          title: 'Convert',
           to: '/convert'
         },
         {
