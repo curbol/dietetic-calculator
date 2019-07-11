@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
+    command: npm run docker.dev
+    ports:
+      - "3000:3000"

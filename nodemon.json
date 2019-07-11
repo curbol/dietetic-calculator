@@ -1,0 +1,12 @@
+{
+  "restartable": "rs",
+  "ignore": [".*", ".*/**/*", "test"],
+  "verbose": true,
+  "exec": "npm run build && npm run start",
+  "watch": ["*"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js,ts,json,vue",
+  "delay": "2500"
+}
