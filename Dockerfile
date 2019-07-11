@@ -5,7 +5,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY . .
 
-RUN npm install --global nodemon
 RUN npm install
 
 ENV NUXT_HOST=0.0.0.0
