@@ -1,19 +1,19 @@
 # dietetic-calculator
 
-> Tool for common dietetic calculations
+> Tool For Common Dietetic Calculations
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-$ npm install
+$ npm run install
 
 # serve with hot reload at localhost:3000
 $ npm run dev
 
 # build for production and launch server
 $ npm run build
-$ npm start
+$ npm run start
 
 # generate static project
 $ npm run generate
