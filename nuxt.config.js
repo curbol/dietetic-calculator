@@ -37,7 +37,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/filters.js'],
   /*
    ** Nuxt.js modules
    */
@@ -59,13 +59,13 @@ export default {
    */
   vuetify: {
     theme: {
-      primary: colors.blue.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
+      primary: colors.cyan.darken2,
+      secondary: colors.orange.base,
+      accent: colors.blueGrey.base,
+      error: colors.deepOrange.base,
       warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
+      info: colors.teal.base,
+      success: colors.green.base
     }
   },
   /*

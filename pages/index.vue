@@ -1,8 +1,8 @@
 <template>
-  <v-container fill-height fluid grid-list-xl>
+  <v-container fluid grid-list-xl>
     <v-layout wrap>
       <v-flex v-for="card in cards" :key="card.title" xs12 sm12 md4 lg4 xl4>
-        <v-toolbar color="indigo" dark>
+        <v-toolbar dense card color="primary">
           <v-toolbar-title>{{ card.title }}</v-toolbar-title>
         </v-toolbar>
         <v-card>
@@ -19,7 +19,7 @@ export default {
     return {
       cards: [
         {
-          title: 'Calculator',
+          title: 'Calculators',
           text: 'Card 1'
         },
         {
