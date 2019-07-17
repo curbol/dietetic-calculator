@@ -1,46 +1,12 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <v-flex md12 sm12 lg4>
+      <v-flex v-for="card in cards" :key="card.title" xs12 sm12 md4 lg4 xl4>
         <v-toolbar color="indigo" dark>
-          <v-toolbar-title>Calculators</v-toolbar-title>
+          <v-toolbar-title>{{ card.title }}</v-toolbar-title>
         </v-toolbar>
         <v-card>
-          <v-container fluid grid-list-md>
-            <v-layout row wrap>
-              <v-flex xs8>
-                <span>test</span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
-      </v-flex>
-      <v-flex md12 sm12 lg4>
-        <v-toolbar color="indigo" dark>
-          <v-toolbar-title>Calculators</v-toolbar-title>
-        </v-toolbar>
-        <v-card>
-          <v-container fluid grid-list-md>
-            <v-layout row wrap>
-              <v-flex xs8>
-                <span>test</span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
-      </v-flex>
-      <v-flex md12 sm12 lg4>
-        <v-toolbar color="indigo" dark>
-          <v-toolbar-title>Calculators</v-toolbar-title>
-        </v-toolbar>
-        <v-card>
-          <v-container fluid grid-list-md>
-            <v-layout row wrap>
-              <v-flex xs8>
-                <span>test</span>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <span>{{ card.text }}</span>
         </v-card>
       </v-flex>
     </v-layout>
@@ -51,6 +17,20 @@
 export default {
   data() {
     return {
+      cards: [
+        {
+          title: 'Calculator',
+          text: 'Card 1'
+        },
+        {
+          title: 'Inputs',
+          text: 'Card 2'
+        },
+        {
+          title: 'Results',
+          text: 'Card 3'
+        }
+      ],
       headers: [
         {
           sortable: false,
