@@ -1,14 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      clipped
-      app
-    >
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
+    <v-navigation-drawer v-model="drawer" width="180" clipped app>
       <v-list>
         <v-list-tile
           v-for="(item, i) in items"
@@ -26,11 +18,11 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar clipped-left color="primary" app>
+    <v-toolbar color="primary" clipped-left app>
       <v-btn icon @click.stop="drawer = !drawer">
         <v-icon>menu</v-icon>
       </v-btn>
-      <v-toolbar-title>{{ title | toUpperCase }}</v-toolbar-title>
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid>
@@ -48,18 +40,22 @@ export default {
   data() {
     return {
       drawer: false,
-      miniVariant: false,
       title: 'Dietetic Calculator',
       items: [
         {
           icon: 'apps',
-          title: 'Welcome',
+          title: 'Calculate',
           to: '/'
         },
         {
+          icon: 'apps',
+          title: 'Convert',
+          to: '/convert'
+        },
+        {
           icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
+          title: 'About',
+          to: '/about'
         }
       ]
     }
