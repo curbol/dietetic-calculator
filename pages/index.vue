@@ -1,79 +1,26 @@
 <template>
   <v-container fluid grid-list-xl>
     <v-layout wrap>
-      <v-flex v-for="card in cards" :key="card.title" xs12 sm12 md4 lg4 xl4>
-        <v-card elevation="3">
-          <v-toolbar dense card color="primary">
-            <v-toolbar-title>{{ card.title }}</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn flat icon color="accent">
-              <v-icon>check_box</v-icon>
-            </v-btn>
-            <v-btn flat icon color="accent">
-              <v-icon>check_box_outline_blank</v-icon>
-            </v-btn>
-          </v-toolbar>
-          <v-list subheader two-line>
-            <v-subheader>Hangout notifications</v-subheader>
-
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-checkbox></v-checkbox>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Notifications</v-list-tile-title>
-                <v-list-tile-sub-title
-                  >Allow notifications</v-list-tile-sub-title
-                >
-              </v-list-tile-content>
-            </v-list-tile>
-
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-checkbox></v-checkbox>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Sound</v-list-tile-title>
-                <v-list-tile-sub-title>Hangouts message</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-checkbox></v-checkbox>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Video sounds</v-list-tile-title>
-                <v-list-tile-sub-title
-                  >Hangouts video call</v-list-tile-sub-title
-                >
-              </v-list-tile-content>
-            </v-list-tile>
-
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-checkbox></v-checkbox>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Invites</v-list-tile-title>
-                <v-list-tile-sub-title
-                  >Notify when receiving invites</v-list-tile-sub-title
-                >
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-card>
+      <v-flex xs12 sm12 md4 lg4 xl4>
+        <calculators></calculators>
+      </v-flex>
+      <v-flex xs12 sm12 md4 lg4 xl4>
+        <calculators></calculators>
+      </v-flex>
+      <v-flex xs12 sm12 md4 lg4 xl4>
+        <calculators></calculators>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import Calculators from '@/components/Calculators.vue'
+
 export default {
+  components: {
+    Calculators
+  },
   data() {
     return {
       cards: [

@@ -48,12 +48,12 @@ export default {
           to: '/'
         },
         {
-          icon: 'apps',
+          icon: 'loop',
           title: 'Convert',
           to: '/convert'
         },
         {
-          icon: 'bubble_chart',
+          icon: 'info',
           title: 'About',
           to: '/about'
         }
