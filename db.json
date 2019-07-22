@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Anthropometric",
+      "icon": "accessibility_new"
+    },
+    {
+      "id": "2",
+      "name": "Nutritional Needs",
+      "icon": "restaurant"
+    }
+  ],
+  "calculators": [
+    {
+      "id": "bmi",
+      "category": "1",
+      "title": "Body Mass Index (BMI)",
+      "subtitle": "A measure of body fat in adults",
+      "inputs": ["height", "weight"],
+      "selections": [],
+      "outputUnit": "kg/m²"
+    },
+    {
+      "id": "ibw",
+      "category": "1",
+      "title": "Ideal Body Weight (IBW)",
+      "subtitle": "Estimated ideal weight for adults",
+      "inputs": ["height"],
+      "selections": ["gender"],
+      "outputUnit": "kg"
+    },
+    {
+      "id": "abw",
+      "category": "1",
+      "title": "Adjusted Body Weight (ABW)",
+      "subtitle": "Adjusted ideal weight for the obese",
+      "inputs": ["height", "weight"],
+      "selections": ["gender"],
+      "outputUnit": "kg"
+    },
+    {
+      "id": "mifflin",
+      "category": "2",
+      "title": "Mifflin St. Jeor",
+      "subtitle": "Daily calorie needs for adults",
+      "inputs": ["height", "weight", "age"],
+      "selections": ["gender"],
+      "outputUnit": "kcal"
+    }
+  ]
+}
