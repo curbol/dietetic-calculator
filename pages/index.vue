@@ -23,7 +23,15 @@ export default {
   },
   async fetch({ store, error, params }) {
     try {
-      await store.dispatch('calcs/fetchCalcGroups')
+      await store.dispatch('calcs/fetchCategories')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch calc groups. Please try again.`
+      })
+    }
+    try {
+      await store.dispatch('calcs/fetchCalculators')
     } catch (e) {
       error({
         statusCode: 503,

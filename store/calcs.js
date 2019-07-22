@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import CalcService from '@/services/CalcService.js'
 
 export default {
@@ -8,53 +9,53 @@ export default {
     }
   },
   mutations: {
-    setCategories(state, categories) {
+    Set_Categories(state, categories) {
       state.categories = categories
     },
-    setCalculators(state, calculators) {
+    Set_Calculators(state, calculators) {
       state.calculators = calculators
     },
-    activateCategory(state, category) {
+    Toggle_Activate_Category(state, id) {
       state.categories = state.categories.map(x =>
-        x.id === category.id ? category : x
+        x.id === id ? { ...x, active: !x.active } : x
       )
     },
-    selectCalculator(state, calc) {
+    Toggle_Select_Calculator(state, id) {
       state.calculators = state.calculators.map(x =>
-        x.id === calc.id ? calc : x
+        x.id === id ? { ...x, selected: !x.selected } : x
       )
     }
   },
   actions: {
     async fetchCategories({ commit }) {
       const { data } = await CalcService.getCategories()
-      data.map(category => ({
-        ...category,
-        active: true
-      }))
-      commit('setCategories', data)
+      const _data = _(data)
+        .map(category => ({
+          ...category,
+          active: true
+        }))
+        .orderBy('name')
+      commit('Set_Categories', _data)
     },
     async fetchCalculators({ commit }) {
       const { data } = await CalcService.getCalculators()
-      data.map(calc => ({
-        ...calc,
-        selected: true
-      }))
-      commit('setCalculators', data)
+      const _data = _(data)
+        .map(calc => ({
+          ...calc,
+          selected: false
+        }))
+        .orderBy('title')
+      commit('Set_Calculators', _data)
     },
-    async activateCategory({ commit, getters }, id) {
-      const category = getters.getCategoryById(id)
-      commit('setEvent', category)
+    toggleActivateCategory({ commit }, id) {
+      commit('Toggle_Activate_Category', id)
     },
-    async selectCalculator({ commit, getters }, id) {
-      const event =
-        getters.getEventById(id) || (await CalcService.getEvent(id)).data
-      commit('setEvent', event)
+    toggleSelectCalculator({ commit }, id) {
+      commit('Toggle_Select_Calculator', id)
     }
   },
   getters: {
-    getCategoryById: state => id =>
-      state.categories.find(category => category.id === id),
-    getCalcById: state => id => state.calculators.find(calc => calc.id === id)
+    getCalcsByCategoryId: state => id =>
+      state.calculators.filter(x => x.category === id)
   }
 }
