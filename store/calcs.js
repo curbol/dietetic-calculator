@@ -5,7 +5,8 @@ export default {
   state() {
     return {
       categories: [],
-      calculators: []
+      calculators: [],
+      inputs: []
     }
   },
   mutations: {
