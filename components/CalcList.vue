@@ -1,10 +1,20 @@
 <template>
   <tool-card title="Calculators">
     <template #toolbar>
-      <v-btn flat icon color="secondary">
+      <v-btn
+        flat
+        icon
+        color="secondary"
+        @click="setAllCalculatorsSelected(true)"
+      >
         <v-icon>check_box</v-icon>
       </v-btn>
-      <v-btn flat icon color="secondary">
+      <v-btn
+        flat
+        icon
+        color="secondary"
+        @click="setAllCalculatorsSelected(false)"
+      >
         <v-icon>check_box_outline_blank</v-icon>
       </v-btn>
     </template>
@@ -59,7 +69,11 @@ export default {
     ...mapGetters('calcs', ['getCalcsByCategoryId'])
   },
   methods: {
-    ...mapActions('calcs', ['toggleActivateCategory', 'toggleSelectCalculator'])
+    ...mapActions('calcs', [
+      'toggleActivateCategory',
+      'toggleSelectCalculator',
+      'setAllCalculatorsSelected'
+    ])
   }
 }
 </script>

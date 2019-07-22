@@ -24,6 +24,18 @@ export default {
       state.calculators = state.calculators.map(x =>
         x.id === id ? { ...x, selected: !x.selected } : x
       )
+    },
+    Set_All_Categories_Active(state, active) {
+      state.categories = state.categories.map(x => ({
+        ...x,
+        active
+      }))
+    },
+    Set_All_Calculators_Selected(state, selected) {
+      state.calculators = state.calculators.map(x => ({
+        ...x,
+        selected
+      }))
     }
   },
   actions: {
@@ -52,6 +64,12 @@ export default {
     },
     toggleSelectCalculator({ commit }, id) {
       commit('Toggle_Select_Calculator', id)
+    },
+    setAllCalculatorsSelected({ commit }, selected) {
+      commit('Set_All_Calculators_Selected', selected)
+      if (selected) {
+        commit('Set_All_Categories_Active', true)
+      }
     }
   },
   getters: {
