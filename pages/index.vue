@@ -5,10 +5,10 @@
         <calc-list></calc-list>
       </v-flex>
       <v-flex xs12 sm12 md4 lg4 xl4>
-        <calc-list></calc-list>
+        <input-list></input-list>
       </v-flex>
       <v-flex xs12 sm12 md4 lg4 xl4>
-        <calc-list></calc-list>
+        <input-list></input-list>
       </v-flex>
     </v-layout>
   </v-container>
@@ -16,10 +16,12 @@
 
 <script>
 import CalcList from '@/components/CalcList.vue'
+import InputList from '@/components/InputList.vue'
 
 export default {
   components: {
-    CalcList
+    CalcList,
+    InputList
   },
   async fetch({ store, error, params }) {
     try {

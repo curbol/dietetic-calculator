@@ -19,10 +19,11 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="primary" clipped-left app>
-      <v-btn icon @click.stop="drawer = !drawer">
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-divider class="mx-2 hidden-sm-and-down" inset vertical></v-divider>
+      <span class="subheading hidden-sm-and-down">{{ subtitle }}</span>
+      <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
       <v-container fluid>
@@ -41,6 +42,7 @@ export default {
     return {
       drawer: false,
       title: 'Dietetic Calculator',
+      subtitle: 'Tool For Common Dietetic Calculations',
       items: [
         {
           icon: 'apps',
