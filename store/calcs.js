@@ -16,6 +16,9 @@ export default {
     Set_Calculators(state, calculators) {
       state.calculators = calculators
     },
+    Set_Inputs(state, inputs) {
+      state.inputs = inputs
+    },
     Toggle_Activate_Category(state, id) {
       state.categories = state.categories.map(x =>
         x.id === id ? { ...x, active: !x.active } : x
@@ -59,6 +62,10 @@ export default {
         }))
         .orderBy('title')
       commit('Set_Calculators', _data)
+    },
+    async fetchInputs({ commit }) {
+      const { data } = await CalcService.getInputs()
+      commit('Set_Inputs', data)
     },
     toggleActivateCategory({ commit }, id) {
       commit('Toggle_Activate_Category', id)

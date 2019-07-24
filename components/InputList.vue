@@ -20,26 +20,15 @@
     </template>
     <v-container>
       <v-layout column align-center>
-        <v-flex>
-          <v-text-field>
-            <v-icon slot="append" color="red">check_box</v-icon>
-            <v-icon slot="prepend" color="green">check_box</v-icon>
-          </v-text-field>
-        </v-flex>
-        <v-flex>
-          <v-text-field>
-            <v-icon slot="append" color="red">check_box</v-icon>
-            <v-icon slot="prepend" color="green">check_box</v-icon>
-          </v-text-field>
-        </v-flex>
-        <v-flex>
+        <v-flex v-for="input in inputs" :key="input.id">
           <v-layout>
-            <v-flex>
-              <v-text-field></v-text-field>
-            </v-flex>
-            <v-flex sm3 d-flex>
-              <v-select :items="items" label="kg"></v-select>
-            </v-flex>
+            <v-text-field :label="input.name"></v-text-field>
+            <v-select
+              outlined
+              class="units"
+              :items="items"
+              label="Units"
+            ></v-select>
           </v-layout>
         </v-flex>
       </v-layout>
@@ -61,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('calcs', ['categories', 'calculators']),
+    ...mapState('calcs', ['categories', 'calculators', 'inputs']),
     ...mapGetters('calcs', ['getCalcsByCategoryId'])
   },
   methods: {
@@ -74,4 +63,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.units {
+  width: 60px;
+}
+</style>

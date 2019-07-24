@@ -15,5 +15,8 @@ export default {
   },
   getCalculators() {
     return apiClient.get('/calculators')
+  },
+  getInputs() {
+    return apiClient.get('/inputs')
   }
 }

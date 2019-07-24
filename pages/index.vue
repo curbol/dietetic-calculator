@@ -40,6 +40,14 @@ export default {
         message: `Unable to fetch calc groups. Please try again.`
       })
     }
+    try {
+      await store.dispatch('calcs/fetchInputs')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch inputs. Please try again.`
+      })
+    }
   }
 }
 </script>
