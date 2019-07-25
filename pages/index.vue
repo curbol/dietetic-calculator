@@ -48,6 +48,14 @@ export default {
         message: `Unable to fetch inputs. Please try again.`
       })
     }
+    try {
+      await store.dispatch('calcs/fetchUnits')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch units. Please try again.`
+      })
+    }
   }
 }
 </script>

@@ -20,17 +20,33 @@
     </template>
     <v-container>
       <v-layout column align-center>
-        <v-flex v-for="input in inputs" :key="input.id">
-          <v-layout>
-            <v-text-field :label="input.name"></v-text-field>
-            <v-select
-              outlined
-              class="units"
-              :items="items"
-              label="Units"
-            ></v-select>
-          </v-layout>
-        </v-flex>
+        <v-slide-y-transition group>
+          <v-flex v-for="input in activeInputs" :key="input.id">
+            <v-layout>
+              <v-text-field
+                :label="input.name"
+                :value="input.value"
+                @input="setInputValue({ id: input.id, value: $event })"
+              ></v-text-field>
+              <v-select
+                outlined
+                class="units"
+                item-text="symbol"
+                item-value="symbol"
+                label="Units"
+                :items="getUnitsByType(input.type)"
+                :value="input.selectedUnit"
+                @input="
+                  setInputSelectedUnit({ id: input.id, selectedUnit: $event })
+                "
+              >
+                <template slot="item" slot-scope="data">
+                  <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+                </template>
+              </v-select>
+            </v-layout>
+          </v-flex>
+        </v-slide-y-transition>
       </v-layout>
     </v-container>
   </tool-card>
@@ -50,15 +66,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('calcs', ['categories', 'calculators', 'inputs']),
-    ...mapGetters('calcs', ['getCalcsByCategoryId'])
+    ...mapState('calcs', ['inputs']),
+    ...mapGetters('calcs', ['activeInputs', 'getUnitsByType'])
   },
   methods: {
-    ...mapActions('calcs', [
-      'toggleActivateCategory',
-      'toggleSelectCalculator',
-      'setAllCalculatorsSelected'
-    ])
+    ...mapActions('calcs', ['setInputValue', 'setInputSelectedUnit'])
   }
 }
 </script>

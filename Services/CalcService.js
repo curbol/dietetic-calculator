@@ -18,5 +18,8 @@ export default {
   },
   getInputs() {
     return apiClient.get('/inputs')
+  },
+  getUnits() {
+    return apiClient.get('/units')
   }
 }

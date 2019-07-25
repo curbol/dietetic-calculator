@@ -6,7 +6,8 @@ export default {
     return {
       categories: [],
       calculators: [],
-      inputs: []
+      inputs: [],
+      units: []
     }
   },
   mutations: {
@@ -18,6 +19,9 @@ export default {
     },
     Set_Inputs(state, inputs) {
       state.inputs = inputs
+    },
+    Set_Units(state, units) {
+      state.units = units
     },
     Toggle_Activate_Category(state, id) {
       state.categories = state.categories.map(x =>
@@ -40,6 +44,14 @@ export default {
         ...x,
         selected
       }))
+    },
+    Set_Input_Value(state, { id, value }) {
+      state.inputs = state.inputs.map(x => (x.id === id ? { ...x, value } : x))
+    },
+    Set_Input_Selected_Unit(state, { id, selectedUnit }) {
+      state.inputs = state.inputs.map(x =>
+        x.id === id ? { ...x, selectedUnit } : x
+      )
     }
   },
   actions: {
@@ -65,7 +77,18 @@ export default {
     },
     async fetchInputs({ commit }) {
       const { data } = await CalcService.getInputs()
-      commit('Set_Inputs', data)
+      const _data = _(data)
+        .map(input => ({
+          ...input,
+          value: undefined,
+          selectedUnit: input.defaultUnit
+        }))
+        .orderBy('type')
+      commit('Set_Inputs', _data)
+    },
+    async fetchUnits({ commit }) {
+      const { data } = await CalcService.getUnits()
+      commit('Set_Units', data)
     },
     toggleActivateCategory({ commit }, id) {
       commit('Toggle_Activate_Category', id)
@@ -78,10 +101,25 @@ export default {
       if (selected) {
         commit('Set_All_Categories_Active', true)
       }
+    },
+    setInputValue({ commit }, { id, value }) {
+      commit('Set_Input_Value', { id, value })
+    },
+    setInputSelectedUnit({ commit }, { id, selectedUnit }) {
+      commit('Set_Input_Selected_Unit', { id, selectedUnit })
     }
   },
   getters: {
     getCalcsByCategoryId: state => id =>
-      state.calculators.filter(x => x.category === id)
+      state.calculators.filter(x => x.category === id),
+    activeInputs: state => {
+      const inputIds = _(state.calculators)
+        .filter(x => x.selected)
+        .map(x => x.inputs)
+        .flatten()
+        .uniq()
+      return state.inputs.filter(x => inputIds.includes(x.id))
+    },
+    getUnitsByType: state => type => state.units.filter(x => x.type === type)
   }
 }
