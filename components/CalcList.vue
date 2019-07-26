@@ -26,7 +26,7 @@
         :prepend-icon="category.icon"
         @click="toggleActivateCategory(category.id)"
       >
-        <template v-slot:activator>
+        <template #activator>
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>{{ category.name }}</v-list-tile-title>
@@ -35,7 +35,7 @@
         </template>
 
         <v-list-tile
-          v-for="calc in getCalcsByCategoryId(category.id)"
+          v-for="calc in calcsByCategoryId(category.id)"
           :key="calc.id"
           @click="() => {}"
         >
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState('calcs', ['categories', 'calculators']),
-    ...mapGetters('calcs', ['getCalcsByCategoryId'])
+    ...mapGetters('calcs', ['calcsByCategoryId'])
   },
   methods: {
     ...mapActions('calcs', [

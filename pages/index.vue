@@ -4,24 +4,34 @@
       <v-flex xs12 sm12 md4 lg4 xl4>
         <calc-list></calc-list>
       </v-flex>
-      <v-flex xs12 sm12 md4 lg4 xl4>
-        <input-list></input-list>
-      </v-flex>
-      <v-flex xs12 sm12 md4 lg4 xl4>
-        <input-list></input-list>
-      </v-flex>
+      <v-fade-transition appear>
+        <v-flex v-if="selectedCalculators.length" xs12 sm12 md4 lg4 xl4>
+          <input-list></input-list>
+        </v-flex>
+      </v-fade-transition>
+      <v-fade-transition appear>
+        <v-flex v-if="selectedCalculators.length" xs12 sm12 md4 lg4 xl4>
+          <result-list></result-list>
+        </v-flex>
+      </v-fade-transition>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CalcList from '@/components/CalcList.vue'
 import InputList from '@/components/InputList.vue'
+import ResultList from '@/components/ResultList.vue'
 
 export default {
   components: {
     CalcList,
-    InputList
+    InputList,
+    ResultList
+  },
+  computed: {
+    ...mapGetters('calcs', ['selectedCalculators'])
   },
   async fetch({ store, error, params }) {
     try {

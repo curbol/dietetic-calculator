@@ -19,7 +19,7 @@
       "subtitle": "A measure of body fat in adults",
       "inputs": ["height", "weight"],
       "selections": [],
-      "outputUnit": "kg/m²"
+      "defaultUnit": "kg/m²"
     },
     {
       "id": "ibw",
@@ -28,7 +28,7 @@
       "subtitle": "Estimated ideal weight for adults",
       "inputs": ["height"],
       "selections": ["gender"],
-      "outputUnit": "kg"
+      "defaultUnit": "kg"
     },
     {
       "id": "abw",
@@ -37,7 +37,7 @@
       "subtitle": "Adjusted ideal weight for the obese",
       "inputs": ["height", "weight"],
       "selections": ["gender"],
-      "outputUnit": "kg"
+      "defaultUnit": "kg"
     },
     {
       "id": "mifflin",
@@ -46,7 +46,7 @@
       "subtitle": "Daily calorie needs for adults",
       "inputs": ["height", "weight", "age"],
       "selections": ["gender"],
-      "outputUnit": "kcal"
+      "defaultUnit": "kcal"
     }
   ],
   "inputs": [

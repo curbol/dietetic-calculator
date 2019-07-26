@@ -1,37 +1,41 @@
 <template>
-  <tool-card title="Inputs">
-    <template #toolbar>
-      <v-btn flat icon color="secondary" @click="clearInputs()">
-        <v-icon>delete_sweep</v-icon>
-      </v-btn>
-    </template>
+  <tool-card title="Results">
+    <template #toolbar></template>
     <v-container>
       <v-layout column align-center>
         <v-slide-y-transition group appear>
-          <v-flex v-for="input in activeInputs" :key="input.id">
+          <v-flex v-for="calc in selectedCalculators" :key="calc.id">
             <v-layout>
               <v-text-field
-                type="number"
-                :label="input.name"
-                :value="input.value"
-                @input="setInputValue({ id: input.id, value: $event })"
+                readonly
+                :label="calc.title"
+                :value="calc.result"
+                @input="setInputValue({ id: calc.id, value: $event })"
               ></v-text-field>
               <v-select
+                v-if="unitsBySymbol(calc.defaultUnit).length > 1"
                 outlined
                 class="units"
                 item-text="symbol"
                 item-value="symbol"
                 label="Units"
-                :items="unitsByType(input.type)"
-                :value="input.selectedUnit"
+                :items="unitsBySymbol(calc.defaultUnit)"
+                :value="calc.selectedUnit"
                 @input="
-                  setInputSelectedUnit({ id: input.id, selectedUnit: $event })
+                  setInputSelectedUnit({ id: calc.id, selectedUnit: $event })
                 "
               >
                 <template slot="item" slot-scope="data">
                   <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
                 </template>
               </v-select>
+              <v-text-field
+                v-else
+                readonly
+                class="units"
+                label="Units"
+                :value="calc.selectedUnit"
+              ></v-text-field>
             </v-layout>
           </v-flex>
         </v-slide-y-transition>
@@ -41,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import ToolCard from '@/components/ToolCard.vue'
 
 export default {
@@ -54,14 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('calcs', ['activeInputs', 'unitsByType'])
-  },
-  methods: {
-    ...mapActions('calcs', [
-      'setInputValue',
-      'setInputSelectedUnit',
-      'clearInputs'
-    ])
+    ...mapGetters('calcs', ['selectedCalculators', 'unitsBySymbol'])
   }
 }
 </script>
@@ -69,5 +66,6 @@ export default {
 <style lang="scss" scoped>
 .units {
   width: 60px;
+  max-width: 60px;
 }
 </style>

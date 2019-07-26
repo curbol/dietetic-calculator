@@ -60,34 +60,40 @@ export default {
   actions: {
     async fetchCategories({ commit }) {
       const { data } = await CalcService.getCategories()
-      const _data = _(data)
+      const categories = _(data)
         .map(category => ({
           ...category,
           active: true
         }))
         .orderBy('name')
-      commit('Set_Categories', _data)
+        .value()
+      commit('Set_Categories', categories)
     },
     async fetchCalculators({ commit }) {
       const { data } = await CalcService.getCalculators()
-      const _data = _(data)
+      const calculators = _(data)
         .map(calc => ({
           ...calc,
-          selected: false
+          selected: false,
+          result: '?',
+          selectedUnit: calc.defaultUnit
         }))
         .orderBy('title')
-      commit('Set_Calculators', _data)
+        .orderBy('category')
+        .value()
+      commit('Set_Calculators', calculators)
     },
     async fetchInputs({ commit }) {
       const { data } = await CalcService.getInputs()
-      const _data = _(data)
+      const inputs = _(data)
         .map(input => ({
           ...input,
           value: undefined,
           selectedUnit: input.defaultUnit
         }))
         .orderBy('type')
-      commit('Set_Inputs', _data)
+        .value()
+      commit('Set_Inputs', inputs)
     },
     async fetchUnits({ commit }) {
       const { data } = await CalcService.getUnits()
@@ -116,16 +122,22 @@ export default {
     }
   },
   getters: {
-    getCalcsByCategoryId: state => id =>
-      state.calculators.filter(x => x.category === id),
-    activeInputs: state => {
-      const inputIds = _(state.calculators)
-        .filter(x => x.selected)
-        .map(x => x.inputs)
+    calcsByCategoryId: state => id =>
+      state.calculators.filter(calc => calc.category === id),
+    selectedCalculators: state =>
+      state.calculators.filter(calc => calc.selected),
+    activeInputs: state =>
+      _(state.calculators)
+        .filter(calc => calc.selected)
+        .map(calc => calc.inputs)
         .flatten()
         .uniq()
-      return state.inputs.filter(x => inputIds.includes(x.id))
-    },
-    getUnitsByType: state => type => state.units.filter(x => x.type === type)
+        .map(id => state.inputs.find(input => input.id === id))
+        .value(),
+    unitsByType: state => type => state.units.filter(x => x.type === type),
+    unitsBySymbol: (state, getters) => symbol =>
+      getters.unitsByType(
+        _.get(state.units.find(x => x.symbol === symbol), 'type')
+      )
   }
 }
