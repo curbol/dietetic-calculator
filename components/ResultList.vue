@@ -13,13 +13,13 @@
                 @input="setInputValue({ id: calc.id, value: $event })"
               ></v-text-field>
               <v-select
-                v-if="unitsBySymbol(calc.defaultUnit).length > 1"
+                v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
                 outlined
                 class="units"
                 item-text="symbol"
                 item-value="symbol"
                 label="Units"
-                :items="unitsBySymbol(calc.defaultUnit)"
+                :items="unitsOfType(symbolType(calc.defaultUnit))"
                 :value="calc.selectedUnit"
                 @input="
                   setInputSelectedUnit({ id: calc.id, selectedUnit: $event })
@@ -58,7 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('calcs', ['selectedCalculators', 'unitsBySymbol'])
+    ...mapGetters('calcs', ['selectedCalculators', 'unitsOfType', 'symbolType'])
   }
 }
 </script>

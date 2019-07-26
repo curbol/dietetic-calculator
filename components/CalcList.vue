@@ -35,7 +35,7 @@
         </template>
 
         <v-list-tile
-          v-for="calc in calcsByCategoryId(category.id)"
+          v-for="calc in calcsInCategory(category.id)"
           :key="calc.id"
           @click="() => {}"
         >
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState('calcs', ['categories', 'calculators']),
-    ...mapGetters('calcs', ['calcsByCategoryId'])
+    ...mapGetters('calcs', ['calcsInCategory'])
   },
   methods: {
     ...mapActions('calcs', [

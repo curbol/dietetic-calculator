@@ -22,7 +22,7 @@
                 item-text="symbol"
                 item-value="symbol"
                 label="Units"
-                :items="unitsByType(input.type)"
+                :items="unitsOfType(input.type)"
                 :value="input.selectedUnit"
                 @input="
                   setInputSelectedUnit({ id: input.id, selectedUnit: $event })
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('calcs', ['activeInputs', 'unitsByType'])
+    ...mapGetters('calcs', ['activeInputs', 'unitsOfType'])
   },
   methods: {
     ...mapActions('calcs', [

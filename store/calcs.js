@@ -119,11 +119,15 @@ export default {
     },
     clearInputs({ commit }) {
       commit('Clear_Inputs')
+    },
+    calculateResult({ state, getters, commit }, calcId) {
+      const calc = state.calculators.find(x => x.id === calcId)
+      const inputs = state.inputs.filter(x => calc.inputs.contains(x.id))
     }
   },
   getters: {
-    calcsByCategoryId: state => id =>
-      state.calculators.filter(calc => calc.category === id),
+    calcsInCategory: state => categoryId =>
+      state.calculators.filter(calc => calc.category === categoryId),
     selectedCalculators: state =>
       state.calculators.filter(calc => calc.selected),
     activeInputs: state =>
@@ -134,10 +138,8 @@ export default {
         .uniq()
         .map(id => state.inputs.find(input => input.id === id))
         .value(),
-    unitsByType: state => type => state.units.filter(x => x.type === type),
-    unitsBySymbol: (state, getters) => symbol =>
-      getters.unitsByType(
-        _.get(state.units.find(x => x.symbol === symbol), 'type')
-      )
+    unitsOfType: state => type => state.units.filter(x => x.type === type),
+    symbolType: state => symbol =>
+      _.get(state.units.find(x => x.symbol === symbol), 'type')
   }
 }
