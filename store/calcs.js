@@ -52,6 +52,9 @@ export default {
       state.inputs = state.inputs.map(x =>
         x.id === id ? { ...x, selectedUnit } : x
       )
+    },
+    Clear_Inputs(state) {
+      state.inputs = state.inputs.map(x => ({ ...x, value: undefined }))
     }
   },
   actions: {
@@ -107,6 +110,9 @@ export default {
     },
     setInputSelectedUnit({ commit }, { id, selectedUnit }) {
       commit('Set_Input_Selected_Unit', { id, selectedUnit })
+    },
+    clearInputs({ commit }) {
+      commit('Clear_Inputs')
     }
   },
   getters: {

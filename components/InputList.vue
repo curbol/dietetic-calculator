@@ -1,21 +1,8 @@
 <template>
   <tool-card title="Inputs">
     <template #toolbar>
-      <v-btn
-        flat
-        icon
-        color="secondary"
-        @click="setAllCalculatorsSelected(true)"
-      >
-        <v-icon>check_box</v-icon>
-      </v-btn>
-      <v-btn
-        flat
-        icon
-        color="secondary"
-        @click="setAllCalculatorsSelected(false)"
-      >
-        <v-icon>check_box_outline_blank</v-icon>
+      <v-btn flat icon color="secondary" @click="clearInputs()">
+        <v-icon>delete_sweep</v-icon>
       </v-btn>
     </template>
     <v-container>
@@ -53,7 +40,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import ToolCard from '@/components/ToolCard.vue'
 
 export default {
@@ -66,11 +53,14 @@ export default {
     }
   },
   computed: {
-    ...mapState('calcs', ['inputs']),
     ...mapGetters('calcs', ['activeInputs', 'getUnitsByType'])
   },
   methods: {
-    ...mapActions('calcs', ['setInputValue', 'setInputSelectedUnit'])
+    ...mapActions('calcs', [
+      'setInputValue',
+      'setInputSelectedUnit',
+      'clearInputs'
+    ])
   }
 }
 </script>
