@@ -5,6 +5,7 @@
         <v-icon>delete_sweep</v-icon>
       </v-btn>
     </template>
+
     <v-container>
       <v-layout column align-center>
         <v-slide-y-transition group appear>
@@ -16,6 +17,7 @@
                 :value="input.value"
                 @input="setInputValue({ id: input.id, value: $event })"
               ></v-text-field>
+
               <v-select
                 outlined
                 class="units"
@@ -47,11 +49,6 @@ import ToolCard from '@/components/ToolCard.vue'
 export default {
   components: {
     ToolCard
-  },
-  data() {
-    return {
-      items: ['kg', 'lb']
-    }
   },
   computed: {
     ...mapGetters('calcs', ['activeInputs', 'unitsOfType'])

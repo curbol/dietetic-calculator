@@ -65,7 +65,7 @@ export default {
     ToolCard
   },
   computed: {
-    ...mapState('calcs', ['categories', 'calculators']),
+    ...mapState('calcs', ['categories']),
     ...mapGetters('calcs', ['calcsInCategory'])
   },
   methods: {

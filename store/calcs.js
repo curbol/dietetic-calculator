@@ -1,5 +1,8 @@
 import _ from 'lodash'
-import CalcService from '@/services/CalcService.js'
+import CalcService from '@/services/calcs.js'
+import Equations from '@/services/equations.js'
+
+const INVALID_INPUTS = 'Invalid Inputs'
 
 export default {
   state() {
@@ -55,6 +58,16 @@ export default {
     },
     Clear_Inputs(state) {
       state.inputs = state.inputs.map(x => ({ ...x, value: undefined }))
+    },
+    Set_Result_Selected_Unit(state, { id, selectedUnit }) {
+      state.calculators = state.calculators.map(x =>
+        x.id === id ? { ...x, selectedUnit } : x
+      )
+    },
+    Set_Result(state, { calcId, result }) {
+      state.calculators = state.calculators.map(x =>
+        x.id === calcId ? { ...x, result } : x
+      )
     }
   },
   actions: {
@@ -75,7 +88,7 @@ export default {
         .map(calc => ({
           ...calc,
           selected: false,
-          result: '?',
+          result: INVALID_INPUTS,
           selectedUnit: calc.defaultUnit
         }))
         .orderBy('title')
@@ -111,18 +124,31 @@ export default {
         commit('Set_All_Categories_Active', true)
       }
     },
-    setInputValue({ commit }, { id, value }) {
+    setInputValue({ commit, dispatch }, { id, value }) {
       commit('Set_Input_Value', { id, value })
+      dispatch('calculateResults')
     },
-    setInputSelectedUnit({ commit }, { id, selectedUnit }) {
+    setInputSelectedUnit({ commit, dispatch }, { id, selectedUnit }) {
       commit('Set_Input_Selected_Unit', { id, selectedUnit })
+      dispatch('calculateResults')
     },
-    clearInputs({ commit }) {
+    clearInputs({ commit, dispatch }) {
       commit('Clear_Inputs')
+      dispatch('calculateResults')
     },
-    calculateResult({ state, getters, commit }, calcId) {
-      const calc = state.calculators.find(x => x.id === calcId)
-      const inputs = state.inputs.filter(x => calc.inputs.contains(x.id))
+    setResultSelectedUnit({ commit, dispatch }, { id, selectedUnit }) {
+      commit('Set_Result_Selected_Unit', { id, selectedUnit })
+      dispatch('calculateResults')
+    },
+    calculateResults({ state, commit }) {
+      state.calculators.forEach(calc => {
+        const calcId = calc.id
+        if (Equations[calcId]) {
+          const result =
+            Equations[calcId](state.units, state.inputs) || INVALID_INPUTS
+          commit('Set_Result', { calcId, result })
+        }
+      })
     }
   },
   getters: {

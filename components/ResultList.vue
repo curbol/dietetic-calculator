@@ -1,6 +1,7 @@
 <template>
   <tool-card title="Results">
     <template #toolbar></template>
+
     <v-container>
       <v-layout column align-center>
         <v-slide-y-transition group appear>
@@ -12,6 +13,7 @@
                 :value="calc.result"
                 @input="setInputValue({ id: calc.id, value: $event })"
               ></v-text-field>
+
               <v-select
                 v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
                 outlined
@@ -22,13 +24,14 @@
                 :items="unitsOfType(symbolType(calc.defaultUnit))"
                 :value="calc.selectedUnit"
                 @input="
-                  setInputSelectedUnit({ id: calc.id, selectedUnit: $event })
+                  setResultSelectedUnit({ id: calc.id, selectedUnit: $event })
                 "
               >
                 <template slot="item" slot-scope="data">
                   <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
                 </template>
               </v-select>
+
               <v-text-field
                 v-else
                 readonly
@@ -45,20 +48,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import ToolCard from '@/components/ToolCard.vue'
 
 export default {
   components: {
     ToolCard
   },
-  data() {
-    return {
-      items: ['kg', 'lb']
-    }
-  },
   computed: {
     ...mapGetters('calcs', ['selectedCalculators', 'unitsOfType', 'symbolType'])
+  },
+  methods: {
+    ...mapActions('calcs', ['setResultSelectedUnit'])
   }
 }
 </script>
