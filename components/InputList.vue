@@ -9,6 +9,16 @@
     <v-container>
       <v-layout column align-center>
         <v-slide-y-transition group appear>
+          <v-flex v-for="selection in activeSelections" :key="selection.id">
+            <v-layout>
+              <v-select
+                :label="selection.name"
+                :items="selection.options"
+                :value="selection.value"
+                @input="setSelectionValue({ id: selection.id, value: $event })"
+              ></v-select>
+            </v-layout>
+          </v-flex>
           <v-flex v-for="input in activeInputs" :key="input.id">
             <v-layout>
               <v-text-field
@@ -51,10 +61,11 @@ export default {
     ToolCard
   },
   computed: {
-    ...mapGetters('calcs', ['activeInputs', 'unitsOfType'])
+    ...mapGetters('calcs', ['activeSelections', 'activeInputs', 'unitsOfType'])
   },
   methods: {
     ...mapActions('calcs', [
+      'setSelectionValue',
       'setInputValue',
       'setInputSelectedUnit',
       'clearInputs'

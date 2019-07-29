@@ -18,13 +18,13 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="primary" clipped-left app>
+    <v-app-bar prominent shrink-on-scroll color="primary" clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-divider class="mx-2 hidden-sm-and-down" inset vertical></v-divider>
       <span class="subheading hidden-sm-and-down">{{ subtitle }}</span>
       <v-spacer></v-spacer>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid>
         <nuxt />

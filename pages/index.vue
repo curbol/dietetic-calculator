@@ -5,12 +5,12 @@
         <calc-list></calc-list>
       </v-flex>
       <v-fade-transition appear>
-        <v-flex v-if="selectedCalculators.length" xs12 sm12 md4 lg4 xl4>
+        <v-flex v-if="activeCalculators.length" xs12 sm12 md4 lg4 xl4>
           <input-list></input-list>
         </v-flex>
       </v-fade-transition>
       <v-fade-transition appear>
-        <v-flex v-if="selectedCalculators.length" xs12 sm12 md4 lg4 xl4>
+        <v-flex v-if="activeCalculators.length" xs12 sm12 md4 lg4 xl4>
           <result-list></result-list>
         </v-flex>
       </v-fade-transition>
@@ -31,7 +31,7 @@ export default {
     ResultList
   },
   computed: {
-    ...mapGetters('calcs', ['selectedCalculators'])
+    ...mapGetters('calcs', ['activeCalculators'])
   },
   async fetch({ store, error, params }) {
     try {

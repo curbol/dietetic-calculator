@@ -1,56 +1,13 @@
-import _ from 'lodash'
-import Inputs from '@/enums/inputs.js'
-
 /* eslint-disable camelcase */
-export default {
-  abw: adjustedBodyWeight,
-  bmi: bodyMassIndexResult
-}
-
-function convert(unitData = [], value = 0, fromUnit = '', toUnit = '') {
-  const unitFactor = unit =>
-    _.get(unitData.find(x => x.symbol === unit), 'factor')
-  const multiplyFactor = unitFactor(fromUnit)
-  const divideFactor = unitFactor(toUnit)
-  if (!divideFactor) return undefined
-  return (value / divideFactor) * multiplyFactor
-}
-
-function getConvertedInputs(unitData = [], inputs = [], target = {}) {
-  return Object.assign(
-    ...Object.entries(target).map(([id, toUnit]) => {
-      const input = inputs.find(x => x.id === id)
-      const value = convert(unitData, input.value, input.selectedUnit, toUnit)
-      return { [`${id}_${toUnit}`]: value }
-    })
-  )
-}
-
-function processEquation(
-  unitData = [],
-  inputs = [],
-  target = {},
-  equation = () => {}
-) {
-  const converted = getConvertedInputs(unitData, inputs, target)
-  const result = equation(converted)
-  // TODO: convert to result unit if needed
-  const rounded = result ? result.toFixed(1) : result
-  return rounded
-}
-
-function bodyMassIndexResult(unitData = [], inputs = []) {
-  const target = {
-    [Inputs.Weight]: 'kg',
-    [Inputs.Height]: 'm'
-  }
-  return processEquation(unitData, inputs, target, bodyMassIndex)
-}
-
-function idealBodyWeight({ gender, height_in }) {
-  if (!gender || !height_in || height_in <= 0) {
+export function bodyMassIndex({ weight_kg, height_m }) {
+  if (!weight_kg || !height_m || weight_kg <= 0 || height_m <= 0)
     return undefined
-  }
+
+  return weight_kg / (height_m * height_m)
+}
+
+export function idealBodyWeight({ gender, height_in }) {
+  if (!gender || !height_in || height_in <= 0) return undefined
 
   const _gender = gender.toLowerCase()
   const deltaFiveFeet = height_in - 60
@@ -61,18 +18,29 @@ function idealBodyWeight({ gender, height_in }) {
     : undefined
 }
 
-function adjustedBodyWeight({ gender, weight_kg, height_in }) {
-  if (!gender || !weight_kg || !height_in || weight_kg <= 0 || height_in <= 0) {
-    return undefined
-  }
-
+export function adjustedBodyWeight({ gender, weight_kg, height_in }) {
   const ibw = idealBodyWeight({ gender, height_in })
-  return ibw ? 0.25 * (weight_kg - ibw) + ibw : undefined
+  if (!ibw || !weight_kg || weight_kg <= 0) return undefined
+
+  return 0.25 * (weight_kg - ibw) + ibw
 }
 
-function bodyMassIndex({ weight_kg, height_m }) {
-  if (!weight_kg || !height_m || weight_kg <= 0 || height_m <= 0)
+export function mifflinStJeor({ gender, weight_kg, height_cm, age_y }) {
+  if (
+    !gender ||
+    !weight_kg ||
+    weight_kg <= 0 ||
+    !height_cm ||
+    height_cm <= 0 ||
+    !age_y ||
+    age_y <= 0
+  )
     return undefined
 
-  return weight_kg / (height_m * height_m)
+  const _gender = gender.toLowerCase()
+  return _gender === 'male'
+    ? 10 * weight_kg + 6.25 * height_cm - 5 * age_y + 5
+    : _gender === 'female'
+    ? 10 * weight_kg + 6.25 * height_cm - 5 * age_y - 161
+    : undefined
 }

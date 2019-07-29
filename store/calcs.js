@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import CalcService from '@/services/calcs.js'
-import Equations from '@/services/equations.js'
+import { equationProcessor } from '@/services/equation-processor.js'
 
 const INVALID_INPUTS = 'Invalid Inputs'
 
@@ -9,6 +9,7 @@ export default {
     return {
       categories: [],
       calculators: [],
+      selections: [],
       inputs: [],
       units: []
     }
@@ -23,6 +24,9 @@ export default {
     Set_Inputs(state, inputs) {
       state.inputs = inputs
     },
+    Set_Selections(state, selections) {
+      state.selections = selections
+    },
     Set_Units(state, units) {
       state.units = units
     },
@@ -31,9 +35,9 @@ export default {
         x.id === id ? { ...x, active: !x.active } : x
       )
     },
-    Toggle_Select_Calculator(state, id) {
+    Toggle_Activate_Calculator(state, id) {
       state.calculators = state.calculators.map(x =>
-        x.id === id ? { ...x, selected: !x.selected } : x
+        x.id === id ? { ...x, active: !x.active } : x
       )
     },
     Set_All_Categories_Active(state, active) {
@@ -42,11 +46,16 @@ export default {
         active
       }))
     },
-    Set_All_Calculators_Selected(state, selected) {
+    Set_All_Calculators_Active(state, active) {
       state.calculators = state.calculators.map(x => ({
         ...x,
-        selected
+        active
       }))
+    },
+    Set_Selection_Value(state, { id, value }) {
+      state.selections = state.selections.map(x =>
+        x.id === id ? { ...x, value } : x
+      )
     },
     Set_Input_Value(state, { id, value }) {
       state.inputs = state.inputs.map(x => (x.id === id ? { ...x, value } : x))
@@ -58,6 +67,7 @@ export default {
     },
     Clear_Inputs(state) {
       state.inputs = state.inputs.map(x => ({ ...x, value: undefined }))
+      state.selections = state.selections.map(x => ({ ...x, value: undefined }))
     },
     Set_Result_Selected_Unit(state, { id, selectedUnit }) {
       state.calculators = state.calculators.map(x =>
@@ -87,7 +97,7 @@ export default {
       const calculators = _(data)
         .map(calc => ({
           ...calc,
-          selected: false,
+          active: false,
           result: INVALID_INPUTS,
           selectedUnit: calc.defaultUnit
         }))
@@ -97,8 +107,8 @@ export default {
       commit('Set_Calculators', calculators)
     },
     async fetchInputs({ commit }) {
-      const { data } = await CalcService.getInputs()
-      const inputs = _(data)
+      const { data: inputData } = await CalcService.getInputs()
+      const inputs = _(inputData)
         .map(input => ({
           ...input,
           value: undefined,
@@ -107,6 +117,15 @@ export default {
         .orderBy('type')
         .value()
       commit('Set_Inputs', inputs)
+      const { data: selectData } = await CalcService.getSelections()
+      const selections = _(selectData)
+        .map(select => ({
+          ...select,
+          value: undefined
+        }))
+        .orderBy('id')
+        .value()
+      commit('Set_Selections', selections)
     },
     async fetchUnits({ commit }) {
       const { data } = await CalcService.getUnits()
@@ -115,14 +134,18 @@ export default {
     toggleActivateCategory({ commit }, id) {
       commit('Toggle_Activate_Category', id)
     },
-    toggleSelectCalculator({ commit }, id) {
-      commit('Toggle_Select_Calculator', id)
+    toggleActivateCalculator({ commit }, id) {
+      commit('Toggle_Activate_Calculator', id)
     },
-    setAllCalculatorsSelected({ commit }, selected) {
-      commit('Set_All_Calculators_Selected', selected)
-      if (selected) {
+    setAllCalculatorsActive({ commit }, active) {
+      commit('Set_All_Calculators_Active', active)
+      if (active) {
         commit('Set_All_Categories_Active', true)
       }
+    },
+    setSelectionValue({ commit, dispatch }, { id, value }) {
+      commit('Set_Selection_Value', { id, value })
+      dispatch('calculateResults')
     },
     setInputValue({ commit, dispatch }, { id, value }) {
       commit('Set_Input_Value', { id, value })
@@ -141,28 +164,37 @@ export default {
       dispatch('calculateResults')
     },
     calculateResults({ state, commit }) {
+      const processEquation = equationProcessor({
+        unitData: state.units,
+        inputs: state.inputs,
+        selections: state.selections
+      })
       state.calculators.forEach(calc => {
-        const calcId = calc.id
-        if (Equations[calcId]) {
-          const result =
-            Equations[calcId](state.units, state.inputs) || INVALID_INPUTS
-          commit('Set_Result', { calcId, result })
-        }
+        const result = processEquation(calc) || INVALID_INPUTS
+        const rounded = isNaN(result) ? result : result.toFixed(1)
+        commit('Set_Result', { calcId: calc.id, result: rounded })
       })
     }
   },
   getters: {
     calcsInCategory: state => categoryId =>
       state.calculators.filter(calc => calc.category === categoryId),
-    selectedCalculators: state =>
-      state.calculators.filter(calc => calc.selected),
+    activeCalculators: state => state.calculators.filter(calc => calc.active),
     activeInputs: state =>
       _(state.calculators)
-        .filter(calc => calc.selected)
+        .filter(calc => calc.active)
         .map(calc => calc.inputs)
         .flatten()
         .uniq()
         .map(id => state.inputs.find(input => input.id === id))
+        .value(),
+    activeSelections: state =>
+      _(state.calculators)
+        .filter(calc => calc.active)
+        .map(calc => calc.selections)
+        .flatten()
+        .uniq()
+        .map(id => state.selections.find(selection => selection.id === id))
         .value(),
     unitsOfType: state => type => state.units.filter(x => x.type === type),
     symbolType: state => symbol =>

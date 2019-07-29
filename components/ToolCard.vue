@@ -1,10 +1,10 @@
 <template>
   <v-card elevation="3">
-    <v-toolbar dense card color="primary">
+    <v-app-bar flat dense card color="primary">
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <slot name="toolbar"></slot>
-    </v-toolbar>
+    </v-app-bar>
     <slot></slot>
   </v-card>
 </template>

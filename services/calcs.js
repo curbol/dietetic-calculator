@@ -19,6 +19,9 @@ export default {
   getInputs() {
     return apiClient.get('/inputs')
   },
+  getSelections() {
+    return apiClient.get('/selections')
+  },
   getUnits() {
     return apiClient.get('/units')
   }

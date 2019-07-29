@@ -5,7 +5,7 @@
     <v-container>
       <v-layout column align-center>
         <v-slide-y-transition group appear>
-          <v-flex v-for="calc in selectedCalculators" :key="calc.id">
+          <v-flex v-for="calc in activeCalculators" :key="calc.id">
             <v-layout>
               <v-text-field
                 readonly
@@ -56,7 +56,7 @@ export default {
     ToolCard
   },
   computed: {
-    ...mapGetters('calcs', ['selectedCalculators', 'unitsOfType', 'symbolType'])
+    ...mapGetters('calcs', ['activeCalculators', 'unitsOfType', 'symbolType'])
   },
   methods: {
     ...mapActions('calcs', ['setResultSelectedUnit'])

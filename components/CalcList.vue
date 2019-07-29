@@ -1,20 +1,10 @@
 <template>
   <tool-card title="Calculators">
     <template #toolbar>
-      <v-btn
-        flat
-        icon
-        color="secondary"
-        @click="setAllCalculatorsSelected(true)"
-      >
+      <v-btn icon color="secondary" @click="setAllCalculatorsActive(true)">
         <v-icon>check_box</v-icon>
       </v-btn>
-      <v-btn
-        flat
-        icon
-        color="secondary"
-        @click="setAllCalculatorsSelected(false)"
-      >
+      <v-btn icon color="secondary" @click="setAllCalculatorsActive(false)">
         <v-icon>check_box_outline_blank</v-icon>
       </v-btn>
     </template>
@@ -27,30 +17,30 @@
         @click="toggleActivateCategory(category.id)"
       >
         <template #activator>
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ category.name }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ category.name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
 
-        <v-list-tile
+        <v-list-item
           v-for="calc in calcsInCategory(category.id)"
           :key="calc.id"
           @click="() => {}"
         >
-          <v-list-tile-action>
+          <v-list-item-action>
             <v-checkbox
-              :value="calc.selected"
-              @click.stop="toggleSelectCalculator(calc.id)"
+              :value="calc.active"
+              @click.stop="toggleActivateCalculator(calc.id)"
             ></v-checkbox>
-          </v-list-tile-action>
+          </v-list-item-action>
 
-          <v-list-tile-content @click="toggleSelectCalculator(calc.id)">
-            <v-list-tile-title>{{ calc.title }}</v-list-tile-title>
-            <v-list-tile-sub-title>{{ calc.subtitle }}</v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-list-item-content @click="toggleActivateCalculator(calc.id)">
+            <v-list-item-title>{{ calc.title }}</v-list-item-title>
+            <v-list-item-sub-title>{{ calc.subtitle }}</v-list-item-sub-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list-group>
     </v-list>
   </tool-card>
@@ -71,8 +61,8 @@ export default {
   methods: {
     ...mapActions('calcs', [
       'toggleActivateCategory',
-      'toggleSelectCalculator',
-      'setAllCalculatorsSelected'
+      'toggleActivateCalculator',
+      'setAllCalculatorsActive'
     ])
   }
 }
