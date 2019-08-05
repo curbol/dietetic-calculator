@@ -31,51 +31,56 @@ export default {
       state.units = units
     },
     Toggle_Activate_Category(state, id) {
-      state.categories = state.categories.map(x =>
+      state.categories = state.categories.map((x) =>
         x.id === id ? { ...x, active: !x.active } : x
       )
     },
     Toggle_Activate_Calculator(state, id) {
-      state.calculators = state.calculators.map(x =>
+      state.calculators = state.calculators.map((x) =>
         x.id === id ? { ...x, active: !x.active } : x
       )
     },
     Set_All_Categories_Active(state, active) {
-      state.categories = state.categories.map(x => ({
+      state.categories = state.categories.map((x) => ({
         ...x,
         active
       }))
     },
     Set_All_Calculators_Active(state, active) {
-      state.calculators = state.calculators.map(x => ({
+      state.calculators = state.calculators.map((x) => ({
         ...x,
         active
       }))
     },
     Set_Selection_Value(state, { id, value }) {
-      state.selections = state.selections.map(x =>
+      state.selections = state.selections.map((x) =>
         x.id === id ? { ...x, value } : x
       )
     },
     Set_Input_Value(state, { id, value }) {
-      state.inputs = state.inputs.map(x => (x.id === id ? { ...x, value } : x))
+      state.inputs = state.inputs.map((x) =>
+        x.id === id ? { ...x, value } : x
+      )
     },
     Set_Input_Selected_Unit(state, { id, selectedUnit }) {
-      state.inputs = state.inputs.map(x =>
+      state.inputs = state.inputs.map((x) =>
         x.id === id ? { ...x, selectedUnit } : x
       )
     },
     Clear_Inputs(state) {
-      state.inputs = state.inputs.map(x => ({ ...x, value: undefined }))
-      state.selections = state.selections.map(x => ({ ...x, value: undefined }))
+      state.inputs = state.inputs.map((x) => ({ ...x, value: undefined }))
+      state.selections = state.selections.map((x) => ({
+        ...x,
+        value: undefined
+      }))
     },
     Set_Result_Selected_Unit(state, { id, selectedUnit }) {
-      state.calculators = state.calculators.map(x =>
+      state.calculators = state.calculators.map((x) =>
         x.id === id ? { ...x, selectedUnit } : x
       )
     },
     Set_Result(state, { calcId, result }) {
-      state.calculators = state.calculators.map(x =>
+      state.calculators = state.calculators.map((x) =>
         x.id === calcId ? { ...x, result } : x
       )
     }
@@ -84,7 +89,7 @@ export default {
     async fetchCategories({ commit }) {
       const { data } = await CalcService.getCategories()
       const categories = _(data)
-        .map(category => ({
+        .map((category) => ({
           ...category,
           active: true
         }))
@@ -95,7 +100,7 @@ export default {
     async fetchCalculators({ commit }) {
       const { data } = await CalcService.getCalculators()
       const calculators = _(data)
-        .map(calc => ({
+        .map((calc) => ({
           ...calc,
           active: false,
           result: INVALID_INPUTS,
@@ -109,7 +114,7 @@ export default {
     async fetchInputs({ commit }) {
       const { data: inputData } = await CalcService.getInputs()
       const inputs = _(inputData)
-        .map(input => ({
+        .map((input) => ({
           ...input,
           value: undefined,
           selectedUnit: input.defaultUnit
@@ -119,7 +124,7 @@ export default {
       commit('Set_Inputs', inputs)
       const { data: selectData } = await CalcService.getSelections()
       const selections = _(selectData)
-        .map(select => ({
+        .map((select) => ({
           ...select,
           value: undefined
         }))
@@ -169,7 +174,7 @@ export default {
         inputs: state.inputs,
         selections: state.selections
       })
-      state.calculators.forEach(calc => {
+      state.calculators.forEach((calc) => {
         const result = processEquation(calc) || INVALID_INPUTS
         const rounded = isNaN(result) ? result : result.toFixed(1)
         commit('Set_Result', { calcId: calc.id, result: rounded })
@@ -177,27 +182,29 @@ export default {
     }
   },
   getters: {
-    calcsInCategory: state => categoryId =>
-      state.calculators.filter(calc => calc.category === categoryId),
-    activeCalculators: state => state.calculators.filter(calc => calc.active),
-    activeInputs: state =>
+    calcsInCategory: (state) => (categoryId) =>
+      state.calculators.filter((calc) => calc.category === categoryId),
+    activeCalculators: (state) =>
+      state.calculators.filter((calc) => calc.active),
+    activeInputs: (state) =>
       _(state.calculators)
-        .filter(calc => calc.active)
-        .map(calc => calc.inputs)
+        .filter((calc) => calc.active)
+        .map((calc) => calc.inputs)
         .flatten()
         .uniq()
-        .map(id => state.inputs.find(input => input.id === id))
+        .map((id) => state.inputs.find((input) => input.id === id))
         .value(),
-    activeSelections: state =>
+    activeSelections: (state) =>
       _(state.calculators)
-        .filter(calc => calc.active)
-        .map(calc => calc.selections)
+        .filter((calc) => calc.active)
+        .map((calc) => calc.selections)
         .flatten()
         .uniq()
-        .map(id => state.selections.find(selection => selection.id === id))
+        .map((id) => state.selections.find((selection) => selection.id === id))
         .value(),
-    unitsOfType: state => type => state.units.filter(x => x.type === type),
-    symbolType: state => symbol =>
-      _.get(state.units.find(x => x.symbol === symbol), 'type')
+    unitsOfType: (state) => (type) =>
+      state.units.filter((x) => x.type === type),
+    symbolType: (state) => (symbol) =>
+      _.get(state.units.find((x) => x.symbol === symbol), 'type')
   }
 }

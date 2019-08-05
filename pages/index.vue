@@ -1,16 +1,16 @@
 <template>
-  <v-container fluid grid-list-xl>
-    <v-layout wrap>
-      <v-flex xs12 sm12 md4 lg4 xl4>
+  <v-container grid-list-lg>
+    <v-layout align-start justify-left wrap>
+      <v-flex sm12 md4>
         <calc-list></calc-list>
       </v-flex>
-      <v-fade-transition appear>
-        <v-flex v-if="activeCalculators.length" xs12 sm12 md4 lg4 xl4>
+      <v-fade-transition>
+        <v-flex v-if="activeCalculators.length" sm12 md4>
           <input-list></input-list>
         </v-flex>
       </v-fade-transition>
-      <v-fade-transition appear>
-        <v-flex v-if="activeCalculators.length" xs12 sm12 md4 lg4 xl4>
+      <v-fade-transition>
+        <v-flex v-if="activeCalculators.length" sm12 md4>
           <result-list></result-list>
         </v-flex>
       </v-fade-transition>

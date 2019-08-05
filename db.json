@@ -3,12 +3,12 @@
     {
       "id": "1",
       "name": "Anthropometric",
-      "icon": "accessibility_new"
+      "icon": "mdi-human-handsdown"
     },
     {
       "id": "2",
       "name": "Nutritional Needs",
-      "icon": "restaurant"
+      "icon": "mdi-silverware-fork-knife"
     }
   ],
   "calculators": [

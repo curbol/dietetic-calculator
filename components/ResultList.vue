@@ -2,47 +2,48 @@
   <tool-card title="Results">
     <template #toolbar></template>
 
-    <v-container>
-      <v-layout column align-center>
-        <v-slide-y-transition group appear>
-          <v-flex v-for="calc in activeCalculators" :key="calc.id">
-            <v-layout>
-              <v-text-field
-                readonly
-                :label="calc.title"
-                :value="calc.result"
-                @input="setInputValue({ id: calc.id, value: $event })"
-              ></v-text-field>
+    <v-container pa-6>
+      <transition-group
+        name="input"
+        tag="div"
+        class="layout align-start justify-center wrap"
+      >
+        <v-flex v-for="calc in activeCalculators" :key="calc.id" sm6 md12>
+          <v-layout>
+            <v-text-field
+              readonly
+              :label="calc.title"
+              :value="calc.result"
+              @input="setInputValue({ id: calc.id, value: $event })"
+            ></v-text-field>
 
-              <v-select
-                v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
-                outlined
-                class="units"
-                item-text="symbol"
-                item-value="symbol"
-                label="Units"
-                :items="unitsOfType(symbolType(calc.defaultUnit))"
-                :value="calc.selectedUnit"
-                @input="
-                  setResultSelectedUnit({ id: calc.id, selectedUnit: $event })
-                "
-              >
-                <template slot="item" slot-scope="data">
-                  <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
-                </template>
-              </v-select>
+            <v-select
+              v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
+              class="units"
+              item-text="symbol"
+              item-value="symbol"
+              label="Units"
+              :items="unitsOfType(symbolType(calc.defaultUnit))"
+              :value="calc.selectedUnit"
+              @input="
+                setResultSelectedUnit({ id: calc.id, selectedUnit: $event })
+              "
+            >
+              <template slot="item" slot-scope="data">
+                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+              </template>
+            </v-select>
 
-              <v-text-field
-                v-else
-                readonly
-                class="units"
-                label="Units"
-                :value="calc.selectedUnit"
-              ></v-text-field>
-            </v-layout>
-          </v-flex>
-        </v-slide-y-transition>
-      </v-layout>
+            <v-text-field
+              v-else
+              readonly
+              class="units"
+              label="Units"
+              :value="calc.selectedUnit"
+            ></v-text-field>
+          </v-layout>
+        </v-flex>
+      </transition-group>
     </v-container>
   </tool-card>
 </template>
@@ -67,6 +68,17 @@ export default {
 <style lang="scss" scoped>
 .units {
   width: 60px;
+  min-width: 60px;
   max-width: 60px;
+}
+
+.input-enter-active,
+.input-leave-active {
+  transition: all 0.3s ease;
+}
+.input-enter,
+.input-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
 }
 </style>

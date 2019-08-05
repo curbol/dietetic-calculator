@@ -17,14 +17,7 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-      }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
    ** Customize the progress-bar color
@@ -37,17 +30,19 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/filters.js'],
+  plugins: [],
+  /*
+   ** Nuxt.js dev-modules
+   */
+  devModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify'
+  ],
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/vuetify',
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/eslint-module'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -58,14 +53,20 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
+    customVariables: ['~/assets/variables.scss'],
     theme: {
-      primary: colors.cyan.darken2,
-      secondary: colors.blueGrey.lighten4,
-      accent: colors.orange.darken3,
-      error: colors.deepOrange.base,
-      warning: colors.amber.base,
-      info: colors.teal.base,
-      success: colors.green.base
+      dark: true,
+      themes: {
+        dark: {
+          primary: colors.cyan.darken2,
+          secondary: colors.blueGrey.lighten4,
+          accent: colors.orange.darken3,
+          error: colors.deepOrange.base,
+          warning: colors.amber.base,
+          info: colors.teal.base,
+          success: colors.green.base
+        }
+      }
     }
   },
   /*

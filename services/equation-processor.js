@@ -13,7 +13,7 @@ export function equationProcessor({
   inputs = [],
   selections = []
 }) {
-  return calc => {
+  return (calc) => {
     const equation = equationMap[calc.id]
     return !equation
       ? undefined
@@ -47,7 +47,7 @@ function processEquation(equation = () => {}, targetUnits = {}) {
       ...getSelectionData(selections)
     })
     const canConvertResult = unitData
-      .map(x => x.symbol)
+      .map((x) => x.symbol)
       .includes(calc.defaultUnit)
     return canConvertResult
       ? convert({
@@ -63,7 +63,7 @@ function processEquation(equation = () => {}, targetUnits = {}) {
 function getConvertedInputs(unitData = [], inputs = [], targetUnits = {}) {
   return Object.assign(
     ...Object.entries(targetUnits).map(([id, toUnit]) => {
-      const input = inputs.find(x => x.id === id)
+      const input = inputs.find((x) => x.id === id)
       const value = convert({
         unitData,
         value: input.value,
@@ -76,8 +76,8 @@ function getConvertedInputs(unitData = [], inputs = [], targetUnits = {}) {
 }
 
 function convert({ unitData = [], value = 0, fromUnit = '', toUnit = '' }) {
-  const unitFactor = unit =>
-    _.get(unitData.find(x => x.symbol === unit), 'factor')
+  const unitFactor = (unit) =>
+    _.get(unitData.find((x) => x.symbol === unit), 'factor')
   const fromFactor = unitFactor(fromUnit)
   const toFactor = unitFactor(toUnit)
   if (!toFactor) return undefined
