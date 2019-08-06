@@ -54,26 +54,30 @@
       "id": "weight",
       "name": "Weight",
       "type": "Mass",
-      "defaultUnit": "kg"
+      "defaultUnit": "kg",
+      "icon": "mdi-weight"
     },
     {
       "id": "height",
       "name": "Height",
       "type": "Length",
-      "defaultUnit": "cm"
+      "defaultUnit": "cm",
+      "icon": "mdi-human-male-height"
     },
     {
       "id": "age",
       "name": "Age",
       "type": "Time",
-      "defaultUnit": "y"
+      "defaultUnit": "y",
+      "icon": "mdi-timer-sand"
     }
   ],
   "selections": [
     {
       "id": "gender",
       "name": "Gender",
-      "options": ["Male", "Female"]
+      "options": ["Male", "Female"],
+      "icon": "mdi-human-male-female"
     }
   ],
   "units": [

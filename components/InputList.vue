@@ -31,7 +31,9 @@
               :rules="selectRules(selection.name)"
               required
               @change="setSelectionValue({ id: selection.id, value: $event })"
-            ></v-select>
+            >
+              <v-icon slot="prepend">{{ selection.icon }}</v-icon>
+            </v-select>
           </v-layout>
         </v-flex>
 
@@ -44,7 +46,9 @@
               :rules="numberRules(input.name)"
               required
               @input="setInputValue({ id: input.id, value: $event })"
-            ></v-text-field>
+            >
+              <v-icon slot="prepend">{{ input.icon }}</v-icon>
+            </v-text-field>
 
             <v-select
               class="units"
@@ -70,7 +74,6 @@
 
 <script>
 // TODO: Reset validation on clear?
-// TODO: Prepend icon for each input https://vuetifyjs.com/en/components/text-fields
 // TODO: Select all text-field text on click for easier edits
 // TODO: Try to prevent values less than zero again?
 
