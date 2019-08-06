@@ -14,7 +14,6 @@
               readonly
               :label="calc.title"
               :value="calc.result"
-              @input="setInputValue({ id: calc.id, value: $event })"
             ></v-text-field>
 
             <v-select

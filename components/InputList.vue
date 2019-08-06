@@ -1,14 +1,9 @@
 <template>
   <tool-card title="Inputs">
     <template #toolbar>
-      <v-tooltip bottom open-delay="1000">
-        <template v-slot:activator="{ on }">
-          <v-btn text icon color="secondary" v-on="on" @click="clearInputs()">
-            <v-icon>mdi-delete-sweep</v-icon>
-          </v-btn>
-        </template>
-        <span>Clear Inputs</span>
-      </v-tooltip>
+      <v-btn text icon color="secondary" @click="clearInputs()">
+        <v-icon>mdi-delete-sweep</v-icon>
+      </v-btn>
     </template>
 
     <v-container pa-6>
@@ -73,6 +68,7 @@
 </template>
 
 <script>
+// TODO: Get grid spacing working
 // TODO: Reset validation on clear?
 // TODO: Select all text-field text on click for easier edits
 // TODO: Try to prevent values less than zero again?

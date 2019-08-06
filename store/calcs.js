@@ -186,6 +186,8 @@ export default {
       state.calculators.filter((calc) => calc.category === categoryId),
     activeCalculators: (state) =>
       state.calculators.filter((calc) => calc.active),
+    calcsWithResults: (state) =>
+      state.calculators.filter((calc) => !isNaN(calc.result)),
     activeInputs: (state) =>
       _(state.calculators)
         .filter((calc) => calc.active)

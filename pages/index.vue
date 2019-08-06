@@ -10,7 +10,7 @@
         </v-flex>
       </v-fade-transition>
       <v-fade-transition>
-        <v-flex v-if="activeCalculators.length" sm12 md4>
+        <v-flex v-if="calcsWithResults.length" sm12 md4>
           <result-list></result-list>
         </v-flex>
       </v-fade-transition>
@@ -31,7 +31,7 @@ export default {
     ResultList
   },
   computed: {
-    ...mapGetters('calcs', ['activeCalculators'])
+    ...mapGetters('calcs', ['activeCalculators', 'calcsWithResults'])
   },
   async fetch({ store, error, params }) {
     try {
