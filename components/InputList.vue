@@ -1,75 +1,81 @@
 <template>
   <tool-card title="Inputs">
     <template #toolbar>
-      <v-btn text icon color="secondary" @click="clearInputs()">
-        <v-icon>mdi-delete-sweep</v-icon>
-      </v-btn>
+      <v-tooltip bottom open-delay="1000">
+        <template v-slot:activator="{ on }">
+          <v-btn text icon color="secondary" v-on="on" @click="clear()">
+            <v-icon>mdi-delete-sweep</v-icon>
+          </v-btn>
+        </template>
+        <span>Clear All</span>
+      </v-tooltip>
     </template>
 
-    <v-container pa-6>
-      <transition-group
-        name="input"
-        tag="div"
-        class="layout align-start justify-center wrap"
-      >
-        <v-flex
-          v-for="selection in activeSelections"
-          :key="selection.id"
-          sm6
-          md12
+    <v-form ref="form">
+      <v-container pa-6>
+        <transition-group
+          name="input"
+          tag="div"
+          class="layout align-start justify-center wrap"
         >
-          <v-layout>
-            <v-select
-              :label="selection.name"
-              :items="selection.options"
-              :value="selection.value"
-              :rules="selectRules(selection.name)"
-              required
-              @change="setSelectionValue({ id: selection.id, value: $event })"
-            >
-              <v-icon slot="prepend">{{ selection.icon }}</v-icon>
-            </v-select>
-          </v-layout>
-        </v-flex>
+          <v-flex
+            v-for="selection in activeSelections"
+            :key="selection.id"
+            sm6
+            md12
+          >
+            <v-layout>
+              <v-select
+                :label="selection.name"
+                :items="selection.options"
+                :value="selection.value"
+                :rules="selectRules(selection.name)"
+                required
+                @change="setSelectionValue({ id: selection.id, value: $event })"
+              >
+                <v-icon slot="prepend">{{ selection.icon }}</v-icon>
+              </v-select>
+            </v-layout>
+          </v-flex>
 
-        <v-flex v-for="input in activeInputs" :key="input.id" sm6 md12>
-          <v-layout>
-            <v-text-field
-              type="number"
-              :label="input.name"
-              :value="input.value"
-              :rules="numberRules(input.name)"
-              required
-              @input="setInputValue({ id: input.id, value: $event })"
-            >
-              <v-icon slot="prepend">{{ input.icon }}</v-icon>
-            </v-text-field>
+          <v-flex v-for="input in activeInputs" :key="input.id" sm6 md12>
+            <v-layout>
+              <v-text-field
+                type="number"
+                :label="input.name"
+                :value="input.value"
+                :rules="numberRules(input.name)"
+                required
+                @input="setInputValue({ id: input.id, value: $event })"
+              >
+                <v-icon slot="prepend">{{ input.icon }}</v-icon>
+              </v-text-field>
 
-            <v-select
-              class="units"
-              item-text="symbol"
-              item-value="symbol"
-              label="Units"
-              :items="unitsOfType(input.type)"
-              :value="input.selectedUnit"
-              @change="
-                setInputSelectedUnit({ id: input.id, selectedUnit: $event })
-              "
-            >
-              <template slot="item" slot-scope="data">
-                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
-              </template>
-            </v-select>
-          </v-layout>
-        </v-flex>
-      </transition-group>
-    </v-container>
+              <v-select
+                class="units"
+                item-text="symbol"
+                item-value="symbol"
+                label="Units"
+                :items="unitsOfType(input.type)"
+                :value="input.selectedUnit"
+                @change="
+                  setInputSelectedUnit({ id: input.id, selectedUnit: $event })
+                "
+              >
+                <template slot="item" slot-scope="data">
+                  <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+                </template>
+              </v-select>
+            </v-layout>
+          </v-flex>
+        </transition-group>
+      </v-container>
+    </v-form>
   </tool-card>
 </template>
 
 <script>
 // TODO: Get grid spacing working
-// TODO: Reset validation on clear?
 // TODO: Select all text-field text on click for easier edits
 // TODO: Try to prevent values less than zero again?
 
@@ -80,6 +86,9 @@ export default {
   components: {
     ToolCard
   },
+  data: () => ({
+    valid: true
+  }),
   computed: {
     ...mapGetters('calcs', ['activeSelections', 'activeInputs', 'unitsOfType'])
   },
@@ -94,7 +103,11 @@ export default {
     numberRules: (label) => [
       (x) => !!x || `${label} is required`,
       (x) => x > 0 || `${label} must be greater than zero`
-    ]
+    ],
+    clear() {
+      this.clearInputs()
+      this.$refs.form.resetValidation()
+    }
   }
 }
 </script>

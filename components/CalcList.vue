@@ -1,13 +1,35 @@
 <template>
   <tool-card title="Calculators">
     <template #toolbar>
-      <v-btn icon color="secondary" @click="setAllCalculatorsActive(true)">
-        <v-icon>mdi-checkbox-multiple-marked</v-icon>
-      </v-btn>
-      <v-btn icon color="secondary" @click="setAllCalculatorsActive(false)">
-        <v-icon>mdi-checkbox-multiple-blank-outline</v-icon>
-      </v-btn>
+      <v-tooltip bottom open-delay="1000">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            color="secondary"
+            v-on="on"
+            @click="setAllCalculatorsActive(true)"
+          >
+            <v-icon>mdi-checkbox-multiple-marked</v-icon>
+          </v-btn>
+        </template>
+        <span>Select All</span>
+      </v-tooltip>
+
+      <v-tooltip bottom open-delay="1000">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            color="secondary"
+            v-on="on"
+            @click="setAllCalculatorsActive(false)"
+          >
+            <v-icon>mdi-checkbox-multiple-blank-outline</v-icon>
+          </v-btn>
+        </template>
+        <span>Deselect All</span>
+      </v-tooltip>
     </template>
+
     <v-list expand flat>
       <v-list-group
         v-for="category in categories"
@@ -50,8 +72,6 @@
 </template>
 
 <script>
-// TODO: add tooltips to icon buttons
-// TODO: add divider lines between groups
 // TODO: Wait for v-list-group fix so expander works correctly
 // * https://github.com/vuetifyjs/vuetify/issues/8166
 
