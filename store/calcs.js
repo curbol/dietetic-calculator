@@ -204,6 +204,8 @@ export default {
         .uniq()
         .map((id) => state.selections.find((selection) => selection.id === id))
         .value(),
+    unitTypes: (state) =>
+      state.units.filter((unit) => unit.factor === 1).map((unit) => unit.type),
     unitsOfType: (state) => (type) =>
       state.units.filter((x) => x.type === type),
     symbolType: (state) => (symbol) =>

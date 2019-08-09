@@ -1,5 +1,5 @@
 <template>
-  <tool-card title="Inputs">
+  <tool-card title="Converter">
     <template #toolbar>
       <v-tooltip bottom open-delay="1000">
         <template v-slot:activator="{ on }">
@@ -13,78 +13,75 @@
 
     <v-form ref="form">
       <v-container grid-list-xs pa-4>
-        <transition-group
-          name="input"
-          tag="div"
-          class="layout align-start justify-center wrap"
-        >
-          <v-flex
-            v-for="selection in activeSelections"
-            :key="selection.id"
-            xs12
-            sm6
-            md12
-            lg12
-            xl6
-          >
+        <v-layout align-start justify-center wrap>
+          <v-flex>
             <v-select
-              :label="selection.name"
-              :items="selection.options"
-              :value="selection.value"
-              :rules="selectRules(selection.name)"
-              required
-              @change="setSelectionValue({ id: selection.id, value: $event })"
-            >
-              <v-icon slot="prepend">{{ selection.icon }}</v-icon>
-            </v-select>
+              label="Type"
+              :items="unitTypes"
+              :value="type"
+              @change="setType({ type: $event })"
+            ></v-select>
           </v-flex>
 
-          <v-flex
-            v-for="input in activeInputs"
-            :key="input.id"
-            xs12
-            sm6
-            md12
-            lg12
-            xl6
-            d-flex
-          >
+          <v-flex xs12 sm6 md12 lg12 xl6 d-flex>
             <v-text-field
               type="number"
-              :label="input.name"
-              :value="input.value"
-              :rules="numberRules(input.name)"
+              label="from"
+              :value="from.value"
+              :rules="numberRules('from')"
               required
               @focus="$event.target.select()"
-              @input="setInputValue({ id: input.id, value: $event })"
-            >
-              <v-icon slot="prepend">{{ input.icon }}</v-icon>
-            </v-text-field>
+              @input="setFromValue({ value: $event })"
+            ></v-text-field>
 
             <v-select
               class="units"
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsOfType(input.type)"
-              :value="input.selectedUnit"
-              @change="
-                setInputSelectedUnit({ id: input.id, selectedUnit: $event })
-              "
+              :items="unitsOfType(type)"
+              :value="from.unit"
+              @change="setFromUnit({ unit: $event })"
             >
               <template slot="item" slot-scope="data">
                 <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
               </template>
             </v-select>
           </v-flex>
-        </transition-group>
+
+          <v-flex xs12 sm6 md12 lg12 xl6 d-flex>
+            <v-text-field
+              type="number"
+              label="to"
+              :value="to.value"
+              :rules="numberRules('to')"
+              required
+              @focus="$event.target.select()"
+              @input="setToValue({ value: $event })"
+            ></v-text-field>
+
+            <v-select
+              class="units"
+              item-text="symbol"
+              item-value="symbol"
+              label="Units"
+              :items="unitsOfType(type)"
+              :value="to.unit"
+              @change="setToUnit({ unit: $event })"
+            >
+              <template slot="item" slot-scope="data">
+                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+              </template>
+            </v-select>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-form>
   </tool-card>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import ToolCard from '@/components/ToolCard.vue'
 
 export default {
@@ -95,20 +92,18 @@ export default {
     valid: true
   }),
   computed: {
-    ...mapGetters('calcs', ['activeSelections', 'activeInputs', 'unitsOfType'])
+    ...mapState('convert', ['type', 'from', 'to']),
+    ...mapGetters('calcs', ['unitTypes', 'unitsOfType'])
   },
   methods: {
-    ...mapActions('calcs', [
-      'setSelectionValue',
-      'setInputValue',
-      'setInputSelectedUnit',
-      'clearInputs'
+    ...mapActions('convert', [
+      'setType',
+      'setFromValue',
+      'setFromUnit',
+      'setToValue',
+      'setToUnit'
     ]),
-    selectRules: (label) => [(x) => !!x || `${label} is required`],
-    numberRules: (label) => [
-      (x) => !!x || `${label} is required`,
-      (x) => x > 0 || `${label} must be greater than zero`
-    ],
+    numberRules: (label) => [(x) => !!x || `${label} is required`],
     clear() {
       this.clearInputs()
       this.$refs.form.resetValidation()
@@ -122,15 +117,5 @@ export default {
   width: 60px;
   min-width: 60px;
   max-width: 60px;
-}
-
-.input-enter-active,
-.input-leave-active {
-  transition: all 0.3s ease;
-}
-.input-enter,
-.input-leave-to {
-  transform: translateY(-10px);
-  opacity: 0;
 }
 </style>

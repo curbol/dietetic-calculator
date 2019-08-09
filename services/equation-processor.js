@@ -75,7 +75,12 @@ function getConvertedInputs(unitData = [], inputs = [], targetUnits = {}) {
   )
 }
 
-function convert({ unitData = [], value = 0, fromUnit = '', toUnit = '' }) {
+export function convert({
+  unitData = [],
+  value = 0,
+  fromUnit = '',
+  toUnit = ''
+}) {
   const unitFactor = (unit) =>
     _.get(unitData.find((x) => x.symbol === unit), 'factor')
   const fromFactor = unitFactor(fromUnit)
