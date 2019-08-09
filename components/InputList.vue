@@ -12,7 +12,7 @@
     </template>
 
     <v-form ref="form">
-      <v-container pa-6>
+      <v-container grid-list-sm pa-4>
         <transition-group
           name="input"
           tag="div"
@@ -21,52 +21,62 @@
           <v-flex
             v-for="selection in activeSelections"
             :key="selection.id"
+            xs12
             sm6
             md12
+            lg12
+            xl6
+            d-flex
           >
-            <v-layout>
-              <v-select
-                :label="selection.name"
-                :items="selection.options"
-                :value="selection.value"
-                :rules="selectRules(selection.name)"
-                required
-                @change="setSelectionValue({ id: selection.id, value: $event })"
-              >
-                <v-icon slot="prepend">{{ selection.icon }}</v-icon>
-              </v-select>
-            </v-layout>
+            <v-select
+              :label="selection.name"
+              :items="selection.options"
+              :value="selection.value"
+              :rules="selectRules(selection.name)"
+              required
+              @change="setSelectionValue({ id: selection.id, value: $event })"
+            >
+              <v-icon slot="prepend">{{ selection.icon }}</v-icon>
+            </v-select>
           </v-flex>
 
-          <v-flex v-for="input in activeInputs" :key="input.id" sm6 md12>
-            <v-layout>
-              <v-text-field
-                type="number"
-                :label="input.name"
-                :value="input.value"
-                :rules="numberRules(input.name)"
-                required
-                @input="setInputValue({ id: input.id, value: $event })"
-              >
-                <v-icon slot="prepend">{{ input.icon }}</v-icon>
-              </v-text-field>
+          <v-flex
+            v-for="input in activeInputs"
+            :key="input.id"
+            xs12
+            sm6
+            md12
+            lg12
+            xl6
+            d-flex
+          >
+            <v-text-field
+              type="number"
+              :label="input.name"
+              :value="input.value"
+              :rules="numberRules(input.name)"
+              required
+              @focus="$event.target.select()"
+              @input="setInputValue({ id: input.id, value: $event })"
+            >
+              <v-icon slot="prepend">{{ input.icon }}</v-icon>
+            </v-text-field>
 
-              <v-select
-                class="units"
-                item-text="symbol"
-                item-value="symbol"
-                label="Units"
-                :items="unitsOfType(input.type)"
-                :value="input.selectedUnit"
-                @change="
-                  setInputSelectedUnit({ id: input.id, selectedUnit: $event })
-                "
-              >
-                <template slot="item" slot-scope="data">
-                  <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
-                </template>
-              </v-select>
-            </v-layout>
+            <v-select
+              class="units"
+              item-text="symbol"
+              item-value="symbol"
+              label="Units"
+              :items="unitsOfType(input.type)"
+              :value="input.selectedUnit"
+              @change="
+                setInputSelectedUnit({ id: input.id, selectedUnit: $event })
+              "
+            >
+              <template slot="item" slot-scope="data">
+                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+              </template>
+            </v-select>
           </v-flex>
         </transition-group>
       </v-container>
@@ -75,10 +85,6 @@
 </template>
 
 <script>
-// TODO: Get grid spacing working
-// TODO: Select all text-field text on click for easier edits
-// TODO: Try to prevent values less than zero again?
-
 import { mapGetters, mapActions } from 'vuex'
 import ToolCard from '@/components/ToolCard.vue'
 
