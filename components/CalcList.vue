@@ -12,6 +12,7 @@
             <v-icon>mdi-checkbox-multiple-marked</v-icon>
           </v-btn>
         </template>
+
         <span>Select All</span>
       </v-tooltip>
 
@@ -26,48 +27,66 @@
             <v-icon>mdi-checkbox-multiple-blank-outline</v-icon>
           </v-btn>
         </template>
+
         <span>Deselect All</span>
       </v-tooltip>
     </template>
 
-    <v-list expand flat>
-      <v-list-group
-        v-for="category in categories"
-        :key="category.id"
-        :value="category.active"
-        :prepend-icon="category.icon"
-        @click="toggleActivateCategory(category.id)"
-      >
-        <template #activator>
-          <v-list-item-content>
-            <v-list-item-title v-text="category.name" />
-          </v-list-item-content>
-        </template>
+    <v-container grid-list-xs pa-0 ma-0>
+      <v-layout ma-0 pa-0 align-start justify-center wrap>
+        <v-flex
+          v-for="category in categories"
+          :key="category.id"
+          xs12
+          sm6
+          md12
+          lg12
+          xl6
+          ma-0
+          pa-0
+        >
+          <v-list expand flat>
+            <v-list-group
+              :value="category.active"
+              :prepend-icon="category.icon"
+              @click="toggleActivateCategory(category.id)"
+            >
+              <template #activator>
+                <v-list-item-content>
+                  <v-list-item-title v-text="category.name" />
+                </v-list-item-content>
+              </template>
 
-        <v-list-item-group :value="activeCalculators.map((x) => x.id)" multiple>
-          <v-list-item
-            v-for="calc in calcsInCategory(category.id)"
-            :key="calc.id"
-            :value="calc.id"
-            active-class="accent--text"
-            two-line
-            @click="toggleActivateCalculator(calc.id)"
-          >
-            <v-list-item-action>
-              <v-checkbox
-                :input-value="calc.active"
-                :true-value="calc.id"
-              ></v-checkbox>
-            </v-list-item-action>
+              <v-list-item-group
+                :value="activeCalculators.map((x) => x.id)"
+                multiple
+              >
+                <v-list-item
+                  v-for="calc in calcsInCategory(category.id)"
+                  :key="calc.id"
+                  :value="calc.id"
+                  active-class="accent--text"
+                  two-line
+                  @click="toggleActivateCalculator(calc.id)"
+                >
+                  <v-list-item-action>
+                    <v-checkbox
+                      :input-value="calc.active"
+                      :true-value="calc.id"
+                    ></v-checkbox>
+                  </v-list-item-action>
 
-            <v-list-item-content>
-              <v-list-item-title v-text="calc.title" />
-              <v-list-item-subtitle v-text="calc.subtitle" />
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list-group>
-    </v-list>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="calc.title" />
+                    <v-list-item-subtitle v-text="calc.subtitle" />
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list-group>
+          </v-list>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </tool-card>
 </template>
 
