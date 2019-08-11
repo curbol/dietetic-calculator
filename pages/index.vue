@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-lg>
+  <v-container grid-list-lg mt-md-4 mt-xl-8>
     <v-layout align-start justify-left wrap>
       <v-flex sm12 md4>
         <calc-list></calc-list>
@@ -59,7 +59,7 @@ export default {
       })
     }
     try {
-      await store.dispatch('calcs/fetchUnits')
+      await store.dispatch('units/fetchUnits')
     } catch (e) {
       error({
         statusCode: 503,

@@ -10,8 +10,7 @@ export default {
       categories: [],
       calculators: [],
       selections: [],
-      inputs: [],
-      units: []
+      inputs: []
     }
   },
   mutations: {
@@ -26,9 +25,6 @@ export default {
     },
     Set_Selections(state, selections) {
       state.selections = selections
-    },
-    Set_Units(state, units) {
-      state.units = units
     },
     Toggle_Activate_Category(state, id) {
       state.categories = state.categories.map((x) =>
@@ -86,7 +82,8 @@ export default {
     }
   },
   actions: {
-    async fetchCategories({ commit }) {
+    async fetchCategories({ state, commit }) {
+      if (state.categories.length) return
       const { data } = await CalcService.getCategories()
       const categories = _(data)
         .map((category) => ({
@@ -97,7 +94,8 @@ export default {
         .value()
       commit('Set_Categories', categories)
     },
-    async fetchCalculators({ commit }) {
+    async fetchCalculators({ state, commit }) {
+      if (state.calculators.length) return
       const { data } = await CalcService.getCalculators()
       const calculators = _(data)
         .map((calc) => ({
@@ -111,7 +109,8 @@ export default {
         .value()
       commit('Set_Calculators', calculators)
     },
-    async fetchInputs({ commit }) {
+    async fetchInputs({ state, commit }) {
+      if (state.inputs.length && state.selections.length) return
       const { data: inputData } = await CalcService.getInputs()
       const inputs = _(inputData)
         .map((input) => ({
@@ -131,10 +130,6 @@ export default {
         .orderBy('id')
         .value()
       commit('Set_Selections', selections)
-    },
-    async fetchUnits({ commit }) {
-      const { data } = await CalcService.getUnits()
-      commit('Set_Units', data)
     },
     toggleActivateCategory({ commit }, id) {
       commit('Toggle_Activate_Category', id)
@@ -168,9 +163,9 @@ export default {
       commit('Set_Result_Selected_Unit', { id, selectedUnit })
       dispatch('calculateResults')
     },
-    calculateResults({ state, commit }) {
+    calculateResults({ rootState, state, commit }) {
       const processEquation = equationProcessor({
-        unitData: state.units,
+        unitData: rootState.units.units,
         inputs: state.inputs,
         selections: state.selections
       })
@@ -203,12 +198,6 @@ export default {
         .flatten()
         .uniq()
         .map((id) => state.selections.find((selection) => selection.id === id))
-        .value(),
-    unitTypes: (state) =>
-      state.units.filter((unit) => unit.factor === 1).map((unit) => unit.type),
-    unitsOfType: (state) => (type) =>
-      state.units.filter((x) => x.type === type),
-    symbolType: (state) => (symbol) =>
-      _.get(state.units.find((x) => x.symbol === symbol), 'type')
+        .value()
   }
 }

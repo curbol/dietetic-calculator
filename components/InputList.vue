@@ -12,11 +12,11 @@
     </template>
 
     <v-form ref="form">
-      <v-container grid-list-xs pa-4>
+      <v-container grid-list-lg pa-4>
         <transition-group
-          name="input"
+          name="slide"
           tag="div"
-          class="layout align-start justify-center wrap"
+          class="layout align-start justify-left wrap"
         >
           <v-flex
             v-for="selection in activeSelections"
@@ -95,7 +95,8 @@ export default {
     valid: true
   }),
   computed: {
-    ...mapGetters('calcs', ['activeSelections', 'activeInputs', 'unitsOfType'])
+    ...mapGetters('calcs', ['activeSelections', 'activeInputs']),
+    ...mapGetters('units', ['unitsOfType'])
   },
   methods: {
     ...mapActions('calcs', [
@@ -124,12 +125,12 @@ export default {
   max-width: 60px;
 }
 
-.input-enter-active,
-.input-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.3s ease;
 }
-.input-enter,
-.input-leave-to {
+.slide-enter,
+.slide-leave-to {
   transform: translateY(-10px);
   opacity: 0;
 }

@@ -1,9 +1,7 @@
 <template>
-  <v-container>
+  <v-container mt-md-4 mt-xl-8>
     <v-layout align-start justify-center>
-      <v-flex sm12 md8>
-        <converter></converter>
-      </v-flex>
+      <converter></converter>
     </v-layout>
   </v-container>
 </template>
@@ -17,7 +15,7 @@ export default {
   },
   async fetch({ store, error, params }) {
     try {
-      await store.dispatch('calcs/fetchUnits')
+      await store.dispatch('units/fetchUnits')
     } catch (e) {
       error({
         statusCode: 503,

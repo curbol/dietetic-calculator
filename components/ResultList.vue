@@ -2,10 +2,11 @@
   <tool-card title="Results">
     <template #toolbar></template>
 
-    <v-container grid-list-xs pa-4>
+    <v-container grid-list-lg pa-4>
       <transition-group
+        name="slide"
         tag="div"
-        class="layout align-start justify-center wrap"
+        class="layout align-start justify-left wrap"
       >
         <v-flex
           v-for="calc in activeCalculators"
@@ -63,7 +64,8 @@ export default {
     ToolCard
   },
   computed: {
-    ...mapGetters('calcs', ['activeCalculators', 'unitsOfType', 'symbolType'])
+    ...mapGetters('calcs', ['activeCalculators']),
+    ...mapGetters('units', ['unitsOfType', 'symbolType'])
   },
   methods: {
     ...mapActions('calcs', ['setResultSelectedUnit'])
@@ -78,12 +80,12 @@ export default {
   max-width: 60px;
 }
 
-.input-enter-active,
-.input-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.3s ease;
 }
-.input-enter,
-.input-leave-to {
+.slide-enter,
+.slide-leave-to {
   transform: translateY(-10px);
   opacity: 0;
 }

@@ -34,11 +34,12 @@ export default {
   actions: {
     setType({ rootGetters, commit, dispatch }, { type }) {
       commit('Set_Type', { type })
+      const unitsOfType = rootGetters['units/unitsOfType'](type)
       dispatch('setFromUnit', {
-        unit: rootGetters['calcs/unitsOfType'](type)[0].symbol
+        unit: unitsOfType[0].symbol
       })
       dispatch('setToUnit', {
-        unit: rootGetters['calcs/unitsOfType'](type)[1].symbol
+        unit: unitsOfType[1].symbol
       })
       dispatch('setFromValue', { value: 1 })
     },
@@ -69,7 +70,7 @@ export default {
     },
     calculateToValue({ rootState, state, commit }) {
       const toValue = convert({
-        unitData: rootState.calcs.units,
+        unitData: rootState.units.units,
         value: state.from.value,
         fromUnit: state.from.unit,
         toUnit: state.to.unit

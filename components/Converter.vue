@@ -1,5 +1,5 @@
 <template>
-  <tool-card title="Converter">
+  <tool-card title="Converter" class="converter">
     <template #toolbar>
       <v-tooltip bottom open-delay="1000">
         <template v-slot:activator="{ on }">
@@ -12,18 +12,22 @@
     </template>
 
     <v-form ref="form">
-      <v-container grid-list-xs pa-4>
+      <v-container grid-list-lg pa-4>
         <v-layout align-start justify-center wrap>
           <v-flex>
             <v-select
               label="Type"
-              :items="unitTypes"
+              required
+              :items="typesWithMultipleUnits"
               :value="type"
+              :rules="selectRules('Type')"
               @change="setType({ type: $event })"
             ></v-select>
           </v-flex>
+        </v-layout>
 
-          <v-flex xs12 sm6 md12 lg12 xl6 d-flex>
+        <v-layout :column="isXS" align-center justify-center>
+          <v-flex d-flex>
             <v-text-field
               type="number"
               label="from"
@@ -49,7 +53,11 @@
             </v-select>
           </v-flex>
 
-          <v-flex xs12 sm6 md12 lg12 xl6 d-flex>
+          <v-flex justify-center d-flex>
+            <v-icon>mdi-equal</v-icon>
+          </v-flex>
+
+          <v-flex d-flex>
             <v-text-field
               type="number"
               label="to"
@@ -93,7 +101,10 @@ export default {
   }),
   computed: {
     ...mapState('convert', ['type', 'from', 'to']),
-    ...mapGetters('calcs', ['unitTypes', 'unitsOfType'])
+    ...mapGetters('units', ['typesWithMultipleUnits', 'unitsOfType']),
+    isXS() {
+      return this.$vuetify.breakpoint.xs
+    }
   },
   methods: {
     ...mapActions('convert', [
@@ -103,6 +114,7 @@ export default {
       'setToValue',
       'setToUnit'
     ]),
+    selectRules: (label) => [(x) => !!x || `${label} is required`],
     numberRules: (label) => [(x) => !!x || `${label} is required`],
     clear() {
       this.clearInputs()
@@ -113,6 +125,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.converter {
+  max-width: 40rem;
+}
+
 .units {
   width: 60px;
   min-width: 60px;
