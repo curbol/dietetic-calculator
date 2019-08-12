@@ -64,7 +64,7 @@
       </v-tooltip>
     </v-app-bar>
 
-    <v-content fill-height>
+    <v-content>
       <nuxt />
     </v-content>
 
