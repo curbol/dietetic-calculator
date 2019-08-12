@@ -91,6 +91,7 @@
 </template>
 
 <script>
+// TODO: add option to show formula for calculator if possible
 // TODO: Wait for v-list-group fix so expander works correctly
 // * https://github.com/vuetifyjs/vuetify/issues/8166
 

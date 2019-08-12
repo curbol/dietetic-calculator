@@ -47,16 +47,24 @@ export default {
       commit('Set_From_Value', { value })
       dispatch('calculateToValue')
     },
-    setFromUnit({ commit, dispatch }, { unit }) {
+    setFromUnit({ state, commit, dispatch }, { unit }) {
+      const prevFromUnit = state.from.unit
       commit('Set_From_Unit', { unit })
+      if (state.to.unit === unit) {
+        dispatch('setToUnit', { unit: prevFromUnit })
+      }
       dispatch('calculateToValue')
     },
     setToValue({ commit, dispatch }, { value }) {
       commit('Set_To_Value', { value })
       dispatch('calculateFromValue')
     },
-    setToUnit({ commit, dispatch }, { unit }) {
+    setToUnit({ state, commit, dispatch }, { unit }) {
+      const prevToUnit = state.to.unit
       commit('Set_To_Unit', { unit })
+      if (state.from.unit === unit) {
+        dispatch('setFromUnit', { unit: prevToUnit })
+      }
       dispatch('calculateToValue')
     },
     calculateFromValue({ rootState, state, commit }) {
@@ -69,13 +77,20 @@ export default {
       commit('Set_From_Value', { value: fromValue })
     },
     calculateToValue({ rootState, state, commit }) {
-      const toValue = convert({
-        unitData: rootState.units.units,
-        value: state.from.value,
-        fromUnit: state.from.unit,
-        toUnit: state.to.unit
-      })
-      commit('Set_To_Value', { value: toValue })
+      const toValue = state.from.value
+        ? convert({
+            unitData: rootState.units.units,
+            value: state.from.value,
+            fromUnit: state.from.unit,
+            toUnit: state.to.unit
+          })
+        : undefined
+      const rounded = isNaN(toValue) ? toValue : parseFloat(toValue.toFixed(5))
+      commit('Set_To_Value', { value: rounded })
+    },
+    clearValues({ dispatch }) {
+      dispatch('setFromValue', { value: undefined })
+      dispatch('setToValue', { value: undefined })
     }
   },
   getters: {}

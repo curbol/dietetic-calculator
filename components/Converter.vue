@@ -1,9 +1,9 @@
 <template>
-  <tool-card title="Converter" class="converter">
+  <tool-card title="Unit Converter" class="converter">
     <template #toolbar>
       <v-tooltip bottom open-delay="1000">
         <template v-slot:activator="{ on }">
-          <v-btn text icon color="secondary" v-on="on" @click="clear()">
+          <v-btn text icon color="secondary" v-on="on" @click="clearValues()">
             <v-icon>mdi-delete-sweep</v-icon>
           </v-btn>
         </template>
@@ -20,7 +20,6 @@
               required
               :items="typesWithMultipleUnits"
               :value="type"
-              :rules="selectRules('Type')"
               @change="setType({ type: $event })"
             ></v-select>
           </v-flex>
@@ -30,9 +29,8 @@
           <v-flex d-flex>
             <v-text-field
               type="number"
-              label="from"
+              :label="fromLabel"
               :value="from.value"
-              :rules="numberRules('from')"
               required
               @focus="$event.target.select()"
               @input="setFromValue({ value: $event })"
@@ -60,9 +58,8 @@
           <v-flex d-flex>
             <v-text-field
               type="number"
-              label="to"
+              :label="toLabel"
               :value="to.value"
-              :rules="numberRules('to')"
               required
               @focus="$event.target.select()"
               @input="setToValue({ value: $event })"
@@ -83,6 +80,17 @@
             </v-select>
           </v-flex>
         </v-layout>
+        <v-layout row align-center justify-left>
+          <v-flex shrink>
+            <v-chip small label color="accent">
+              Formula
+            </v-chip>
+          </v-flex>
+
+          <v-flex shrink>
+            <span class="body-2 font-weight-light">{{ formula }}</span>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-form>
   </tool-card>
@@ -101,7 +109,34 @@ export default {
   }),
   computed: {
     ...mapState('convert', ['type', 'from', 'to']),
-    ...mapGetters('units', ['typesWithMultipleUnits', 'unitsOfType']),
+    ...mapGetters('units', [
+      'typesWithMultipleUnits',
+      'unitsOfType',
+      'unitWithSymbol'
+    ]),
+    fromUnit() {
+      return this.unitWithSymbol(this.from.unit)
+    },
+    toUnit() {
+      return this.unitWithSymbol(this.to.unit)
+    },
+    fromLabel() {
+      return `${this.fromUnit.name} Value`
+    },
+    toLabel() {
+      return `${this.toUnit.name} Value`
+    },
+    formula() {
+      const fromFactor = this.fromUnit.factor
+      const toFactor = this.toUnit.factor
+      return fromFactor >= toFactor
+        ? `multiply the ${this.type.toLowerCase()} value by ${this.round(
+            fromFactor / toFactor
+          )}`
+        : `divide the ${this.type.toLowerCase()} value by ${this.round(
+            toFactor / fromFactor
+          )}`
+    },
     isXS() {
       return this.$vuetify.breakpoint.xs
     }
@@ -112,13 +147,15 @@ export default {
       'setFromValue',
       'setFromUnit',
       'setToValue',
-      'setToUnit'
+      'setToUnit',
+      'clearValues'
     ]),
-    selectRules: (label) => [(x) => !!x || `${label} is required`],
-    numberRules: (label) => [(x) => !!x || `${label} is required`],
     clear() {
       this.clearInputs()
       this.$refs.form.resetValidation()
+    },
+    round(value) {
+      return parseFloat(value.toFixed(5))
     }
   }
 }
@@ -130,8 +167,8 @@ export default {
 }
 
 .units {
-  width: 60px;
-  min-width: 60px;
-  max-width: 60px;
+  width: 65px;
+  min-width: 65px;
+  max-width: 65px;
 }
 </style>

@@ -29,6 +29,8 @@ export default {
     unitsOfType: (state) => (type) =>
       state.units.filter((x) => x.type === type),
     symbolType: (state) => (symbol) =>
-      _.get(state.units.find((x) => x.symbol === symbol), 'type')
+      _.get(state.units.find((x) => x.symbol === symbol), 'type'),
+    unitWithSymbol: (state) => (symbol) =>
+      state.units.find((unit) => unit.symbol === symbol)
   }
 }

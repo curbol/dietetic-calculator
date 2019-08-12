@@ -61,7 +61,7 @@ export default {
           primary: colors.cyan.darken2,
           secondary: colors.blueGrey.lighten4,
           accent: colors.orange.darken3,
-          error: colors.deepOrange.base,
+          error: colors.deepOrange.darken2,
           warning: colors.amber.base,
           info: colors.teal.base,
           success: colors.green.base

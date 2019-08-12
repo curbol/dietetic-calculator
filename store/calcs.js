@@ -171,7 +171,7 @@ export default {
       })
       state.calculators.forEach((calc) => {
         const result = processEquation(calc) || INVALID_INPUTS
-        const rounded = isNaN(result) ? result : result.toFixed(1)
+        const rounded = isNaN(result) ? result : parseFloat(result.toFixed(1))
         commit('Set_Result', { calcId: calc.id, result: rounded })
       })
     }

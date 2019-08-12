@@ -75,9 +75,9 @@ export default {
 
 <style lang="scss" scoped>
 .units {
-  width: 60px;
-  min-width: 60px;
-  max-width: 60px;
+  width: 65px;
+  min-width: 65px;
+  max-width: 65px;
 }
 
 .slide-enter-active,
