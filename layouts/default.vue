@@ -79,6 +79,7 @@
 <script>
 // TODO: get rid of scroll bar on right
 // TODO: toolbar does not darken when nav drawer opens
+// TODO: page change transition animations?
 
 export default {
   data: () => ({
