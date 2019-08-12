@@ -92,6 +92,7 @@
 
 <script>
 // TODO: add option to show formula for calculator if possible
+// TODO: add helper text somewhere to explain how to use the app? Helper tooltips maybe?
 // TODO: Wait for v-list-group fix so expander works correctly
 // * https://github.com/vuetifyjs/vuetify/issues/8166
 
