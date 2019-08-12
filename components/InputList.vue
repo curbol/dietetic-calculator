@@ -35,7 +35,9 @@
               required
               @change="setSelectionValue({ id: selection.id, value: $event })"
             >
-              <v-icon slot="prepend">{{ selection.icon }}</v-icon>
+              <v-icon slot="prepend" color="secondary">{{
+                selection.icon
+              }}</v-icon>
             </v-select>
           </v-flex>
 
@@ -58,7 +60,7 @@
               @focus="$event.target.select()"
               @input="setInputValue({ id: input.id, value: $event })"
             >
-              <v-icon slot="prepend">{{ input.icon }}</v-icon>
+              <v-icon slot="prepend" color="secondary">{{ input.icon }}</v-icon>
             </v-text-field>
 
             <v-select

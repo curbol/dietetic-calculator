@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-lg mt-md-4 mt-xl-8>
+  <v-container grid-list-lg my-1>
     <v-layout align-start justify-left wrap>
       <v-flex sm12 md4>
         <calc-list></calc-list>

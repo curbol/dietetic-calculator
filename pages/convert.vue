@@ -1,5 +1,5 @@
 <template>
-  <v-container mt-md-4 mt-xl-8>
+  <v-container my-1>
     <v-layout align-start justify-center>
       <converter></converter>
     </v-layout>

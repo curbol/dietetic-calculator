@@ -25,7 +25,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout :column="isXS" align-center justify-center>
+        <v-layout :column="$vuetify.breakpoint.xs" align-center justify-center>
           <v-flex d-flex>
             <v-text-field
               type="number"
@@ -52,7 +52,7 @@
           </v-flex>
 
           <v-flex justify-center d-flex>
-            <v-icon>mdi-equal</v-icon>
+            <v-icon color="secondary">mdi-equal</v-icon>
           </v-flex>
 
           <v-flex d-flex>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+// TODO: match calc input sizing/width
 import { mapState, mapGetters, mapActions } from 'vuex'
 import ToolCard from '@/components/ToolCard.vue'
 
@@ -136,9 +137,6 @@ export default {
         : `divide the ${this.type.toLowerCase()} value by ${this.round(
             toFactor / fromFactor
           )}`
-    },
-    isXS() {
-      return this.$vuetify.breakpoint.xs
     }
   },
   methods: {

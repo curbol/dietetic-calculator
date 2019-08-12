@@ -32,8 +32,8 @@
       </v-tooltip>
     </template>
 
-    <v-container grid-list-xs pa-0 ma-0>
-      <v-layout ma-0 pa-0 align-start justify-center wrap>
+    <v-container grid-list-xs>
+      <v-layout align-start justify-center wrap>
         <v-flex
           v-for="category in categories"
           :key="category.id"
