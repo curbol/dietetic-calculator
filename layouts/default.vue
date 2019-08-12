@@ -77,7 +77,7 @@
 </template>
 
 <script>
-// TODO: get rid of scroll bar on right
+// TODO: get rid of scroll bar on right (related to @nuxtjs/vuetify module)
 // TODO: toolbar does not darken when nav drawer opens
 // TODO: page change transition animations?
 
