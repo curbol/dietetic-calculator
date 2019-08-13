@@ -1,8 +1,9 @@
 <template>
-  <v-container class="container" my-1>
+  <v-container class="container" my-1 fill-height>
     <v-layout align-start justify-center>
-      <v-card>
-        <v-card-title class="display-1 primary--text">About</v-card-title>
+      <v-card elevation="3">
+        <!-- <v-card-title class="display-1 primary--text">About</v-card-title> -->
+        <v-card-title class="display-1 primary pb-4 mb-4">About</v-card-title>
 
         <v-card-text class="body-1">
           Dietetic Calculator is a tool created for dietitians to make common
@@ -25,16 +26,20 @@
             </v-layout>
           </template>
 
-          <v-layout pa-1 column fill-height class="lightbox">
-            <v-spacer />
-            <v-flex justify-space-around shrink d-flex>
-              <a
-                v-for="(person, key) in [curtis, chelsey]"
-                :key="key"
-                :href="person.link"
-                target="_blank"
-                class="white--text"
-              >
+          <v-layout
+            pa-1
+            fill-height
+            wrap
+            align-content-end
+            justify-space-around
+            class="lightbox"
+          >
+            <v-flex
+              v-for="(person, key) in [curtis, chelsey]"
+              :key="key"
+              shrink
+            >
+              <a :href="person.link" target="_blank" class="white--text">
                 <v-layout shrink column>
                   <span class="subheading">{{ person.name }}</span>
                   <span class="body-1">{{ person.email }}</span>

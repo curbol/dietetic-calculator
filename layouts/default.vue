@@ -1,13 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      temporary
-      width="200"
-      clipped
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" width="200" clipped app>
       <v-list shaped>
         <v-list-item
           v-for="(link, i) in [home, ...links]"
@@ -25,8 +18,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
-    <v-system-bar color="primary darken-2" app></v-system-bar>
 
     <v-app-bar color="primary" clipped-left fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -68,7 +59,7 @@
       <nuxt />
     </v-content>
 
-    <v-footer color="primary py-4" app absolute>
+    <v-footer color="primary py-4" width="auto" inset absolute app>
       <v-layout justify-center>
         <span class="font-weight-light">&copy; 2019 - Curtis Bollinger</span>
       </v-layout>
@@ -77,9 +68,9 @@
 </template>
 
 <script>
-// TODO: get rid of scroll bar on right (related to @nuxtjs/vuetify module)
-// TODO: toolbar does not darken when nav drawer opens
 // TODO: page change transition animations?
+// !BUG: get rid of scroll bar on right (related to @nuxtjs/vuetify module)
+// !BUG: toolbar does not darken when nav drawer opens
 
 export default {
   data: () => ({
