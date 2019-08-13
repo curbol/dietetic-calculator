@@ -16,7 +16,7 @@
 
     <v-form ref="form">
       <v-container grid-list-lg pa-4>
-        <v-layout align-start justify-center wrap>
+        <v-layout align-center justify-center>
           <v-flex>
             <v-select
               label="Type"
@@ -28,7 +28,7 @@
           </v-flex>
         </v-layout>
 
-        <v-layout :column="$vuetify.breakpoint.xs" align-center justify-center>
+        <v-layout align-center justify-center>
           <v-flex d-flex>
             <v-text-field
               type="number"
@@ -100,7 +100,6 @@
 </template>
 
 <script>
-// TODO: match calc input sizing/width
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
