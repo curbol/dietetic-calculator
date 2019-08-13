@@ -35,7 +35,6 @@
           subtitle-1
           text-truncate
           font-weight-light
-          text--secondary
           hidden-sm-and-down
         "
       >

@@ -2,8 +2,9 @@
   <v-container class="container" my-1 fill-height>
     <v-layout align-start justify-center>
       <v-card elevation="3">
-        <!-- <v-card-title class="display-1 primary--text">About</v-card-title> -->
-        <v-card-title class="display-1 primary pb-4 mb-4">About</v-card-title>
+        <v-toolbar flat color="primary">
+          <v-toolbar-title class="headline" v-text="title" />
+        </v-toolbar>
 
         <v-card-text class="body-1">
           Dietetic Calculator is a tool created for dietitians to make common
@@ -68,6 +69,7 @@
 <script>
 export default {
   data: () => ({
+    title: 'About',
     curtis: {
       name: 'Curtis Bollinger',
       title: 'Software Engineer',
@@ -100,13 +102,14 @@ $a-tags-hover: 'a:active, a:hover';
   box-shadow: 0 0 20px inset rgba(0, 0, 0, 0.2);
   background-image: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.5) 0%,
-    transparent 80px
+    rgba(0, 0, 0, 0.4) 0%,
+    transparent 75px
   );
 }
 
 .v-image {
   #{$a-tags} {
+    text-shadow: 0 1px 4px #000000;
     text-decoration: none;
   }
   #{$a-tags-hover} {
