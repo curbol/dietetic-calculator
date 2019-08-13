@@ -1,68 +1,71 @@
 <template>
-  <tool-card title="Results">
-    <template #toolbar></template>
+  <v-card elevation="3">
+    <v-toolbar flat dense color="primary">
+      <v-toolbar-title v-text="title" />
+    </v-toolbar>
 
-    <v-container grid-list-lg pa-4>
-      <transition-group
-        name="slide"
-        tag="div"
-        class="layout align-start justify-left wrap"
-      >
-        <v-flex
-          v-for="calc in activeCalculators"
-          :key="calc.id"
-          xs12
-          sm6
-          md12
-          lg12
-          xl6
-          d-flex
+    <v-form ref="form">
+      <v-container grid-list-lg pa-4>
+        <transition-group
+          name="slide"
+          tag="div"
+          class="layout align-start justify-left wrap"
         >
-          <v-text-field
-            readonly
-            :label="calc.title"
-            :value="calc.result"
-            @focus="$event.target.select()"
-          ></v-text-field>
-
-          <v-select
-            v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
-            class="units"
-            item-text="symbol"
-            item-value="symbol"
-            label="Units"
-            :items="unitsOfType(symbolType(calc.defaultUnit))"
-            :value="calc.selectedUnit"
-            @input="
-              setResultSelectedUnit({ id: calc.id, selectedUnit: $event })
-            "
+          <v-flex
+            v-for="calc in activeCalculators"
+            :key="calc.id"
+            xs12
+            sm6
+            md12
+            lg12
+            xl6
+            d-flex
           >
-            <template slot="item" slot-scope="data">
-              <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
-            </template>
-          </v-select>
+            <v-text-field
+              readonly
+              :label="calc.title"
+              :value="calc.result"
+              @focus="$event.target.select()"
+            ></v-text-field>
 
-          <v-text-field
-            v-else
-            readonly
-            class="units"
-            label="Units"
-            :value="calc.selectedUnit"
-          ></v-text-field>
-        </v-flex>
-      </transition-group>
-    </v-container>
-  </tool-card>
+            <v-select
+              v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
+              class="units"
+              item-text="symbol"
+              item-value="symbol"
+              label="Units"
+              :items="unitsOfType(symbolType(calc.defaultUnit))"
+              :value="calc.selectedUnit"
+              @input="
+                setResultSelectedUnit({ id: calc.id, selectedUnit: $event })
+              "
+            >
+              <template slot="item" slot-scope="data">
+                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+              </template>
+            </v-select>
+
+            <v-text-field
+              v-else
+              readonly
+              class="units"
+              label="Units"
+              :value="calc.selectedUnit"
+            ></v-text-field>
+          </v-flex>
+        </transition-group>
+      </v-container>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import ToolCard from '@/components/ToolCard.vue'
 
 export default {
-  components: {
-    ToolCard
-  },
+  data: () => ({
+    title: 'Results'
+  }),
   computed: {
     ...mapGetters('calcs', ['activeCalculators']),
     ...mapGetters('units', ['unitsOfType', 'symbolType'])

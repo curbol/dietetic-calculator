@@ -10,6 +10,16 @@
 import Converter from '@/components/Converter.vue'
 
 export default {
+  head: () => ({
+    title: 'Unit Converter',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Tool for unit conversions'
+      }
+    ]
+  }),
   components: {
     Converter
   },

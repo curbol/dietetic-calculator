@@ -1,15 +1,18 @@
 <template>
-  <tool-card title="Unit Converter" class="converter">
-    <template #toolbar>
-      <v-tooltip bottom open-delay="1000">
+  <v-card elevation="3" class="converter">
+    <v-toolbar flat dense color="primary">
+      <v-toolbar-title v-text="title" />
+      <v-spacer />
+      <v-tooltip bottom open-delay="800">
         <template v-slot:activator="{ on }">
           <v-btn text icon color="secondary" v-on="on" @click="clearValues()">
             <v-icon>mdi-delete-sweep</v-icon>
           </v-btn>
         </template>
+
         <span>Clear All</span>
       </v-tooltip>
-    </template>
+    </v-toolbar>
 
     <v-form ref="form">
       <v-container grid-list-lg pa-4>
@@ -93,19 +96,16 @@
         </v-layout>
       </v-container>
     </v-form>
-  </tool-card>
+  </v-card>
 </template>
 
 <script>
 // TODO: match calc input sizing/width
 import { mapState, mapGetters, mapActions } from 'vuex'
-import ToolCard from '@/components/ToolCard.vue'
 
 export default {
-  components: {
-    ToolCard
-  },
   data: () => ({
+    title: 'Unit Converter',
     valid: true
   }),
   computed: {

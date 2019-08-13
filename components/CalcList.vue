@@ -1,7 +1,9 @@
 <template>
-  <tool-card title="Calculators">
-    <template #toolbar>
-      <v-tooltip bottom open-delay="1000">
+  <v-card elevation="3">
+    <v-toolbar flat dense color="primary">
+      <v-toolbar-title v-text="title" />
+      <v-spacer />
+      <v-tooltip bottom open-delay="800">
         <template v-slot:activator="{ on }">
           <v-btn
             icon
@@ -16,7 +18,7 @@
         <span>Select All</span>
       </v-tooltip>
 
-      <v-tooltip bottom open-delay="1000">
+      <v-tooltip bottom open-delay="800">
         <template v-slot:activator="{ on }">
           <v-btn
             icon
@@ -30,7 +32,7 @@
 
         <span>Deselect All</span>
       </v-tooltip>
-    </template>
+    </v-toolbar>
 
     <v-container grid-list-xs>
       <v-layout align-start justify-center wrap>
@@ -87,7 +89,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </tool-card>
+  </v-card>
 </template>
 
 <script>
@@ -96,12 +98,11 @@
 // !BUG: Wait for v-list-group fix so expander works correctly https://github.com/vuetifyjs/vuetify/issues/8166
 
 import { mapState, mapGetters, mapActions } from 'vuex'
-import ToolCard from '@/components/ToolCard.vue'
 
 export default {
-  components: {
-    ToolCard
-  },
+  data: () => ({
+    title: 'Calculators'
+  }),
   computed: {
     ...mapState('calcs', ['categories']),
     ...mapGetters('calcs', ['calcsInCategory', 'activeCalculators'])

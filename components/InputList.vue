@@ -1,15 +1,18 @@
 <template>
-  <tool-card title="Inputs">
-    <template #toolbar>
-      <v-tooltip bottom open-delay="1000">
+  <v-card elevation="3">
+    <v-toolbar flat dense color="primary">
+      <v-toolbar-title v-text="title" />
+      <v-spacer />
+      <v-tooltip bottom open-delay="800">
         <template v-slot:activator="{ on }">
           <v-btn text icon color="secondary" v-on="on" @click="clear()">
             <v-icon>mdi-delete-sweep</v-icon>
           </v-btn>
         </template>
+
         <span>Clear All</span>
       </v-tooltip>
-    </template>
+    </v-toolbar>
 
     <v-form ref="form">
       <v-container grid-list-lg pa-4>
@@ -82,18 +85,15 @@
         </transition-group>
       </v-container>
     </v-form>
-  </tool-card>
+  </v-card>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import ToolCard from '@/components/ToolCard.vue'
 
 export default {
-  components: {
-    ToolCard
-  },
   data: () => ({
+    title: 'Inputs',
     valid: true
   }),
   computed: {

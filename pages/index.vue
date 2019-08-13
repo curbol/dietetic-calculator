@@ -25,6 +25,16 @@ import InputList from '@/components/InputList.vue'
 import ResultList from '@/components/ResultList.vue'
 
 export default {
+  head: () => ({
+    title: 'Calculator',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Tool for common dietitian calculations'
+      }
+    ]
+  }),
   components: {
     CalcList,
     InputList,

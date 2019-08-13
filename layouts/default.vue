@@ -67,15 +67,18 @@
 </template>
 
 <script>
-// TODO: page change transition animations?
-// !BUG: get rid of scroll bar on right (related to @nuxtjs/vuetify module)
-// !BUG: toolbar does not darken when nav drawer opens
+// TODO: Tests
+// !BUG: get rid of scroll bar on right (related to @nuxtjs/vuetify module) - need to submit bug report if none exists
+// !BUG: toolbar does not darken when nav drawer opens - need to submit bug report if none exists
 
 export default {
+  head: () => ({
+    titleTemplate: '%s - Dietetic Calculator'
+  }),
   data: () => ({
     drawer: false,
     title: 'Dietetic Calculator',
-    subtitle: 'Tool For Common Dietetic Calculations',
+    subtitle: 'Tool For Common Dietitian Calculations',
     home: {
       icon: 'mdi-calculator-variant',
       title: 'Calculate',

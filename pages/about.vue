@@ -68,6 +68,16 @@
 
 <script>
 export default {
+  head: () => ({
+    title: 'About',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Information about this site'
+      }
+    ]
+  }),
   data: () => ({
     title: 'About',
     curtis: {
