@@ -28,7 +28,11 @@
           </v-flex>
         </v-layout>
 
-        <v-layout align-center justify-center>
+        <v-layout
+          :wrap="$vuetify.breakpoint.xsOnly"
+          align-center
+          justify-center
+        >
           <v-flex d-flex>
             <v-text-field
               type="number"
@@ -54,7 +58,7 @@
             </v-select>
           </v-flex>
 
-          <v-flex justify-center d-flex>
+          <v-flex :xs12="$vuetify.breakpoint.xsOnly" justify-center d-flex>
             <v-icon color="secondary">mdi-equal</v-icon>
           </v-flex>
 
@@ -129,13 +133,12 @@ export default {
     formula() {
       const fromFactor = this.fromUnit.factor
       const toFactor = this.toUnit.factor
+      const typeText = this.type && this.type.toLowerCase()
       return fromFactor >= toFactor
-        ? `multiply the ${this.type.toLowerCase()} value by ${this.round(
+        ? `multiply the ${typeText} value by ${this.round(
             fromFactor / toFactor
           )}`
-        : `divide the ${this.type.toLowerCase()} value by ${this.round(
-            toFactor / fromFactor
-          )}`
+        : `divide the ${typeText} value by ${this.round(toFactor / fromFactor)}`
     }
   },
   methods: {

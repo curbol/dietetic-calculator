@@ -2,12 +2,7 @@
   <v-app dark>
     <v-navigation-drawer v-model="drawer" width="200" clipped app>
       <v-list shaped>
-        <v-list-item
-          v-for="(link, i) in [home, ...links]"
-          :key="i"
-          nuxt
-          :to="link.to"
-        >
+        <v-list-item v-for="(link, i) in links" :key="i" nuxt :to="link.to">
           <v-list-item-action>
             <v-icon color="secondary">{{ link.icon }}</v-icon>
           </v-list-item-action>
@@ -23,7 +18,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
       <v-toolbar-title>
-        <n-link nuxt :to="home.to" class="toolbar-title">
+        <n-link nuxt to="/" class="toolbar-title">
           {{ title }}
         </n-link>
       </v-toolbar-title>
@@ -43,15 +38,17 @@
 
       <v-spacer />
 
-      <v-tooltip v-for="(link, i) in [home, ...links]" :key="i" bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn icon color="secondary" nuxt :to="link.to" v-on="on">
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-btn>
-        </template>
+      <span v-show="$vuetify.breakpoint.smAndUp">
+        <v-tooltip v-for="(link, i) in links" :key="i" bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn icon color="secondary" nuxt :to="link.to" v-on="on">
+              <v-icon>{{ link.icon }}</v-icon>
+            </v-btn>
+          </template>
 
-        <span>{{ link.title }}</span>
-      </v-tooltip>
+          <span>{{ link.title }}</span>
+        </v-tooltip>
+      </span>
     </v-app-bar>
 
     <v-content>
@@ -75,28 +72,30 @@ export default {
   head: () => ({
     titleTemplate: '%s - Dietetic Calculator'
   }),
-  data: () => ({
-    drawer: false,
-    title: 'Dietetic Calculator',
-    subtitle: 'Tool For Common Dietitian Calculations',
-    home: {
-      icon: 'mdi-calculator-variant',
-      title: 'Calculate',
-      to: '/'
-    },
-    links: [
-      {
-        icon: 'mdi-sync',
-        title: 'Convert',
-        to: '/convert'
-      },
-      {
-        icon: 'mdi-information-outline',
-        title: 'About',
-        to: '/about'
-      }
-    ]
-  })
+  data() {
+    return {
+      drawer: false,
+      title: 'Dietetic Calculator',
+      subtitle: 'Tool For Common Dietitian Calculations',
+      links: [
+        {
+          icon: 'mdi-calculator-variant',
+          title: 'Calculate',
+          to: '/'
+        },
+        {
+          icon: 'mdi-sync',
+          title: 'Convert',
+          to: '/convert'
+        },
+        {
+          icon: 'mdi-information-outline',
+          title: 'About',
+          to: '/about'
+        }
+      ]
+    }
+  }
 }
 </script>
 

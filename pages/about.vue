@@ -26,29 +26,25 @@
               <v-progress-circular indeterminate color="secondary" />
             </v-layout>
           </template>
-
-          <v-layout
-            pa-1
-            fill-height
-            wrap
-            align-content-end
-            justify-space-around
-            class="lightbox"
-          >
-            <v-flex
-              v-for="(person, key) in [curtis, chelsey]"
-              :key="key"
-              shrink
-            >
-              <a :href="person.link" target="_blank" class="white--text">
-                <v-layout shrink column>
-                  <span class="subheading">{{ person.name }}</span>
-                  <span class="body-1">{{ person.email }}</span>
-                </v-layout>
-              </a>
-            </v-flex>
-          </v-layout>
         </v-img>
+
+        <v-layout justify-space-around wrap>
+          <v-flex
+            v-for="(person, key) in [curtis, chelsey]"
+            :key="key"
+            :href="person.link"
+            target="_blank"
+            tag="a"
+            shrink
+            d-flex
+            align-center
+          >
+            <v-btn small text icon color="primary">
+              <v-icon>mdi-linkedin-box</v-icon>
+            </v-btn>
+            <span>{{ person.name }}</span>
+          </v-flex>
+        </v-layout>
 
         <v-card-text class="body-1">
           <p>
@@ -82,14 +78,10 @@ export default {
     title: 'About',
     curtis: {
       name: 'Curtis Bollinger',
-      title: 'Software Engineer',
-      email: 'curtis.bollinger@gmail.com',
       link: 'https://www.linkedin.com/in/curtis-bollinger/'
     },
     chelsey: {
       name: 'Chelsey Bollinger',
-      title: 'Registered Dietitian',
-      email: 'chelseymbollinger@gmail.com',
       link: 'https://www.linkedin.com/in/chelsey-bollinger-ms-rd-ld-a2879bb7/'
     }
   }),
@@ -102,28 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$a-tags: 'a, a:active, a:hover, a:visited';
-$a-tags-hover: 'a:active, a:hover';
-
 .container {
   max-width: 700px;
-}
-.lightbox {
-  box-shadow: 0 0 20px inset rgba(0, 0, 0, 0.2);
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.4) 0%,
-    transparent 75px
-  );
-}
-
-.v-image {
-  #{$a-tags} {
-    text-shadow: 0 1px 4px #000000;
-    text-decoration: none;
-  }
-  #{$a-tags-hover} {
-    text-decoration: underline;
-  }
 }
 </style>
