@@ -53,7 +53,7 @@
               @change="setFromUnit({ unit: $event })"
             >
               <template slot="item" slot-scope="data">
-                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+                <span>{{ unitOption(data.item) }}</span>
               </template>
             </v-select>
           </v-flex>
@@ -82,7 +82,7 @@
               @change="setToUnit({ unit: $event })"
             >
               <template slot="item" slot-scope="data">
-                <span>{{ data.item.name }} ({{ data.item.symbol }})</span>
+                <span>{{ unitOption(data.item) }}</span>
               </template>
             </v-select>
           </v-flex>
@@ -119,10 +119,10 @@ export default {
       'unitWithSymbol'
     ]),
     fromUnit() {
-      return this.unitWithSymbol(this.from.unit)
+      return this.unitWithSymbol(this.from.unit) || {}
     },
     toUnit() {
-      return this.unitWithSymbol(this.to.unit)
+      return this.unitWithSymbol(this.to.unit) || {}
     },
     fromLabel() {
       return `${this.fromUnit.name} Value`
@@ -150,6 +150,9 @@ export default {
       'setToUnit',
       'clearValues'
     ]),
+    unitOption(unit) {
+      return unit ? `${unit.name} (${unit.symbol})` : ''
+    },
     clear() {
       this.clearInputs()
       this.$refs.form.resetValidation()

@@ -13,6 +13,8 @@
 </template>
 
 <script>
+// TODO: Make a better error page. use vuemastery example?
+
 export default {
   layout: 'empty',
   props: {

@@ -25,8 +25,9 @@
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/vuetify": "^1.2.1",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/vue": "^2.0.1",
     "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "eslint": "^6.1.0",
@@ -37,6 +38,6 @@
     "json-server": "^0.15.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^4.0.0-0"
   }
 }
