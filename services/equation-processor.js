@@ -40,7 +40,7 @@ const equationMap = {
   })
 }
 
-function processEquation(equation = () => {}, targetUnits = {}) {
+function processEquation(equation = () => 0, targetUnits = {}) {
   return ({ unitData = [], inputs = [], selections = [], calc = {} }) => {
     const result = equation({
       ...getConvertedInputs(unitData, inputs, targetUnits),

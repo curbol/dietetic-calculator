@@ -4,12 +4,36 @@ import { equationProcessor } from '@/services/equation-processor.js'
 
 const INVALID_INPUTS = 'Invalid Inputs'
 
+/**
+ * @typedef {object} Selection
+ * @property {string} id
+ * @property {string} name
+ * @property {string[]} options
+ * @property {string} icon
+ * @property {number} value
+ */
+
+/**
+ * @typedef {object} Input
+ * @property {string} id
+ * @property {string} name
+ * @property {string} type
+ * @property {string} defaultUnit
+ * @property {string} icon
+ * @property {number} value
+ * @property {string} selectedUnit
+ */
+
 export default {
   state() {
     return {
       categories: [],
       calculators: [],
+
+      /** @type {Selection[]} */
       selections: [],
+
+      /** @type {Input[]} */
       inputs: []
     }
   },
@@ -183,6 +207,7 @@ export default {
       state.calculators.filter((calc) => calc.active),
     activeCalcsWithResults: (state, getters) =>
       getters.activeCalculators.filter((calc) => !isNaN(calc.result)),
+    /** @returns {Input[]} */
     activeInputs: (state) =>
       _(state.calculators)
         .filter((calc) => calc.active)
@@ -191,6 +216,7 @@ export default {
         .uniq()
         .map((id) => state.inputs.find((input) => input.id === id))
         .value(),
+    /** @returns {Selection[]} */
     activeSelections: (state) =>
       _(state.calculators)
         .filter((calc) => calc.active)
