@@ -12,7 +12,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "docker": "docker-compose up --build",
-    "db": "json-server --watch db.json --port 4000",
+    "db": "json-server --watch db.json --port 4000 --read-only",
     "db-delay": "json-server -d 1500 --watch db.json --port 4000"
   },
   "dependencies": {
