@@ -11,9 +11,13 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "docker": "docker-compose up --build",
     "db": "json-server --watch db.json --port 4000 --read-only",
-    "db-delay": "json-server -d 1500 --watch db.json --port 4000"
+    "db-delay": "json-server -d 1500 --watch db.json --port 4000",
+    "docker-build": "docker build -t dietetic-calculator-web .",
+    "docker-run": "docker run -p 3000:3000 dietetic-calculator-web",
+    "docker-tag": "docker tag dietetic-calculator-web gcr.io/dietetic-calculator/dietetic-calculator-web:latest",
+    "docker-push": "docker push gcr.io/dietetic-calculator/dietetic-calculator-web:latest",
+    "deploy": "docker-build & docker-tag & docker-push"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
