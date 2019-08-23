@@ -19,8 +19,9 @@
     "deploy": "docker-build & docker-tag & docker-push"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.5.4",
+    "@nuxtjs/apollo": "^4.0.0-rc11",
     "@nuxtjs/pwa": "^2.6.0",
+    "graphql-tag": "^2.10.1",
     "lodash": "^4.17.15",
     "nuxt": "^2.8.1"
   },

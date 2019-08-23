@@ -42,12 +42,19 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
+  modules: ['@nuxtjs/apollo', '@nuxtjs/pwa'],
   /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
+   ** Apollo module configuration
+   ** See https://github.com/nuxt-community/apollo-module
    */
-  axios: {},
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://35.224.32.89/graphql',
+        wsEndpoint: 'http://35.224.32.89/subscription'
+      }
+    }
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
