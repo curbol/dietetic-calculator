@@ -14,6 +14,7 @@ export default {
       }
     }
   },
+
   mutations: {
     Set_Type(state, { type }) {
       state.type = type
@@ -31,6 +32,7 @@ export default {
       state.to.unit = unit
     }
   },
+
   actions: {
     setType({ rootGetters, commit, dispatch }, { type }) {
       commit('Set_Type', { type })
@@ -93,5 +95,6 @@ export default {
       dispatch('setToValue', { value: undefined })
     }
   },
+
   getters: {}
 }

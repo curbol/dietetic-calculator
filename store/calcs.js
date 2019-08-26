@@ -8,11 +8,11 @@ export default {
   state() {
     return {
       categories: [],
-      calculators: [],
-      selections: [],
-      inputs: []
+      inputs: [],
+      selects: []
     }
   },
+
   mutations: {
     Set_Categories(state, categories) {
       state.categories = categories
@@ -81,55 +81,37 @@ export default {
       )
     }
   },
+
   actions: {
-    async fetchCategories({ state, commit }) {
-      if (state.categories.length) return
-      const { data } = await CalcService.getCategories()
-      const categories = _(data)
-        .map((category) => ({
-          ...category,
-          active: true
-        }))
-        .orderBy('name')
-        .value()
-      commit('Set_Categories', categories)
-    },
     async fetchCalculators({ state, commit }) {
-      if (state.calculators.length) return
-      const { data } = await CalcService.getCalculators()
-      const calculators = _(data)
-        .map((calc) => ({
+      const data = await CalcService.getCalculatorCategories()
+      const calculatorCategories = data.map((category) => ({
+        ...category,
+        active: true,
+        calculators: category.calculators.map((calc) => ({
           ...calc,
           active: false,
           result: INVALID_INPUTS,
           selectedUnit: calc.defaultUnit
         }))
-        .orderBy('title')
-        .orderBy('category')
-        .value()
-      commit('Set_Calculators', calculators)
+      }))
+      commit('Set_Categories', calculatorCategories)
     },
-    async fetchInputs({ state, commit }) {
-      if (state.inputs.length && state.selections.length) return
-      const { data: inputData } = await CalcService.getInputs()
-      const inputs = _(inputData)
-        .map((input) => ({
-          ...input,
-          value: undefined,
-          selectedUnit: input.defaultUnit
-        }))
-        .orderBy('type')
-        .value()
+    async fetchInputsAndSelects({ state, commit }) {
+      const inputData = await CalcService.getInputs()
+      const inputs = inputData.map((input) => ({
+        ...input,
+        value: undefined,
+        selectedUnit: input.defaultUnit
+      }))
       commit('Set_Inputs', inputs)
-      const { data: selectData } = await CalcService.getSelections()
-      const selections = _(selectData)
-        .map((select) => ({
-          ...select,
-          value: undefined
-        }))
-        .orderBy('id')
-        .value()
-      commit('Set_Selections', selections)
+
+      const selectData = await CalcService.getSelects()
+      const selects = selectData.map((select) => ({
+        ...select,
+        value: undefined
+      }))
+      commit('Set_Selections', selects)
     },
     toggleActivateCategory({ commit }, id) {
       commit('Toggle_Activate_Category', id)
@@ -176,6 +158,7 @@ export default {
       })
     }
   },
+
   getters: {
     calcsInCategory: (state) => (categoryId) =>
       state.calculators.filter((calc) => calc.category === categoryId),
@@ -183,7 +166,6 @@ export default {
       state.calculators.filter((calc) => calc.active),
     activeCalcsWithResults: (state, getters) =>
       getters.activeCalculators.filter((calc) => !isNaN(calc.result)),
-    /** @returns {Input[]} */
     activeInputs: (state) =>
       _(state.calculators)
         .filter((calc) => calc.active)
@@ -192,7 +174,6 @@ export default {
         .uniq()
         .map((id) => state.inputs.find((input) => input.id === id))
         .value(),
-    /** @returns {Selection[]} */
     activeSelections: (state) =>
       _(state.calculators)
         .filter((calc) => calc.active)

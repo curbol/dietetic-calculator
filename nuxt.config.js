@@ -30,11 +30,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/filters.js'],
   /*
    ** Nuxt.js dev-modules
    */
-  devModules: [
+  buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
@@ -42,19 +42,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/apollo', '@nuxtjs/pwa'],
-  /*
-   ** Apollo module configuration
-   ** See https://github.com/nuxt-community/apollo-module
-   */
-  apollo: {
-    clientConfigs: {
-      default: {
-        httpEndpoint: 'http://35.224.32.89/graphql',
-        wsEndpoint: 'http://35.224.32.89/subscription'
-      }
-    }
-  },
+  modules: ['@nuxtjs/pwa'],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

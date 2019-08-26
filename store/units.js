@@ -4,23 +4,26 @@ import CalcService from '@/services/calcs.js'
 export default {
   state() {
     return {
-      units: []
+      unitCategories: []
     }
   },
+
   mutations: {
-    Set_Units(state, units) {
-      state.units = units
+    Set_Unit_Categories(state, unitCategories) {
+      state.unitCategories = unitCategories
     }
   },
+
   actions: {
     async fetchUnits({ state, commit, dispatch, getters }) {
       if (state.units.length) return
-      const { data } = await CalcService.getUnits()
-      commit('Set_Units', data)
+      const unitCategories = await CalcService.getUnitCategories()
+      commit('Set_Unit_Categories', unitCategories)
       const firstType = getters.typesWithMultipleUnits[0]
       dispatch('convert/setType', { type: firstType }, { root: true })
     }
   },
+
   getters: {
     typesWithMultipleUnits: (state) =>
       Object.entries(_.groupBy(state.units, 'type'))

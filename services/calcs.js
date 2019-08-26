@@ -1,28 +1,77 @@
-import axios from 'axios'
+import { GraphQLClient } from 'graphql-request'
 
-const apiClient = axios.create({
-  baseURL: `http://localhost:4000`,
-  withCredentials: false,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
+const endpoint = 'http://35.224.32.89'
+const api = new GraphQLClient(endpoint)
 
 export default {
-  getCategories() {
-    return apiClient.get('/categories')
+  getCalculatorCategories() {
+    const query = /* GraphQL */ `
+      query {
+        calculatorCategories(orderBy: name_ASC) {
+          name
+          icon
+          calculators(orderBy: name_ASC) {
+            key
+            name
+            description
+            defaultUnit
+          }
+        }
+      }
+    `
+
+    const data = api.request(query)
+    return data.calculatorCategories
   },
-  getCalculators() {
-    return apiClient.get('/calculators')
-  },
+
   getInputs() {
-    return apiClient.get('/inputs')
+    const query = /* GraphQL */ `
+      query {
+        inputs(orderBy: name_ASC) {
+          name
+          category {
+            name
+          }
+          defaultUnit
+          icon
+        }
+      }
+    `
+
+    const data = api.request(query)
+    return data.inputs
   },
-  getSelections() {
-    return apiClient.get('/selections')
+
+  getSelects() {
+    const query = /* GraphQL */ `
+      query {
+        selects(orderBy: name_ASC) {
+          name
+          options
+          icon
+        }
+      }
+    `
+
+    const data = api.request(query)
+    return data.selects
   },
-  getUnits() {
-    return apiClient.get('/units')
+
+  getUnitCategories() {
+    const query = /* GraphQL */ `
+      query {
+        unitCategories(orderBy: name_ASC) {
+          name
+          units(orderBy: factor_ASC) {
+            name
+            symbol
+            factor
+          }
+        }
+      }
+    `
+
+    const data = api.request(query)
+    return data.unitCategories
   }
 }
