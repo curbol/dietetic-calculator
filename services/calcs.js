@@ -4,7 +4,7 @@ const endpoint = 'http://35.224.32.89'
 const api = new GraphQLClient(endpoint)
 
 export default {
-  getCalculatorCategories() {
+  async getCalculatorCategories() {
     const query = /* GraphQL */ `
       query {
         calculatorCategories(orderBy: name_ASC) {
@@ -20,11 +20,11 @@ export default {
       }
     `
 
-    const data = api.request(query)
+    const data = await api.request(query)
     return data.calculatorCategories
   },
 
-  getInputs() {
+  async getInputs() {
     const query = /* GraphQL */ `
       query {
         inputs(orderBy: name_ASC) {
@@ -38,11 +38,11 @@ export default {
       }
     `
 
-    const data = api.request(query)
+    const data = await api.request(query)
     return data.inputs
   },
 
-  getSelects() {
+  async getSelects() {
     const query = /* GraphQL */ `
       query {
         selects(orderBy: name_ASC) {
@@ -53,11 +53,11 @@ export default {
       }
     `
 
-    const data = api.request(query)
+    const data = await api.request(query)
     return data.selects
   },
 
-  getUnitCategories() {
+  async getUnitCategories() {
     const query = /* GraphQL */ `
       query {
         unitCategories(orderBy: name_ASC) {
@@ -70,8 +70,7 @@ export default {
         }
       }
     `
-
-    const data = api.request(query)
+    const data = await api.request(query)
     return data.unitCategories
   }
 }

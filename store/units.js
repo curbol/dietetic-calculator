@@ -1,39 +1,43 @@
-import _ from 'lodash'
 import CalcService from '@/services/calcs.js'
 
 export default {
   state() {
     return {
-      unitCategories: []
+      categories: []
     }
   },
 
   mutations: {
-    Set_Unit_Categories(state, unitCategories) {
-      state.unitCategories = unitCategories
+    Set_Unit_Categories(state, categories) {
+      state.categories = categories
     }
   },
 
   actions: {
-    async fetchUnits({ state, commit, dispatch, getters }) {
-      if (state.units.length) return
-      const unitCategories = await CalcService.getUnitCategories()
-      commit('Set_Unit_Categories', unitCategories)
-      const firstType = getters.typesWithMultipleUnits[0]
-      dispatch('convert/setType', { type: firstType }, { root: true })
+    async fetchUnits({ commit, dispatch, getters }) {
+      const categories = await CalcService.getUnitCategories()
+      commit('Set_Unit_Categories', categories)
+      const category = getters.categoriesWithMultipleUnits[0]
+      dispatch('convert/setCategory', { category }, { root: true })
     }
   },
 
   getters: {
-    typesWithMultipleUnits: (state) =>
-      Object.entries(_.groupBy(state.units, 'type'))
-        .filter(([type, units]) => units.length >= 2)
-        .map(([type, units]) => type),
-    unitsOfType: (state) => (type) =>
-      state.units.filter((x) => x.type === type),
-    symbolType: (state) => (symbol) =>
-      _.get(state.units.find((x) => x.symbol === symbol), 'type'),
-    unitWithSymbol: (state) => (symbol) =>
-      state.units.find((unit) => unit.symbol === symbol)
+    allUnits: (state) =>
+      state.categories
+        .map((category) => category.units)
+        .reduce((acc, cur) => [...acc, ...cur]),
+    categoriesWithMultipleUnits: (state) =>
+      state.categories
+        .filter((category) => category.units.length >= 2)
+        .map((category) => category.name),
+    unitsInCategory: (state) => (categoryName) =>
+      state.categories.find((category) => category.name === categoryName).units,
+    symbolCategory: (state) => (symbol) =>
+      state.categories.find((category) =>
+        category.units.map((unit) => unit.symbol).includes(symbol)
+      ).name,
+    unitWithSymbol: (state, getters) => (symbol) =>
+      getters.allUnits.find((unit) => unit.symbol === symbol)
   }
 }

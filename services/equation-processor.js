@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Calcs from '@/enums/calcs.js'
 import Inputs from '@/enums/inputs.js'
 import {
@@ -11,13 +10,11 @@ import {
 export function equationProcessor({
   unitData = [],
   inputs = [],
-  selections = []
+  selects = []
 }) {
   return (calc) => {
     const equation = equationMap[calc.id]
-    return !equation
-      ? undefined
-      : equation({ unitData, inputs, selections, calc })
+    return !equation ? undefined : equation({ unitData, inputs, selects, calc })
   }
 }
 
@@ -41,10 +38,10 @@ const equationMap = {
 }
 
 function processEquation(equation = () => 0, targetUnits = {}) {
-  return ({ unitData = [], inputs = [], selections = [], calc = {} }) => {
+  return ({ unitData = [], inputs = [], selects = [], calc = {} }) => {
     const result = equation({
       ...getConvertedInputs(unitData, inputs, targetUnits),
-      ...getSelectionData(selections)
+      ...getSelectData(selects)
     })
     const canConvertResult = unitData
       .map((x) => x.symbol)
@@ -82,13 +79,13 @@ export function convert({
   toUnit = ''
 }) {
   const unitFactor = (unit) =>
-    _.get(unitData.find((x) => x.symbol === unit), 'factor')
+    (unitData.find((x) => x.symbol === unit) || {}).factor
   const fromFactor = unitFactor(fromUnit)
   const toFactor = unitFactor(toUnit)
   if (!toFactor) return undefined
   return (value / toFactor) * fromFactor
 }
 
-function getSelectionData(selections = []) {
-  return selections.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {})
+function getSelectData(selects = []) {
+  return selects.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {})
 }

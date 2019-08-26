@@ -17,14 +17,11 @@ export default {
     Set_Categories(state, categories) {
       state.categories = categories
     },
-    Set_Calculators(state, calculators) {
-      state.calculators = calculators
-    },
     Set_Inputs(state, inputs) {
       state.inputs = inputs
     },
-    Set_Selections(state, selections) {
-      state.selections = selections
+    Set_Selects(state, selects) {
+      state.selects = selects
     },
     Toggle_Activate_Category(state, id) {
       state.categories = state.categories.map((x) =>
@@ -48,8 +45,8 @@ export default {
         active
       }))
     },
-    Set_Selection_Value(state, { id, value }) {
-      state.selections = state.selections.map((x) =>
+    Set_Select_Value(state, { id, value }) {
+      state.selects = state.selects.map((x) =>
         x.id === id ? { ...x, value } : x
       )
     },
@@ -65,7 +62,7 @@ export default {
     },
     Clear_Inputs(state) {
       state.inputs = state.inputs.map((x) => ({ ...x, value: undefined }))
-      state.selections = state.selections.map((x) => ({
+      state.selects = state.selects.map((x) => ({
         ...x,
         value: undefined
       }))
@@ -83,7 +80,7 @@ export default {
   },
 
   actions: {
-    async fetchCalculators({ state, commit }) {
+    async fetchCalculators({ commit }) {
       const data = await CalcService.getCalculatorCategories()
       const calculatorCategories = data.map((category) => ({
         ...category,
@@ -97,7 +94,7 @@ export default {
       }))
       commit('Set_Categories', calculatorCategories)
     },
-    async fetchInputsAndSelects({ state, commit }) {
+    async fetchInputs({ commit }) {
       const inputData = await CalcService.getInputs()
       const inputs = inputData.map((input) => ({
         ...input,
@@ -111,7 +108,7 @@ export default {
         ...select,
         value: undefined
       }))
-      commit('Set_Selections', selects)
+      commit('Set_Selects', selects)
     },
     toggleActivateCategory({ commit }, id) {
       commit('Toggle_Activate_Category', id)
@@ -125,8 +122,8 @@ export default {
         commit('Set_All_Categories_Active', true)
       }
     },
-    setSelectionValue({ commit, dispatch }, { id, value }) {
-      commit('Set_Selection_Value', { id, value })
+    setSelectValue({ commit, dispatch }, { id, value }) {
+      commit('Set_Select_Value', { id, value })
       dispatch('calculateResults')
     },
     setInputValue({ commit, dispatch }, { id, value }) {
@@ -149,7 +146,7 @@ export default {
       const processEquation = equationProcessor({
         unitData: rootState.units.units,
         inputs: state.inputs,
-        selections: state.selections
+        selects: state.selections
       })
       state.calculators.forEach((calc) => {
         const result = processEquation(calc) || INVALID_INPUTS

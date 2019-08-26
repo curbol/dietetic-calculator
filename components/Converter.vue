@@ -19,11 +19,10 @@
         <v-layout align-center justify-center>
           <v-flex>
             <v-select
-              label="Type"
               required
-              :items="typesWithMultipleUnits"
-              :value="type"
-              @change="setType({ type: $event })"
+              :items="categoriesWithMultipleUnits"
+              :value="category"
+              @change="setCategory({ category: $event })"
             ></v-select>
           </v-flex>
         </v-layout>
@@ -36,7 +35,7 @@
           <v-flex d-flex>
             <v-text-field
               type="number"
-              :label="fromLabel"
+              :label="fromUnit.name"
               :value="from.value"
               required
               @focus="$event.target.select()"
@@ -48,7 +47,7 @@
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsOfType(type)"
+              :items="unitsInCategory(category)"
               :value="from.unit"
               @change="setFromUnit({ unit: $event })"
             >
@@ -65,7 +64,7 @@
           <v-flex d-flex>
             <v-text-field
               type="number"
-              :label="toLabel"
+              :label="toUnit.name"
               :value="to.value"
               required
               @focus="$event.target.select()"
@@ -77,7 +76,7 @@
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsOfType(type)"
+              :items="unitsInCategory(category)"
               :value="to.unit"
               @change="setToUnit({ unit: $event })"
             >
@@ -112,10 +111,10 @@ export default {
     valid: true
   }),
   computed: {
-    ...mapState('convert', ['type', 'from', 'to']),
+    ...mapState('convert', ['category', 'from', 'to']),
     ...mapGetters('units', [
-      'typesWithMultipleUnits',
-      'unitsOfType',
+      'categoriesWithMultipleUnits',
+      'unitsInCategory',
       'unitWithSymbol'
     ]),
     fromUnit() {
@@ -123,12 +122,6 @@ export default {
     },
     toUnit() {
       return this.unitWithSymbol(this.to.unit) || {}
-    },
-    fromLabel() {
-      return `${this.fromUnit.name} Value`
-    },
-    toLabel() {
-      return `${this.toUnit.name} Value`
     },
     formula() {
       const fromFactor = this.fromUnit.factor
@@ -143,7 +136,7 @@ export default {
   },
   methods: {
     ...mapActions('convert', [
-      'setType',
+      'setCategory',
       'setFromValue',
       'setFromUnit',
       'setToValue',

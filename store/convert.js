@@ -3,7 +3,7 @@ import { convert } from '@/services/equation-processor.js'
 export default {
   state() {
     return {
-      type: undefined,
+      category: undefined,
       from: {
         value: undefined,
         unit: undefined
@@ -16,8 +16,8 @@ export default {
   },
 
   mutations: {
-    Set_Type(state, { type }) {
-      state.type = type
+    Set_Category(state, { category }) {
+      state.category = category
     },
     Set_From_Value(state, { value }) {
       state.from.value = value
@@ -34,14 +34,14 @@ export default {
   },
 
   actions: {
-    setType({ rootGetters, commit, dispatch }, { type }) {
-      commit('Set_Type', { type })
-      const unitsOfType = rootGetters['units/unitsOfType'](type)
+    setCategory({ rootGetters, commit, dispatch }, { category }) {
+      commit('Set_Category', { category })
+      const unitsInCategory = rootGetters['units/unitsInCategory'](category)
       dispatch('setFromUnit', {
-        unit: unitsOfType[0].symbol
+        unit: unitsInCategory[0].symbol
       })
       dispatch('setToUnit', {
-        unit: unitsOfType[1].symbol
+        unit: unitsInCategory[1].symbol
       })
       dispatch('setFromValue', { value: 1 })
     },
@@ -69,19 +69,19 @@ export default {
       }
       dispatch('calculateToValue')
     },
-    calculateFromValue({ rootState, state, commit }) {
+    calculateFromValue({ rootGetters, state, commit }) {
       const fromValue = convert({
-        unitData: rootState.calcs.units,
+        unitData: rootGetters['units/unitsInCategory'](state.category),
         value: state.to.value,
         fromUnit: state.to.unit,
         toUnit: state.from.unit
       })
       commit('Set_From_Value', { value: fromValue })
     },
-    calculateToValue({ rootState, state, commit }) {
+    calculateToValue({ rootGetters, state, commit }) {
       const toValue = state.from.value
         ? convert({
-            unitData: rootState.units.units,
+            unitData: rootGetters['units/unitsInCategory'](state.category),
             value: state.from.value,
             fromUnit: state.from.unit,
             toUnit: state.to.unit
