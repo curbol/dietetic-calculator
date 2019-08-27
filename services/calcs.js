@@ -10,18 +10,37 @@ export default {
         calculatorCategories(orderBy: name_ASC) {
           name
           icon
-          calculators(orderBy: name_ASC) {
-            key
-            name
-            description
-            defaultUnit
-          }
         }
       }
     `
 
     const data = await api.request(query)
     return data.calculatorCategories
+  },
+
+  async getCalculators() {
+    const query = /* GraphQL */ `
+      query {
+        calculators(orderBy: name_ASC) {
+          key
+          name
+          description
+          defaultUnit
+          category {
+            name
+          }
+          inputs {
+            name
+          }
+          selects {
+            name
+          }
+        }
+      }
+    `
+
+    const data = await api.request(query)
+    return data.calculators
   },
 
   async getInputs() {

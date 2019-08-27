@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import CalcService from '@/services/calcs.js'
 import { equationProcessor } from '@/services/equation-processor.js'
 
@@ -8,6 +7,7 @@ export default {
   state() {
     return {
       categories: [],
+      calculators: [],
       inputs: [],
       selects: []
     }
@@ -17,20 +17,23 @@ export default {
     Set_Categories(state, categories) {
       state.categories = categories
     },
+    Set_Calculators(state, calculators) {
+      state.calculators = calculators
+    },
     Set_Inputs(state, inputs) {
       state.inputs = inputs
     },
     Set_Selects(state, selects) {
       state.selects = selects
     },
-    Toggle_Activate_Category(state, id) {
+    Toggle_Activate_Category(state, name) {
       state.categories = state.categories.map((x) =>
-        x.id === id ? { ...x, active: !x.active } : x
+        x.name === name ? { ...x, active: !x.active } : x
       )
     },
-    Toggle_Activate_Calculator(state, id) {
+    Toggle_Activate_Calculator(state, key) {
       state.calculators = state.calculators.map((x) =>
-        x.id === id ? { ...x, active: !x.active } : x
+        x.key === key ? { ...x, active: !x.active } : x
       )
     },
     Set_All_Categories_Active(state, active) {
@@ -80,19 +83,23 @@ export default {
   },
 
   actions: {
-    async fetchCalculators({ commit }) {
+    async fetchCategories({ commit }) {
       const data = await CalcService.getCalculatorCategories()
-      const calculatorCategories = data.map((category) => ({
+      const categories = data.map((category) => ({
         ...category,
-        active: true,
-        calculators: category.calculators.map((calc) => ({
-          ...calc,
-          active: false,
-          result: INVALID_INPUTS,
-          selectedUnit: calc.defaultUnit
-        }))
+        active: true
       }))
-      commit('Set_Categories', calculatorCategories)
+      commit('Set_Categories', categories)
+    },
+    async fetchCalculators({ commit }) {
+      const data = await CalcService.getCalculators()
+      const calculators = data.map((calc) => ({
+        ...calc,
+        active: false,
+        result: INVALID_INPUTS,
+        selectedUnit: calc.defaultUnit
+      }))
+      commit('Set_Calculators', calculators)
     },
     async fetchInputs({ commit }) {
       const inputData = await CalcService.getInputs()
@@ -110,11 +117,11 @@ export default {
       }))
       commit('Set_Selects', selects)
     },
-    toggleActivateCategory({ commit }, id) {
-      commit('Toggle_Activate_Category', id)
+    toggleActivateCategory({ commit }, name) {
+      commit('Toggle_Activate_Category', name)
     },
-    toggleActivateCalculator({ commit }, id) {
-      commit('Toggle_Activate_Calculator', id)
+    toggleActivateCalculator({ commit }, key) {
+      commit('Toggle_Activate_Calculator', key)
     },
     setAllCalculatorsActive({ commit }, active) {
       commit('Set_All_Calculators_Active', active)
@@ -146,7 +153,7 @@ export default {
       const processEquation = equationProcessor({
         unitData: rootState.units.units,
         inputs: state.inputs,
-        selects: state.selections
+        selects: state.selects
       })
       state.calculators.forEach((calc) => {
         const result = processEquation(calc) || INVALID_INPUTS
@@ -157,27 +164,22 @@ export default {
   },
 
   getters: {
-    calcsInCategory: (state) => (categoryId) =>
-      state.calculators.filter((calc) => calc.category === categoryId),
-    activeCalculators: (state) =>
-      state.calculators.filter((calc) => calc.active),
+    activeCalcs: (state) => state.calculators.filter((calc) => calc.active),
+    calcsInCategory: (state) => (name) =>
+      state.calculators.filter((calc) => calc.category.name === name),
+    activeCalcsInCategory: (state, getters) => (name) =>
+      getters.activeCalcs.filter((calc) => calc.category.name === name),
     activeCalcsWithResults: (state, getters) =>
-      getters.activeCalculators.filter((calc) => !isNaN(calc.result)),
-    activeInputs: (state) =>
-      _(state.calculators)
-        .filter((calc) => calc.active)
-        .map((calc) => calc.inputs)
-        .flatten()
-        .uniq()
-        .map((id) => state.inputs.find((input) => input.id === id))
-        .value(),
-    activeSelections: (state) =>
-      _(state.calculators)
-        .filter((calc) => calc.active)
-        .map((calc) => calc.selections)
-        .flatten()
-        .uniq()
-        .map((id) => state.selections.find((selection) => selection.id === id))
-        .value()
+      getters.activeCalcs.filter((calc) => !isNaN(calc.result)),
+    activeInputs: (state, getters) =>
+      getters.activeCalcs
+        .map((calc) => calc.inputs.map((x) => x.name))
+        .reduce((acc, cur) => [...new Set([...acc, ...cur])])
+        .map((name) => state.inputs.find((input) => input.name === name)),
+    activeSelects: (state, getters) =>
+      getters.activeCalcs
+        .map((calc) => calc.selects.map((x) => x.name))
+        .reduce((acc, cur) => [...new Set([...acc, ...cur])])
+        .map((name) => state.select.find((select) => select.name === name))
   }
 }

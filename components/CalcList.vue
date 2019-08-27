@@ -38,7 +38,7 @@
       <v-layout align-start justify-center wrap>
         <v-flex
           v-for="category in categories"
-          :key="category.id"
+          :key="category.name"
           xs12
           sm6
           md12
@@ -51,7 +51,7 @@
             <v-list-group
               :value="category.active"
               :prepend-icon="category.icon"
-              @click="toggleActivateCategory(category.id)"
+              @click="toggleActivateCategory(category.name)"
             >
               <template #activator>
                 <v-list-item-content>
@@ -60,27 +60,27 @@
               </template>
 
               <v-list-item-group
-                :value="activeCalculators.map((x) => x.id)"
+                :value="activeCalcsInCategory(category.name).map((x) => x.key)"
                 multiple
               >
                 <v-list-item
-                  v-for="calc in calcsInCategory(category.id)"
-                  :key="calc.id"
-                  :value="calc.id"
+                  v-for="calc in calcsInCategory(category.name)"
+                  :key="calc.key"
+                  :value="calc.key"
                   active-class="accent--text"
                   two-line
-                  @click="toggleActivateCalculator(calc.id)"
+                  @click="toggleActivateCalculator(calc.key)"
                 >
                   <v-list-item-action>
                     <v-checkbox
                       :input-value="calc.active"
-                      :true-value="calc.id"
+                      :true-value="calc.key"
                     ></v-checkbox>
                   </v-list-item-action>
 
                   <v-list-item-content>
-                    <v-list-item-title v-text="calc.title" />
-                    <v-list-item-subtitle v-text="calc.subtitle" />
+                    <v-list-item-title v-text="calc.name" />
+                    <v-list-item-subtitle v-text="calc.description" />
                   </v-list-item-content>
                 </v-list-item>
               </v-list-item-group>
@@ -105,7 +105,7 @@ export default {
   }),
   computed: {
     ...mapState('calcs', ['categories']),
-    ...mapGetters('calcs', ['calcsInCategory', 'activeCalculators'])
+    ...mapGetters('calcs', ['calcsInCategory', 'activeCalcsInCategory'])
   },
   methods: {
     ...mapActions('calcs', [

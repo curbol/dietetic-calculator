@@ -45,11 +45,19 @@ export default {
   },
   async fetch({ store, error, params }) {
     try {
+      await store.dispatch('calcs/fetchCategories')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: `Unable to fetch calculator categories. Please try again.`
+      })
+    }
+    try {
       await store.dispatch('calcs/fetchCalculators')
     } catch (e) {
       error({
         statusCode: 503,
-        message: `Unable to fetch calc groups. Please try again.`
+        message: `Unable to fetch calculators. Please try again.`
       })
     }
     try {
