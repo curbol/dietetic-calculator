@@ -1,5 +1,5 @@
 export default {
-  Weight: 'weight',
-  Height: 'height',
-  Age: 'age'
+  Weight: 'Weight',
+  Height: 'Height',
+  Age: 'Age'
 }

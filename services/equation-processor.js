@@ -13,7 +13,7 @@ export function equationProcessor({
   selects = []
 }) {
   return (calc) => {
-    const equation = equationMap[calc.id]
+    const equation = equationMap[calc.key]
     return !equation ? undefined : equation({ unitData, inputs, selects, calc })
   }
 }
@@ -43,6 +43,8 @@ function processEquation(equation = () => 0, targetUnits = {}) {
       ...getConvertedInputs(unitData, inputs, targetUnits),
       ...getSelectData(selects)
     })
+
+    console.log('result:', result)
     const canConvertResult = unitData
       .map((x) => x.symbol)
       .includes(calc.defaultUnit)
@@ -59,15 +61,15 @@ function processEquation(equation = () => 0, targetUnits = {}) {
 
 function getConvertedInputs(unitData = [], inputs = [], targetUnits = {}) {
   return Object.assign(
-    ...Object.entries(targetUnits).map(([id, toUnit]) => {
-      const input = inputs.find((x) => x.id === id)
+    ...Object.entries(targetUnits).map(([name, toUnit]) => {
+      const input = inputs.find((x) => x.name === name)
       const value = convert({
         unitData,
         value: input.value,
         fromUnit: input.selectedUnit,
         toUnit
       })
-      return { [`${id}_${toUnit}`]: value }
+      return { [`${name.toLowerCase()}_${toUnit}`]: value }
     })
   )
 }
@@ -87,5 +89,11 @@ export function convert({
 }
 
 function getSelectData(selects = []) {
-  return selects.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {})
+  return selects.reduce(
+    (acc, cur) => ({
+      ...acc,
+      [cur.name.toLowerCase()]: cur.value
+    }),
+    {}
+  )
 }

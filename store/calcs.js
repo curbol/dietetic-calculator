@@ -48,19 +48,19 @@ export default {
         active
       }))
     },
-    Set_Select_Value(state, { id, value }) {
+    Set_Select_Value(state, { name, value }) {
       state.selects = state.selects.map((x) =>
-        x.id === id ? { ...x, value } : x
+        x.name === name ? { ...x, value } : x
       )
     },
-    Set_Input_Value(state, { id, value }) {
+    Set_Input_Value(state, { name, value }) {
       state.inputs = state.inputs.map((x) =>
-        x.id === id ? { ...x, value } : x
+        x.name === name ? { ...x, value } : x
       )
     },
-    Set_Input_Selected_Unit(state, { id, selectedUnit }) {
+    Set_Input_Selected_Unit(state, { name, selectedUnit }) {
       state.inputs = state.inputs.map((x) =>
-        x.id === id ? { ...x, selectedUnit } : x
+        x.name === name ? { ...x, selectedUnit } : x
       )
     },
     Clear_Inputs(state) {
@@ -70,14 +70,14 @@ export default {
         value: undefined
       }))
     },
-    Set_Result_Selected_Unit(state, { id, selectedUnit }) {
+    Set_Result_Selected_Unit(state, { key, selectedUnit }) {
       state.calculators = state.calculators.map((x) =>
-        x.id === id ? { ...x, selectedUnit } : x
+        x.key === key ? { ...x, selectedUnit } : x
       )
     },
-    Set_Result(state, { calcId, result }) {
+    Set_Result(state, { key, result }) {
       state.calculators = state.calculators.map((x) =>
-        x.id === calcId ? { ...x, result } : x
+        x.key === key ? { ...x, result } : x
       )
     }
   },
@@ -129,36 +129,36 @@ export default {
         commit('Set_All_Categories_Active', true)
       }
     },
-    setSelectValue({ commit, dispatch }, { id, value }) {
-      commit('Set_Select_Value', { id, value })
+    setSelectValue({ commit, dispatch }, { name, value }) {
+      commit('Set_Select_Value', { name, value })
       dispatch('calculateResults')
     },
-    setInputValue({ commit, dispatch }, { id, value }) {
-      commit('Set_Input_Value', { id, value })
+    setInputValue({ commit, dispatch }, { name, value }) {
+      commit('Set_Input_Value', { name, value })
       dispatch('calculateResults')
     },
-    setInputSelectedUnit({ commit, dispatch }, { id, selectedUnit }) {
-      commit('Set_Input_Selected_Unit', { id, selectedUnit })
+    setInputSelectedUnit({ commit, dispatch }, { name, selectedUnit }) {
+      commit('Set_Input_Selected_Unit', { name, selectedUnit })
       dispatch('calculateResults')
     },
     clearInputs({ commit, dispatch }) {
       commit('Clear_Inputs')
       dispatch('calculateResults')
     },
-    setResultSelectedUnit({ commit, dispatch }, { id, selectedUnit }) {
-      commit('Set_Result_Selected_Unit', { id, selectedUnit })
+    setResultSelectedUnit({ commit, dispatch }, { key, selectedUnit }) {
+      commit('Set_Result_Selected_Unit', { key, selectedUnit })
       dispatch('calculateResults')
     },
-    calculateResults({ rootState, state, commit }) {
+    calculateResults({ rootGetters, state, commit }) {
       const processEquation = equationProcessor({
-        unitData: rootState.units.units,
+        unitData: rootGetters['units/allUnits'],
         inputs: state.inputs,
         selects: state.selects
       })
       state.calculators.forEach((calc) => {
         const result = processEquation(calc) || INVALID_INPUTS
         const rounded = isNaN(result) ? result : parseFloat(result.toFixed(1))
-        commit('Set_Result', { calcId: calc.id, result: rounded })
+        commit('Set_Result', { key: calc.key, result: rounded })
       })
     }
   },
@@ -174,12 +174,12 @@ export default {
     activeInputs: (state, getters) =>
       getters.activeCalcs
         .map((calc) => calc.inputs.map((x) => x.name))
-        .reduce((acc, cur) => [...new Set([...acc, ...cur])])
+        .reduce((acc, cur) => [...new Set([...acc, ...cur])], [])
         .map((name) => state.inputs.find((input) => input.name === name)),
     activeSelects: (state, getters) =>
       getters.activeCalcs
         .map((calc) => calc.selects.map((x) => x.name))
-        .reduce((acc, cur) => [...new Set([...acc, ...cur])])
-        .map((name) => state.select.find((select) => select.name === name))
+        .reduce((acc, cur) => [...new Set([...acc, ...cur])], [])
+        .map((name) => state.selects.find((select) => select.name === name))
   }
 }

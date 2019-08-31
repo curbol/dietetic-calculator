@@ -1,3 +1,3 @@
 export default {
-  Gender: 'gender'
+  Gender: 'Gender'
 }

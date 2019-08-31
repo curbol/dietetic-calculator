@@ -22,8 +22,8 @@
           class="layout align-start justify-left wrap"
         >
           <v-flex
-            v-for="selection in activeSelections"
-            :key="selection.id"
+            v-for="select in activeSelects"
+            :key="select.name"
             xs12
             sm6
             md12
@@ -31,22 +31,22 @@
             xl6
           >
             <v-select
-              :label="selection.name"
-              :items="selection.options"
-              :value="selection.value"
-              :rules="selectRules(selection.name)"
+              :label="select.name"
+              :items="select.options"
+              :value="select.value"
+              :rules="selectRules(select.name)"
               required
-              @change="setSelectionValue({ id: selection.id, value: $event })"
+              @change="setSelectValue({ name: select.name, value: $event })"
             >
               <v-icon slot="prepend" color="secondary">{{
-                selection.icon
+                select.icon
               }}</v-icon>
             </v-select>
           </v-flex>
 
           <v-flex
             v-for="input in activeInputs"
-            :key="input.id"
+            :key="input.name"
             xs12
             sm6
             md12
@@ -61,7 +61,7 @@
               :rules="numberRules(input.name)"
               required
               @focus="$event.target.select()"
-              @input="setInputValue({ id: input.id, value: $event })"
+              @input="setInputValue({ name: input.name, value: $event })"
             >
               <v-icon slot="prepend" color="secondary">{{ input.icon }}</v-icon>
             </v-text-field>
@@ -71,10 +71,10 @@
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsOfType(input.type)"
+              :items="unitsInCategory(input.category.name)"
               :value="input.selectedUnit"
               @change="
-                setInputSelectedUnit({ id: input.id, selectedUnit: $event })
+                setInputSelectedUnit({ name: input.name, selectedUnit: $event })
               "
             >
               <template slot="item" slot-scope="data">
@@ -97,12 +97,12 @@ export default {
     valid: true
   }),
   computed: {
-    ...mapGetters('calcs', ['activeSelections', 'activeInputs']),
-    ...mapGetters('units', ['unitsOfType'])
+    ...mapGetters('calcs', ['activeSelects', 'activeInputs']),
+    ...mapGetters('units', ['unitsInCategory'])
   },
   methods: {
     ...mapActions('calcs', [
-      'setSelectionValue',
+      'setSelectValue',
       'setInputValue',
       'setInputSelectedUnit',
       'clearInputs'
