@@ -31,12 +31,18 @@ export default {
       state.categories
         .filter((category) => category.units.length >= 2)
         .map((category) => category.name),
-    unitsInCategory: (state) => (categoryName) =>
-      state.categories.find((category) => category.name === categoryName).units,
-    symbolCategory: (state) => (symbol) =>
-      state.categories.find((category) =>
+    unitsInCategory: (state) => (categoryName) => {
+      const category = state.categories.find(
+        (category) => category.name === categoryName
+      )
+      return category ? category.units : []
+    },
+    unitsInCategoryWithSymbol: (state, getters) => (symbol) => {
+      const category = state.categories.find((category) =>
         category.units.map((unit) => unit.symbol).includes(symbol)
-      ).name,
+      )
+      return category ? category.units : []
+    },
     unitWithSymbol: (state, getters) => (symbol) =>
       getters.allUnits.find((unit) => unit.symbol === symbol)
   }

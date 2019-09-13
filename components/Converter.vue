@@ -126,7 +126,8 @@ export default {
     formula() {
       const fromFactor = this.fromUnit.factor
       const toFactor = this.toUnit.factor
-      const typeText = this.type && this.type.toLowerCase()
+      const typeText =
+        this.category && this.category.name && this.category.name.toLowerCase()
       return fromFactor >= toFactor
         ? `multiply the ${typeText} value by ${this.round(
             fromFactor / toFactor

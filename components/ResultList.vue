@@ -12,8 +12,8 @@
           class="layout align-start justify-left wrap"
         >
           <v-flex
-            v-for="calc in activeCalculators"
-            :key="calc.id"
+            v-for="calc in activeCalcs"
+            :key="calc.key"
             xs12
             sm6
             md12
@@ -23,21 +23,21 @@
           >
             <v-text-field
               readonly
-              :label="calc.title"
+              :label="calc.name"
               :value="calc.result"
               @focus="$event.target.select()"
             ></v-text-field>
 
             <v-select
-              v-if="unitsOfType(symbolType(calc.defaultUnit)).length > 1"
+              v-if="unitsInCategoryWithSymbol(calc.defaultUnit).length > 1"
               class="units"
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsOfType(symbolType(calc.defaultUnit))"
+              :items="unitsInCategoryWithSymbol(calc.defaultUnit)"
               :value="calc.selectedUnit"
               @input="
-                setResultSelectedUnit({ id: calc.id, selectedUnit: $event })
+                setResultSelectedUnit({ key: calc.key, selectedUnit: $event })
               "
             >
               <template slot="item" slot-scope="data">
@@ -67,8 +67,8 @@ export default {
     title: 'Results'
   }),
   computed: {
-    ...mapGetters('calcs', ['activeCalculators']),
-    ...mapGetters('units', ['unitsOfType', 'symbolType'])
+    ...mapGetters('calcs', ['activeCalcs']),
+    ...mapGetters('units', ['unitsInCategoryWithSymbol'])
   },
   methods: {
     ...mapActions('calcs', ['setResultSelectedUnit'])

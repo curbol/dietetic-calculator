@@ -4,8 +4,8 @@
       <v-flex sm12 md4>
         <calc-list></calc-list>
       </v-flex>
-      <!-- <v-fade-transition>
-        <v-flex v-if="activeCalculators.length" sm12 md4>
+      <v-fade-transition>
+        <v-flex v-if="activeCalcs.length" sm12 md4>
           <input-list></input-list>
         </v-flex>
       </v-fade-transition>
@@ -13,7 +13,7 @@
         <v-flex v-if="activeCalcsWithResults.length" sm12 md4>
           <result-list></result-list>
         </v-flex>
-      </v-fade-transition> -->
+      </v-fade-transition>
     </v-layout>
   </v-container>
 </template>
@@ -21,8 +21,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import CalcList from '@/components/CalcList.vue'
-// import InputList from '@/components/InputList.vue'
-// import ResultList from '@/components/ResultList.vue'
+import InputList from '@/components/InputList.vue'
+import ResultList from '@/components/ResultList.vue'
 
 export default {
   head: () => ({
@@ -36,12 +36,12 @@ export default {
     ]
   }),
   components: {
-    CalcList
-    // InputList,
-    // ResultList
+    CalcList,
+    InputList,
+    ResultList
   },
   computed: {
-    ...mapGetters('calcs', ['activeCalculators', 'activeCalcsWithResults'])
+    ...mapGetters('calcs', ['activeCalcs', 'activeCalcsWithResults'])
   },
   async fetch({ store, error, params }) {
     try {
