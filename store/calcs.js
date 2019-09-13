@@ -37,16 +37,10 @@ export default {
       )
     },
     Set_All_Categories_Active(state, active) {
-      state.categories = state.categories.map((x) => ({
-        ...x,
-        active
-      }))
+      state.categories = state.categories.map((x) => ({ ...x, active }))
     },
     Set_All_Calculators_Active(state, active) {
-      state.calculators = state.calculators.map((x) => ({
-        ...x,
-        active
-      }))
+      state.calculators = state.calculators.map((x) => ({ ...x, active }))
     },
     Set_Select_Value(state, { id, value }) {
       state.selects = state.selects.map((x) =>
