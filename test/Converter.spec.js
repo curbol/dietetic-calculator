@@ -1,60 +1,43 @@
-import '@testing-library/jest-dom/extend-expect'
-import { cleanup, render, fireEvent } from '@testing-library/vue'
+import { resolve } from 'path'
+import { Nuxt, Builder } from 'nuxt'
+import { JSDOM } from 'jsdom'
+import test from 'ava'
 
-import Converter from '~/components/Converter.vue'
-import convertStore from '~/store/convert.js'
-import unitsStore from '~/store/units.js'
+// We keep the nuxt and server instance
+// So we can close them at the end of the test
+let nuxt = null
 
-afterEach(cleanup)
-
-const unitsTestState = {
-  state() {
-    return {
-      units: [
-        {
-          symbol: 'mg',
-          type: 'Mass',
-          name: 'Milligrams',
-          factor: 0.001
-        },
-        {
-          symbol: 'g',
-          type: 'Mass',
-          name: 'Grams',
-          factor: 1
-        },
-        {
-          symbol: 'kg',
-          type: 'Mass',
-          name: 'Kilograms',
-          factor: 1000
-        }
-      ]
-    }
+// Init Nuxt.js and create a server listening on localhost:4000
+test.before(async () => {
+  const config = {
+    dev: false,
+    rootDir: resolve(__dirname, '..')
   }
-}
+  nuxt = new Nuxt(config)
+  await new Builder(nuxt).build()
+  await nuxt.server.listen(3001, 'localhost')
+}, 30000)
 
-function renderVuexTestComponent() {
-  const store = {
-    modules: {
-      convert: { namespaced: true, ...convertStore },
-      units: { namespaced: true, ...unitsStore, ...unitsTestState }
-    }
-  }
+// Example of testing only generated html
+test('Route / exits and render HTML', async (t) => {
+  const context = {}
+  const { html } = await nuxt.server.renderRoute('/', context)
+  t.true(html.includes('<h1 class="red">Hello world!</h1>'))
+})
 
-  console.log('store: ', store)
+// Example of testing via dom checking
+test('Route / exits and render HTML with CSS applied', async (t) => {
+  const context = {}
+  const { html } = await nuxt.server.renderRoute('/', context)
+  const { window } = new JSDOM(html).window
+  const element = window.document.querySelector('.red')
+  t.not(element, null)
+  t.is(element.textContent, 'Hello world!')
+  t.is(element.className, 'red')
+  t.is(window.getComputedStyle(element).color, 'red')
+})
 
-  return render(Converter, {
-    store,
-    mocks: {
-      $vuetify: { breakpoint: {} }
-    }
-  })
-}
-
-test('can render with vuex with defaults', async () => {
-  const { getByTestId, getByText } = renderVuexTestComponent()
-  await fireEvent.click(getByText('Value'))
-
-  expect(getByTestId('count-value')).toHaveTextContent('1')
+// Close server and ask nuxt to stop listening to file changes
+test.after('Closing server and nuxt.js', (t) => {
+  nuxt.close()
 })
