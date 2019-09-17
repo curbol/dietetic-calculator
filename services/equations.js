@@ -7,8 +7,6 @@ export function bodyMassIndex({ weight_kg, height_m }) {
 }
 
 export function idealBodyWeight({ gender, height_in }) {
-  console.log({ gender, height_in })
-
   if (!gender || !height_in || height_in <= 0) return undefined
 
   const _gender = gender.toLowerCase()

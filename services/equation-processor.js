@@ -44,7 +44,6 @@ function processEquation(equation = () => 0, targetUnits = {}) {
       ...getSelectData(selects)
     })
 
-    console.log('result:', result)
     const canConvertResult = unitData
       .map((x) => x.symbol)
       .includes(calc.defaultUnit)

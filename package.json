@@ -19,14 +19,14 @@
     "deploy": "docker-build & docker-tag & docker-push"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^3.0.0-beta.16",
+    "@nuxtjs/pwa": "^3.0.0-beta.19",
     "graphql-request": "^1.8.2",
-    "nuxt": "^2.9.1"
+    "nuxt": "^2.9.2"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^1.0.1",
-    "@nuxtjs/eslint-module": "^1.0.0",
-    "@nuxtjs/vuetify": "^1.4.0",
+    "@nuxtjs/eslint-config": "^1.1.2",
+    "@nuxtjs/eslint-module": "^1.1.0",
+    "@nuxtjs/vuetify": "^1.8.4",
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/vue": "^3.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
@@ -34,12 +34,12 @@
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "eslint": "^5.0.0",
-    "eslint-config-prettier": "^6.1.0",
+    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-nuxt": "^0.4.3",
     "eslint-plugin-prettier": "^3.1.0",
-    "json-server": "^0.15.0",
-    "nodemon": "^1.19.1",
+    "json-server": "^0.15.1",
+    "nodemon": "^1.19.2",
     "prettier": "^1.18.2",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.5"
   }
 }
