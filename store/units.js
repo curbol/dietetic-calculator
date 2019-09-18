@@ -18,7 +18,7 @@ export default {
       const categories = await CalcService.getUnitCategories()
       commit('Set_Unit_Categories', categories)
       const category = getters.categoriesWithMultipleUnits[0]
-      dispatch('convert/setCategory', { category }, { root: true })
+      dispatch('convert/setCategory', category, { root: true })
     }
   },
 

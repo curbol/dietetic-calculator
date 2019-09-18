@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import CalcService from '@/services/calcs.js'
 import { equationProcessor } from '@/services/equation-processor.js'
 
@@ -158,22 +159,24 @@ export default {
   },
 
   getters: {
-    activeCalcs: (state) => state.calculators.filter((calc) => calc.active),
+    activeCalcs: (state) => state.calculators.filter((x) => x.active),
     calcsInCategory: (state) => (name) =>
-      state.calculators.filter((calc) => calc.category.name === name),
+      state.calculators.filter((x) => x.category.name === name),
     activeCalcsInCategory: (state, getters) => (name) =>
-      getters.activeCalcs.filter((calc) => calc.category.name === name),
+      getters.activeCalcs.filter((x) => x.category.name === name),
     activeCalcsWithResults: (state, getters) =>
-      getters.activeCalcs.filter((calc) => !isNaN(calc.result)),
+      getters.activeCalcs.filter((x) => !isNaN(x.result)),
     activeInputs: (state, getters) =>
-      getters.activeCalcs
-        .map((calc) => calc.inputs.map((x) => x.name))
-        .reduce((acc, cur) => [...new Set([...acc, ...cur])], [])
-        .map((name) => state.inputs.find((input) => input.name === name)),
+      R.pipe(
+        R.map(R.prop('inputs')),
+        R.reduce(R.union, []),
+        R.innerJoin(R.eqProps('name'), state.inputs)
+      )(getters.activeCalcs),
     activeSelects: (state, getters) =>
-      getters.activeCalcs
-        .map((calc) => calc.selects.map((x) => x.name))
-        .reduce((acc, cur) => [...new Set([...acc, ...cur])], [])
-        .map((name) => state.selects.find((select) => select.name === name))
+      R.pipe(
+        R.map(R.prop('selects')),
+        R.reduce(R.union, []),
+        R.innerJoin(R.eqProps('name'), state.selects)
+      )(getters.activeCalcs)
   }
 }

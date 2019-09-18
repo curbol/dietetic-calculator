@@ -22,7 +22,7 @@
               required
               :items="categoriesWithMultipleUnits"
               :value="category"
-              @change="setCategory({ category: $event })"
+              @change="setCategory($event)"
             ></v-select>
           </v-flex>
         </v-layout>
@@ -39,7 +39,7 @@
               :value="from.value"
               required
               @focus="$event.target.select()"
-              @input="setFromValue({ value: $event })"
+              @input="setFromValue($event)"
             ></v-text-field>
 
             <v-select
@@ -49,7 +49,7 @@
               label="Units"
               :items="unitsInCategory(category)"
               :value="from.unit"
-              @change="setFromUnit({ unit: $event })"
+              @change="setFromUnit($event)"
             >
               <template slot="item" slot-scope="data">
                 <span>{{ unitOption(data.item) }}</span>
@@ -68,7 +68,7 @@
               :value="to.value"
               required
               @focus="$event.target.select()"
-              @input="setToValue({ value: $event })"
+              @input="setToValue($event)"
             ></v-text-field>
 
             <v-select
@@ -78,7 +78,7 @@
               label="Units"
               :items="unitsInCategory(category)"
               :value="to.unit"
-              @change="setToUnit({ unit: $event })"
+              @change="setToUnit($event)"
             >
               <template slot="item" slot-scope="data">
                 <span>{{ unitOption(data.item) }}</span>
@@ -126,8 +126,7 @@ export default {
     formula() {
       const fromFactor = this.fromUnit.factor
       const toFactor = this.toUnit.factor
-      const typeText =
-        this.category && this.category.name && this.category.name.toLowerCase()
+      const typeText = this.category && this.category.toLowerCase()
       return fromFactor >= toFactor
         ? `multiply the ${typeText} value by ${this.round(
             fromFactor / toFactor

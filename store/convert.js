@@ -16,57 +16,59 @@ export default {
   },
 
   mutations: {
-    Set_Category(state, { category }) {
+    Set_Category(state, category) {
       state.category = category
     },
-    Set_From_Value(state, { value }) {
+    Set_From_Value(state, value) {
       state.from.value = value
     },
-    Set_From_Unit(state, { unit }) {
+    Set_From_Unit(state, unit) {
       state.from.unit = unit
     },
-    Set_To_Value(state, { value }) {
+    Set_To_Value(state, value) {
       state.to.value = value
     },
-    Set_To_Unit(state, { unit }) {
+    Set_To_Unit(state, unit) {
       state.to.unit = unit
     }
   },
 
   actions: {
-    setCategory({ rootGetters, commit, dispatch }, { category }) {
-      commit('Set_Category', { category })
+    setCategory({ rootGetters, commit, dispatch }, category) {
+      commit('Set_Category', category)
+
       const unitsInCategory = rootGetters['units/unitsInCategory'](category)
-      dispatch('setFromUnit', {
-        unit: unitsInCategory[0].symbol
-      })
-      dispatch('setToUnit', {
-        unit: unitsInCategory[1].symbol
-      })
-      dispatch('setFromValue', { value: 1 })
+      dispatch('setFromUnit', unitsInCategory[0].symbol)
+      dispatch('setToUnit', unitsInCategory[1].symbol)
+
+      dispatch('setFromValue', 1)
     },
-    setFromValue({ commit, dispatch }, { value }) {
-      commit('Set_From_Value', { value })
+    setFromValue({ commit, dispatch }, value) {
+      commit('Set_From_Value', value)
       dispatch('calculateToValue')
     },
-    setFromUnit({ state, commit, dispatch }, { unit }) {
+    setFromUnit({ state, commit, dispatch }, unit) {
       const prevFromUnit = state.from.unit
-      commit('Set_From_Unit', { unit })
+      commit('Set_From_Unit', unit)
+
       if (state.to.unit === unit) {
-        dispatch('setToUnit', { unit: prevFromUnit })
+        dispatch('setToUnit', prevFromUnit)
       }
+
       dispatch('calculateToValue')
     },
-    setToValue({ commit, dispatch }, { value }) {
-      commit('Set_To_Value', { value })
+    setToValue({ commit, dispatch }, value) {
+      commit('Set_To_Value', value)
       dispatch('calculateFromValue')
     },
-    setToUnit({ state, commit, dispatch }, { unit }) {
+    setToUnit({ state, commit, dispatch }, unit) {
       const prevToUnit = state.to.unit
-      commit('Set_To_Unit', { unit })
+      commit('Set_To_Unit', unit)
+
       if (state.from.unit === unit) {
-        dispatch('setFromUnit', { unit: prevToUnit })
+        dispatch('setFromUnit', prevToUnit)
       }
+
       dispatch('calculateToValue')
     },
     calculateFromValue({ rootGetters, state, commit }) {
@@ -76,7 +78,7 @@ export default {
         fromUnit: state.to.unit,
         toUnit: state.from.unit
       })
-      commit('Set_From_Value', { value: fromValue })
+      commit('Set_From_Value', fromValue)
     },
     calculateToValue({ rootGetters, state, commit }) {
       const toValue = state.from.value
@@ -88,11 +90,11 @@ export default {
           })
         : undefined
       const rounded = isNaN(toValue) ? toValue : parseFloat(toValue.toFixed(5))
-      commit('Set_To_Value', { value: rounded })
+      commit('Set_To_Value', rounded)
     },
     clearValues({ dispatch }) {
-      dispatch('setFromValue', { value: undefined })
-      dispatch('setToValue', { value: undefined })
+      dispatch('setFromValue', undefined)
+      dispatch('setToValue', undefined)
     }
   },
 
