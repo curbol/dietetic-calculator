@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import * as _ from 'lodash'
 import CalcService from '@/services/calcs.js'
 import { equationProcessor } from '@/services/equation-processor.js'
 
@@ -167,11 +168,16 @@ export default {
     activeCalcsWithResults: (state, getters) =>
       getters.activeCalcs.filter((x) => !isNaN(x.result)),
     activeInputs: (state, getters) =>
-      R.pipe(
-        R.map(R.prop('inputs')),
-        R.reduce(R.union, []),
-        R.innerJoin(R.eqProps('name'), state.inputs)
+      _.pipe(
+        _.map(_.prop('inputs')),
+        _.reduce(_.union, []),
+        _.innerJoin(_.eqProps('name'), state.inputs)
       )(getters.activeCalcs),
+    // R.pipe(
+    //   R.map(R.prop('inputs')),
+    //   R.reduce(R.union, []),
+    //   R.innerJoin(R.eqProps('name'), state.inputs)
+    // )(getters.activeCalcs),
     activeSelects: (state, getters) =>
       R.pipe(
         R.map(R.prop('selects')),
