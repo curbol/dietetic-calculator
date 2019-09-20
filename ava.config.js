@@ -1,5 +1,5 @@
 export default {
-  require: ['./test/ava.setup.js'],
+  require: ['./test/_setup.js'],
   sources: ['**/*.{js,vue}'],
   files: ['test/specs/**/*'],
   babel: {
@@ -19,5 +19,6 @@ export default {
     }
   },
   tap: true,
+  serial: true,
   verbose: true
 }
