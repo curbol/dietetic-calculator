@@ -8,20 +8,60 @@ import unitsStore from '@/store/units.js'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
-localVue.use(Vuetify)
 
-let store
-
-test.beforeEach((t) => {
-  store = new Vuex.Store({
-    modules: {
-      convert: { ...convertStore, namespaced: true },
-      units: { ...unitsStore, namespaced: true }
+const getWrapper = () => {
+  const vuetify = new Vuetify({
+    mocks: {
+      $vuetify: {
+        breakpoint: {
+          xsOnly: () => false
+        }
+      }
     }
   })
-})
+
+  const store = new Vuex.Store({
+    modules: {
+      convert: { ...convertStore, namespaced: true },
+      units: {
+        ...unitsStore,
+        state() {
+          return {
+            categories: [
+              {
+                name: 'Length',
+                units: [
+                  {
+                    name: 'Millimeters',
+                    symbol: 'mm',
+                    factor: 0.001
+                  },
+                  {
+                    name: 'Meters',
+                    symbol: 'm',
+                    factor: 1
+                  },
+                  {
+                    name: 'Inches',
+                    symbol: 'in',
+                    factor: 0.0254
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        namespaced: true
+      }
+    }
+  })
+
+  return shallowMount(Converter, { localVue, vuetify, store })
+}
+
+// test.beforeEach((t) => {})
 
 test('component should mount', (t) => {
-  const wrapper = shallowMount(Converter, { localVue, store })
+  const wrapper = getWrapper()
   t.is(wrapper.isVueInstance(), true)
 })

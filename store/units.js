@@ -27,10 +27,11 @@ export default {
       state.categories
         .map((category) => category.units)
         .reduce((acc, cur) => [...acc, ...cur]),
-    categoriesWithMultipleUnits: (state) =>
-      state.categories
+    categoriesWithMultipleUnits: (state) => {
+      return state.categories
         .filter((category) => category.units.length >= 2)
-        .map((category) => category.name),
+        .map((category) => category.name)
+    },
     unitsInCategory: (state) => (categoryName) => {
       const category = state.categories.find(
         (category) => category.name === categoryName
