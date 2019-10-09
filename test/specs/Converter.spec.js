@@ -65,3 +65,8 @@ test('component should mount', (t) => {
   const wrapper = getWrapper()
   t.is(wrapper.isVueInstance(), true)
 })
+
+test('component should match snapshot', (t) => {
+  const wrapper = getWrapper()
+  t.snapshot(wrapper.html)
+})
