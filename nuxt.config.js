@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+require('dotenv').config()
+
 export default {
   mode: 'universal',
   /*
@@ -18,13 +20,6 @@ export default {
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-  },
-  /*
-   ** Default Environment Variables. Override with NUXT_ENV_<name>.
-   */
-  env: {
-    CALC_API_HTTP: 'http://35.224.32.89/graphql',
-    CALC_API_WS: 'ws://35.224.32.89/subscription'
   },
   /*
    ** Customize the progress-bar color
