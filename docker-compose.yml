@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    build: .
+    environment:
+      - CALC_API_HTTP=${CALC_API_HTTP}
+      - CALC_API_WS=${CALC_API_WS}
+    ports:
+      - "3000:3000"
