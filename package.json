@@ -13,7 +13,7 @@
     "test": "ava",
     "docker-remove": "docker rm -f dietetic-calculator-web",
     "docker-build": "docker build -t dietetic-calculator-web .",
-    "docker-run": "docker run -p 3000:3000 dietetic-calculator-web",
+    "docker-run": "docker run --env-file ./.env -p 3000:3000 dietetic-calculator-web",
     "docker-tag": "docker tag dietetic-calculator-web gcr.io/dietetic-calculator/dietetic-calculator-web:latest",
     "docker-push": "docker push gcr.io/dietetic-calculator/dietetic-calculator-web:latest",
     "docker-dev": "npm run docker-build && npm run docker-remove && npm run docker-run",
