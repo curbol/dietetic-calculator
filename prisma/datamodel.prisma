@@ -1,0 +1,58 @@
+type CalculatorCategory {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String! @unique
+  icon: String
+  calculators: [Calculator!]!
+}
+
+type Calculator {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  key: String! @unique
+  name: String! @unique
+  description: String!
+  category: CalculatorCategory!
+  inputs: [Input!]!
+  selects: [Select!]!
+  defaultUnit: String!
+}
+
+type Input {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String! @unique
+  category: UnitCategory!
+  defaultUnit: String!
+  icon: String
+}
+
+type Select {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String! @unique
+  options: [String!]! @scalarList(strategy: RELATION)
+  icon: String
+}
+
+type UnitCategory {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String! @unique
+  units: [Unit!]!
+}
+
+type Unit {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String! @unique
+  symbol: String! @unique
+  category: UnitCategory!
+  factor: Float!
+}

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dc-web
+  namespace: prisma
+  labels:
+    app: dc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    stage: production
+    name: dc-web
+    app: dc

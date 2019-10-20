@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dc-api
+  namespace: prisma
+  labels:
+    app: dc
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        stage: production
+        name: dc-api
+        app: dc
+    spec:
+      containers:
+        - name: dc-api
+          image: gcr.io/dietetic-calculator/dietetic-calculator-api:latest
+          ports:
+            - containerPort: 4000
