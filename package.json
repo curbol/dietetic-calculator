@@ -1,0 +1,12 @@
+{
+  "name": "dietetic-calculator",
+  "version": "1.0.0",
+  "description": "Tool For Common Dietetic Calculations",
+  "author": "Curtis Bollinger",
+  "private": true,
+  "scripts": {
+    "docker-compose": "docker-compose up --build"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
