@@ -2,15 +2,15 @@ package main
 
 import (
 	"context"
-	"fmt"
-
 	prisma "dietetic-calculator/api/generated/prisma-client"
+	"fmt"
 )
 
 func main() {
 	client := prisma.New(nil)
+	ctx := context.TODO()
 
-	unitCategories, err := client.UnitCategories(nil).Exec(context.TODO())
+	unitCategories, err := client.UnitCategories(nil).Exec(ctx)
 	if err != nil {
 		panic(err)
 	}

@@ -1,0 +1,15 @@
+type Query {
+  unitCategories: [UnitCategory!]!
+  units: [Unit!]!
+}
+
+type UnitCategory {
+  id: ID!
+  name: String!
+  units: [Unit!]!
+}
+
+type Unit {
+  id: ID!
+  name: String!
+}

@@ -1,0 +1,12 @@
+schema: server/schema.gql
+exec:
+  filename: server/generated.go
+models:
+  UnitCategories:
+    model: dietetic-calculator/api/prisma-client.UnitCategories
+  Units:
+    model: dietetic-calculator/api/prisma-client.Units
+resolver:
+  # Goal: copy&paste from generated file
+  filename: tmp/resolver.go
+  type: Resolver
