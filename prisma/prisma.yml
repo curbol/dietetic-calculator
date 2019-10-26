@@ -1,7 +1,7 @@
 endpoint: http://localhost:4466
 datamodel: datamodel.prisma
 seed:
-  run: go run ./data/seed.go
+  run: go run ./seed.go
 generate:
   - generator: go-client
     output: ../api/generated/prisma-client/

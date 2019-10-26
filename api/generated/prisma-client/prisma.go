@@ -1234,10 +1234,206 @@ const (
 	MutationTypeDeleted MutationType = "DELETED"
 )
 
+type UnitCategoryUpdateOneRequiredInput struct {
+	Create  *UnitCategoryCreateInput       `json:"create,omitempty"`
+	Update  *UnitCategoryUpdateDataInput   `json:"update,omitempty"`
+	Upsert  *UnitCategoryUpsertNestedInput `json:"upsert,omitempty"`
+	Connect *UnitCategoryWhereUniqueInput  `json:"connect,omitempty"`
+}
+
 type CalculatorWhereUniqueInput struct {
 	ID   *string `json:"id,omitempty"`
 	Key  *string `json:"key,omitempty"`
 	Name *string `json:"name,omitempty"`
+}
+
+type UnitUpsertWithWhereUniqueWithoutCategoryInput struct {
+	Where  UnitWhereUniqueInput               `json:"where"`
+	Update UnitUpdateWithoutCategoryDataInput `json:"update"`
+	Create UnitCreateWithoutCategoryInput     `json:"create"`
+}
+
+type UnitCategoryWhereInput struct {
+	ID                *string                  `json:"id,omitempty"`
+	IDNot             *string                  `json:"id_not,omitempty"`
+	IDIn              []string                 `json:"id_in,omitempty"`
+	IDNotIn           []string                 `json:"id_not_in,omitempty"`
+	IDLt              *string                  `json:"id_lt,omitempty"`
+	IDLte             *string                  `json:"id_lte,omitempty"`
+	IDGt              *string                  `json:"id_gt,omitempty"`
+	IDGte             *string                  `json:"id_gte,omitempty"`
+	IDContains        *string                  `json:"id_contains,omitempty"`
+	IDNotContains     *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith      *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith   *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith        *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith     *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt         *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot      *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn       []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn    []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt       *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte      *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt       *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte      *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt         *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot      *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn       []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn    []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt       *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte      *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt       *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte      *string                  `json:"updatedAt_gte,omitempty"`
+	Name              *string                  `json:"name,omitempty"`
+	NameNot           *string                  `json:"name_not,omitempty"`
+	NameIn            []string                 `json:"name_in,omitempty"`
+	NameNotIn         []string                 `json:"name_not_in,omitempty"`
+	NameLt            *string                  `json:"name_lt,omitempty"`
+	NameLte           *string                  `json:"name_lte,omitempty"`
+	NameGt            *string                  `json:"name_gt,omitempty"`
+	NameGte           *string                  `json:"name_gte,omitempty"`
+	NameContains      *string                  `json:"name_contains,omitempty"`
+	NameNotContains   *string                  `json:"name_not_contains,omitempty"`
+	NameStartsWith    *string                  `json:"name_starts_with,omitempty"`
+	NameNotStartsWith *string                  `json:"name_not_starts_with,omitempty"`
+	NameEndsWith      *string                  `json:"name_ends_with,omitempty"`
+	NameNotEndsWith   *string                  `json:"name_not_ends_with,omitempty"`
+	UnitsEvery        *UnitWhereInput          `json:"units_every,omitempty"`
+	UnitsSome         *UnitWhereInput          `json:"units_some,omitempty"`
+	UnitsNone         *UnitWhereInput          `json:"units_none,omitempty"`
+	And               []UnitCategoryWhereInput `json:"AND,omitempty"`
+	Or                []UnitCategoryWhereInput `json:"OR,omitempty"`
+	Not               []UnitCategoryWhereInput `json:"NOT,omitempty"`
+}
+
+type InputCreateManyInput struct {
+	Create  []InputCreateInput      `json:"create,omitempty"`
+	Connect []InputWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type CalculatorCategoryCreateInput struct {
+	ID          *string                                   `json:"id,omitempty"`
+	Name        string                                    `json:"name"`
+	Icon        *string                                   `json:"icon,omitempty"`
+	Calculators *CalculatorCreateManyWithoutCategoryInput `json:"calculators,omitempty"`
+}
+
+type InputCreateInput struct {
+	ID          *string                    `json:"id,omitempty"`
+	Name        string                     `json:"name"`
+	Category    UnitCategoryCreateOneInput `json:"category"`
+	DefaultUnit string                     `json:"defaultUnit"`
+	Icon        *string                    `json:"icon,omitempty"`
+}
+
+type UnitScalarWhereInput struct {
+	ID                  *string                `json:"id,omitempty"`
+	IDNot               *string                `json:"id_not,omitempty"`
+	IDIn                []string               `json:"id_in,omitempty"`
+	IDNotIn             []string               `json:"id_not_in,omitempty"`
+	IDLt                *string                `json:"id_lt,omitempty"`
+	IDLte               *string                `json:"id_lte,omitempty"`
+	IDGt                *string                `json:"id_gt,omitempty"`
+	IDGte               *string                `json:"id_gte,omitempty"`
+	IDContains          *string                `json:"id_contains,omitempty"`
+	IDNotContains       *string                `json:"id_not_contains,omitempty"`
+	IDStartsWith        *string                `json:"id_starts_with,omitempty"`
+	IDNotStartsWith     *string                `json:"id_not_starts_with,omitempty"`
+	IDEndsWith          *string                `json:"id_ends_with,omitempty"`
+	IDNotEndsWith       *string                `json:"id_not_ends_with,omitempty"`
+	CreatedAt           *string                `json:"createdAt,omitempty"`
+	CreatedAtNot        *string                `json:"createdAt_not,omitempty"`
+	CreatedAtIn         []string               `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn      []string               `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt         *string                `json:"createdAt_lt,omitempty"`
+	CreatedAtLte        *string                `json:"createdAt_lte,omitempty"`
+	CreatedAtGt         *string                `json:"createdAt_gt,omitempty"`
+	CreatedAtGte        *string                `json:"createdAt_gte,omitempty"`
+	UpdatedAt           *string                `json:"updatedAt,omitempty"`
+	UpdatedAtNot        *string                `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn         []string               `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn      []string               `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt         *string                `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte        *string                `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt         *string                `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte        *string                `json:"updatedAt_gte,omitempty"`
+	Name                *string                `json:"name,omitempty"`
+	NameNot             *string                `json:"name_not,omitempty"`
+	NameIn              []string               `json:"name_in,omitempty"`
+	NameNotIn           []string               `json:"name_not_in,omitempty"`
+	NameLt              *string                `json:"name_lt,omitempty"`
+	NameLte             *string                `json:"name_lte,omitempty"`
+	NameGt              *string                `json:"name_gt,omitempty"`
+	NameGte             *string                `json:"name_gte,omitempty"`
+	NameContains        *string                `json:"name_contains,omitempty"`
+	NameNotContains     *string                `json:"name_not_contains,omitempty"`
+	NameStartsWith      *string                `json:"name_starts_with,omitempty"`
+	NameNotStartsWith   *string                `json:"name_not_starts_with,omitempty"`
+	NameEndsWith        *string                `json:"name_ends_with,omitempty"`
+	NameNotEndsWith     *string                `json:"name_not_ends_with,omitempty"`
+	Symbol              *string                `json:"symbol,omitempty"`
+	SymbolNot           *string                `json:"symbol_not,omitempty"`
+	SymbolIn            []string               `json:"symbol_in,omitempty"`
+	SymbolNotIn         []string               `json:"symbol_not_in,omitempty"`
+	SymbolLt            *string                `json:"symbol_lt,omitempty"`
+	SymbolLte           *string                `json:"symbol_lte,omitempty"`
+	SymbolGt            *string                `json:"symbol_gt,omitempty"`
+	SymbolGte           *string                `json:"symbol_gte,omitempty"`
+	SymbolContains      *string                `json:"symbol_contains,omitempty"`
+	SymbolNotContains   *string                `json:"symbol_not_contains,omitempty"`
+	SymbolStartsWith    *string                `json:"symbol_starts_with,omitempty"`
+	SymbolNotStartsWith *string                `json:"symbol_not_starts_with,omitempty"`
+	SymbolEndsWith      *string                `json:"symbol_ends_with,omitempty"`
+	SymbolNotEndsWith   *string                `json:"symbol_not_ends_with,omitempty"`
+	Factor              *float64               `json:"factor,omitempty"`
+	FactorNot           *float64               `json:"factor_not,omitempty"`
+	FactorIn            []float64              `json:"factor_in,omitempty"`
+	FactorNotIn         []float64              `json:"factor_not_in,omitempty"`
+	FactorLt            *float64               `json:"factor_lt,omitempty"`
+	FactorLte           *float64               `json:"factor_lte,omitempty"`
+	FactorGt            *float64               `json:"factor_gt,omitempty"`
+	FactorGte           *float64               `json:"factor_gte,omitempty"`
+	And                 []UnitScalarWhereInput `json:"AND,omitempty"`
+	Or                  []UnitScalarWhereInput `json:"OR,omitempty"`
+	Not                 []UnitScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type UnitCategoryCreateOneInput struct {
+	Create  *UnitCategoryCreateInput      `json:"create,omitempty"`
+	Connect *UnitCategoryWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type UnitCategorySubscriptionWhereInput struct {
+	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
+	Node                       *UnitCategoryWhereInput              `json:"node,omitempty"`
+	And                        []UnitCategorySubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []UnitCategorySubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []UnitCategorySubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type UnitCategoryCreateInput struct {
+	ID    *string                             `json:"id,omitempty"`
+	Name  string                              `json:"name"`
+	Units *UnitCreateManyWithoutCategoryInput `json:"units,omitempty"`
+}
+
+type UnitSubscriptionWhereInput struct {
+	MutationIn                 []MutationType               `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                      `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                     `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                     `json:"updatedFields_contains_some,omitempty"`
+	Node                       *UnitWhereInput              `json:"node,omitempty"`
+	And                        []UnitSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []UnitSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []UnitSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type UnitCreateManyWithoutCategoryInput struct {
+	Create  []UnitCreateWithoutCategoryInput `json:"create,omitempty"`
+	Connect []UnitWhereUniqueInput           `json:"connect,omitempty"`
 }
 
 type CalculatorWhereInput struct {
@@ -1339,203 +1535,220 @@ type CalculatorWhereInput struct {
 	Not                      []CalculatorWhereInput        `json:"NOT,omitempty"`
 }
 
-type CalculatorCategoryWhereInput struct {
-	ID                *string                        `json:"id,omitempty"`
-	IDNot             *string                        `json:"id_not,omitempty"`
-	IDIn              []string                       `json:"id_in,omitempty"`
-	IDNotIn           []string                       `json:"id_not_in,omitempty"`
-	IDLt              *string                        `json:"id_lt,omitempty"`
-	IDLte             *string                        `json:"id_lte,omitempty"`
-	IDGt              *string                        `json:"id_gt,omitempty"`
-	IDGte             *string                        `json:"id_gte,omitempty"`
-	IDContains        *string                        `json:"id_contains,omitempty"`
-	IDNotContains     *string                        `json:"id_not_contains,omitempty"`
-	IDStartsWith      *string                        `json:"id_starts_with,omitempty"`
-	IDNotStartsWith   *string                        `json:"id_not_starts_with,omitempty"`
-	IDEndsWith        *string                        `json:"id_ends_with,omitempty"`
-	IDNotEndsWith     *string                        `json:"id_not_ends_with,omitempty"`
-	CreatedAt         *string                        `json:"createdAt,omitempty"`
-	CreatedAtNot      *string                        `json:"createdAt_not,omitempty"`
-	CreatedAtIn       []string                       `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn    []string                       `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt       *string                        `json:"createdAt_lt,omitempty"`
-	CreatedAtLte      *string                        `json:"createdAt_lte,omitempty"`
-	CreatedAtGt       *string                        `json:"createdAt_gt,omitempty"`
-	CreatedAtGte      *string                        `json:"createdAt_gte,omitempty"`
-	UpdatedAt         *string                        `json:"updatedAt,omitempty"`
-	UpdatedAtNot      *string                        `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn       []string                       `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn    []string                       `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt       *string                        `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte      *string                        `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt       *string                        `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte      *string                        `json:"updatedAt_gte,omitempty"`
-	Name              *string                        `json:"name,omitempty"`
-	NameNot           *string                        `json:"name_not,omitempty"`
-	NameIn            []string                       `json:"name_in,omitempty"`
-	NameNotIn         []string                       `json:"name_not_in,omitempty"`
-	NameLt            *string                        `json:"name_lt,omitempty"`
-	NameLte           *string                        `json:"name_lte,omitempty"`
-	NameGt            *string                        `json:"name_gt,omitempty"`
-	NameGte           *string                        `json:"name_gte,omitempty"`
-	NameContains      *string                        `json:"name_contains,omitempty"`
-	NameNotContains   *string                        `json:"name_not_contains,omitempty"`
-	NameStartsWith    *string                        `json:"name_starts_with,omitempty"`
-	NameNotStartsWith *string                        `json:"name_not_starts_with,omitempty"`
-	NameEndsWith      *string                        `json:"name_ends_with,omitempty"`
-	NameNotEndsWith   *string                        `json:"name_not_ends_with,omitempty"`
-	Icon              *string                        `json:"icon,omitempty"`
-	IconNot           *string                        `json:"icon_not,omitempty"`
-	IconIn            []string                       `json:"icon_in,omitempty"`
-	IconNotIn         []string                       `json:"icon_not_in,omitempty"`
-	IconLt            *string                        `json:"icon_lt,omitempty"`
-	IconLte           *string                        `json:"icon_lte,omitempty"`
-	IconGt            *string                        `json:"icon_gt,omitempty"`
-	IconGte           *string                        `json:"icon_gte,omitempty"`
-	IconContains      *string                        `json:"icon_contains,omitempty"`
-	IconNotContains   *string                        `json:"icon_not_contains,omitempty"`
-	IconStartsWith    *string                        `json:"icon_starts_with,omitempty"`
-	IconNotStartsWith *string                        `json:"icon_not_starts_with,omitempty"`
-	IconEndsWith      *string                        `json:"icon_ends_with,omitempty"`
-	IconNotEndsWith   *string                        `json:"icon_not_ends_with,omitempty"`
-	CalculatorsEvery  *CalculatorWhereInput          `json:"calculators_every,omitempty"`
-	CalculatorsSome   *CalculatorWhereInput          `json:"calculators_some,omitempty"`
-	CalculatorsNone   *CalculatorWhereInput          `json:"calculators_none,omitempty"`
-	And               []CalculatorCategoryWhereInput `json:"AND,omitempty"`
-	Or                []CalculatorCategoryWhereInput `json:"OR,omitempty"`
-	Not               []CalculatorCategoryWhereInput `json:"NOT,omitempty"`
+type UnitCreateWithoutCategoryInput struct {
+	ID     *string `json:"id,omitempty"`
+	Name   string  `json:"name"`
+	Symbol string  `json:"symbol"`
+	Factor float64 `json:"factor"`
 }
 
-type InputWhereInput struct {
-	ID                       *string                 `json:"id,omitempty"`
-	IDNot                    *string                 `json:"id_not,omitempty"`
-	IDIn                     []string                `json:"id_in,omitempty"`
-	IDNotIn                  []string                `json:"id_not_in,omitempty"`
-	IDLt                     *string                 `json:"id_lt,omitempty"`
-	IDLte                    *string                 `json:"id_lte,omitempty"`
-	IDGt                     *string                 `json:"id_gt,omitempty"`
-	IDGte                    *string                 `json:"id_gte,omitempty"`
-	IDContains               *string                 `json:"id_contains,omitempty"`
-	IDNotContains            *string                 `json:"id_not_contains,omitempty"`
-	IDStartsWith             *string                 `json:"id_starts_with,omitempty"`
-	IDNotStartsWith          *string                 `json:"id_not_starts_with,omitempty"`
-	IDEndsWith               *string                 `json:"id_ends_with,omitempty"`
-	IDNotEndsWith            *string                 `json:"id_not_ends_with,omitempty"`
-	CreatedAt                *string                 `json:"createdAt,omitempty"`
-	CreatedAtNot             *string                 `json:"createdAt_not,omitempty"`
-	CreatedAtIn              []string                `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn           []string                `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt              *string                 `json:"createdAt_lt,omitempty"`
-	CreatedAtLte             *string                 `json:"createdAt_lte,omitempty"`
-	CreatedAtGt              *string                 `json:"createdAt_gt,omitempty"`
-	CreatedAtGte             *string                 `json:"createdAt_gte,omitempty"`
-	UpdatedAt                *string                 `json:"updatedAt,omitempty"`
-	UpdatedAtNot             *string                 `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn              []string                `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn           []string                `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt              *string                 `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte             *string                 `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt              *string                 `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte             *string                 `json:"updatedAt_gte,omitempty"`
-	Name                     *string                 `json:"name,omitempty"`
-	NameNot                  *string                 `json:"name_not,omitempty"`
-	NameIn                   []string                `json:"name_in,omitempty"`
-	NameNotIn                []string                `json:"name_not_in,omitempty"`
-	NameLt                   *string                 `json:"name_lt,omitempty"`
-	NameLte                  *string                 `json:"name_lte,omitempty"`
-	NameGt                   *string                 `json:"name_gt,omitempty"`
-	NameGte                  *string                 `json:"name_gte,omitempty"`
-	NameContains             *string                 `json:"name_contains,omitempty"`
-	NameNotContains          *string                 `json:"name_not_contains,omitempty"`
-	NameStartsWith           *string                 `json:"name_starts_with,omitempty"`
-	NameNotStartsWith        *string                 `json:"name_not_starts_with,omitempty"`
-	NameEndsWith             *string                 `json:"name_ends_with,omitempty"`
-	NameNotEndsWith          *string                 `json:"name_not_ends_with,omitempty"`
-	Category                 *UnitCategoryWhereInput `json:"category,omitempty"`
-	DefaultUnit              *string                 `json:"defaultUnit,omitempty"`
-	DefaultUnitNot           *string                 `json:"defaultUnit_not,omitempty"`
-	DefaultUnitIn            []string                `json:"defaultUnit_in,omitempty"`
-	DefaultUnitNotIn         []string                `json:"defaultUnit_not_in,omitempty"`
-	DefaultUnitLt            *string                 `json:"defaultUnit_lt,omitempty"`
-	DefaultUnitLte           *string                 `json:"defaultUnit_lte,omitempty"`
-	DefaultUnitGt            *string                 `json:"defaultUnit_gt,omitempty"`
-	DefaultUnitGte           *string                 `json:"defaultUnit_gte,omitempty"`
-	DefaultUnitContains      *string                 `json:"defaultUnit_contains,omitempty"`
-	DefaultUnitNotContains   *string                 `json:"defaultUnit_not_contains,omitempty"`
-	DefaultUnitStartsWith    *string                 `json:"defaultUnit_starts_with,omitempty"`
-	DefaultUnitNotStartsWith *string                 `json:"defaultUnit_not_starts_with,omitempty"`
-	DefaultUnitEndsWith      *string                 `json:"defaultUnit_ends_with,omitempty"`
-	DefaultUnitNotEndsWith   *string                 `json:"defaultUnit_not_ends_with,omitempty"`
-	Icon                     *string                 `json:"icon,omitempty"`
-	IconNot                  *string                 `json:"icon_not,omitempty"`
-	IconIn                   []string                `json:"icon_in,omitempty"`
-	IconNotIn                []string                `json:"icon_not_in,omitempty"`
-	IconLt                   *string                 `json:"icon_lt,omitempty"`
-	IconLte                  *string                 `json:"icon_lte,omitempty"`
-	IconGt                   *string                 `json:"icon_gt,omitempty"`
-	IconGte                  *string                 `json:"icon_gte,omitempty"`
-	IconContains             *string                 `json:"icon_contains,omitempty"`
-	IconNotContains          *string                 `json:"icon_not_contains,omitempty"`
-	IconStartsWith           *string                 `json:"icon_starts_with,omitempty"`
-	IconNotStartsWith        *string                 `json:"icon_not_starts_with,omitempty"`
-	IconEndsWith             *string                 `json:"icon_ends_with,omitempty"`
-	IconNotEndsWith          *string                 `json:"icon_not_ends_with,omitempty"`
-	And                      []InputWhereInput       `json:"AND,omitempty"`
-	Or                       []InputWhereInput       `json:"OR,omitempty"`
-	Not                      []InputWhereInput       `json:"NOT,omitempty"`
+type CalculatorCategorySubscriptionWhereInput struct {
+	MutationIn                 []MutationType                             `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                                    `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                                   `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                                   `json:"updatedFields_contains_some,omitempty"`
+	Node                       *CalculatorCategoryWhereInput              `json:"node,omitempty"`
+	And                        []CalculatorCategorySubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []CalculatorCategorySubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []CalculatorCategorySubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type UnitCategoryWhereInput struct {
-	ID                *string                  `json:"id,omitempty"`
-	IDNot             *string                  `json:"id_not,omitempty"`
-	IDIn              []string                 `json:"id_in,omitempty"`
-	IDNotIn           []string                 `json:"id_not_in,omitempty"`
-	IDLt              *string                  `json:"id_lt,omitempty"`
-	IDLte             *string                  `json:"id_lte,omitempty"`
-	IDGt              *string                  `json:"id_gt,omitempty"`
-	IDGte             *string                  `json:"id_gte,omitempty"`
-	IDContains        *string                  `json:"id_contains,omitempty"`
-	IDNotContains     *string                  `json:"id_not_contains,omitempty"`
-	IDStartsWith      *string                  `json:"id_starts_with,omitempty"`
-	IDNotStartsWith   *string                  `json:"id_not_starts_with,omitempty"`
-	IDEndsWith        *string                  `json:"id_ends_with,omitempty"`
-	IDNotEndsWith     *string                  `json:"id_not_ends_with,omitempty"`
-	CreatedAt         *string                  `json:"createdAt,omitempty"`
-	CreatedAtNot      *string                  `json:"createdAt_not,omitempty"`
-	CreatedAtIn       []string                 `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn    []string                 `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt       *string                  `json:"createdAt_lt,omitempty"`
-	CreatedAtLte      *string                  `json:"createdAt_lte,omitempty"`
-	CreatedAtGt       *string                  `json:"createdAt_gt,omitempty"`
-	CreatedAtGte      *string                  `json:"createdAt_gte,omitempty"`
-	UpdatedAt         *string                  `json:"updatedAt,omitempty"`
-	UpdatedAtNot      *string                  `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn       []string                 `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn    []string                 `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt       *string                  `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte      *string                  `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt       *string                  `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte      *string                  `json:"updatedAt_gte,omitempty"`
-	Name              *string                  `json:"name,omitempty"`
-	NameNot           *string                  `json:"name_not,omitempty"`
-	NameIn            []string                 `json:"name_in,omitempty"`
-	NameNotIn         []string                 `json:"name_not_in,omitempty"`
-	NameLt            *string                  `json:"name_lt,omitempty"`
-	NameLte           *string                  `json:"name_lte,omitempty"`
-	NameGt            *string                  `json:"name_gt,omitempty"`
-	NameGte           *string                  `json:"name_gte,omitempty"`
-	NameContains      *string                  `json:"name_contains,omitempty"`
-	NameNotContains   *string                  `json:"name_not_contains,omitempty"`
-	NameStartsWith    *string                  `json:"name_starts_with,omitempty"`
-	NameNotStartsWith *string                  `json:"name_not_starts_with,omitempty"`
-	NameEndsWith      *string                  `json:"name_ends_with,omitempty"`
-	NameNotEndsWith   *string                  `json:"name_not_ends_with,omitempty"`
-	UnitsEvery        *UnitWhereInput          `json:"units_every,omitempty"`
-	UnitsSome         *UnitWhereInput          `json:"units_some,omitempty"`
-	UnitsNone         *UnitWhereInput          `json:"units_none,omitempty"`
-	And               []UnitCategoryWhereInput `json:"AND,omitempty"`
-	Or                []UnitCategoryWhereInput `json:"OR,omitempty"`
-	Not               []UnitCategoryWhereInput `json:"NOT,omitempty"`
+type SelectCreateManyInput struct {
+	Create  []SelectCreateInput      `json:"create,omitempty"`
+	Connect []SelectWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type UnitCategoryUpdateManyMutationInput struct {
+	Name *string `json:"name,omitempty"`
+}
+
+type SelectCreateInput struct {
+	ID      *string                   `json:"id,omitempty"`
+	Name    string                    `json:"name"`
+	Options *SelectCreateoptionsInput `json:"options,omitempty"`
+	Icon    *string                   `json:"icon,omitempty"`
+}
+
+type UnitUpdateManyMutationInput struct {
+	Name   *string  `json:"name,omitempty"`
+	Symbol *string  `json:"symbol,omitempty"`
+	Factor *float64 `json:"factor,omitempty"`
+}
+
+type SelectCreateoptionsInput struct {
+	Set []string `json:"set,omitempty"`
+}
+
+type UnitCategoryUpdateWithoutUnitsDataInput struct {
+	Name *string `json:"name,omitempty"`
+}
+
+type CalculatorUpdateInput struct {
+	Key         *string                                                     `json:"key,omitempty"`
+	Name        *string                                                     `json:"name,omitempty"`
+	Description *string                                                     `json:"description,omitempty"`
+	Category    *CalculatorCategoryUpdateOneRequiredWithoutCalculatorsInput `json:"category,omitempty"`
+	Inputs      *InputUpdateManyInput                                       `json:"inputs,omitempty"`
+	Selects     *SelectUpdateManyInput                                      `json:"selects,omitempty"`
+	DefaultUnit *string                                                     `json:"defaultUnit,omitempty"`
+}
+
+type UnitCategoryUpdateOneRequiredWithoutUnitsInput struct {
+	Create  *UnitCategoryCreateWithoutUnitsInput     `json:"create,omitempty"`
+	Update  *UnitCategoryUpdateWithoutUnitsDataInput `json:"update,omitempty"`
+	Upsert  *UnitCategoryUpsertWithoutUnitsInput     `json:"upsert,omitempty"`
+	Connect *UnitCategoryWhereUniqueInput            `json:"connect,omitempty"`
+}
+
+type CalculatorCategoryUpdateOneRequiredWithoutCalculatorsInput struct {
+	Create  *CalculatorCategoryCreateWithoutCalculatorsInput     `json:"create,omitempty"`
+	Update  *CalculatorCategoryUpdateWithoutCalculatorsDataInput `json:"update,omitempty"`
+	Upsert  *CalculatorCategoryUpsertWithoutCalculatorsInput     `json:"upsert,omitempty"`
+	Connect *CalculatorCategoryWhereUniqueInput                  `json:"connect,omitempty"`
+}
+
+type UnitCategoryCreateWithoutUnitsInput struct {
+	ID   *string `json:"id,omitempty"`
+	Name string  `json:"name"`
+}
+
+type CalculatorCategoryUpdateWithoutCalculatorsDataInput struct {
+	Name *string `json:"name,omitempty"`
+	Icon *string `json:"icon,omitempty"`
+}
+
+type InputWhereUniqueInput struct {
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+}
+
+type CalculatorCategoryUpsertWithoutCalculatorsInput struct {
+	Update CalculatorCategoryUpdateWithoutCalculatorsDataInput `json:"update"`
+	Create CalculatorCategoryCreateWithoutCalculatorsInput     `json:"create"`
+}
+
+type SelectUpdateManyMutationInput struct {
+	Name    *string                   `json:"name,omitempty"`
+	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
+	Icon    *string                   `json:"icon,omitempty"`
+}
+
+type InputUpdateManyInput struct {
+	Create     []InputCreateInput                      `json:"create,omitempty"`
+	Update     []InputUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []InputUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []InputWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []InputWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []InputWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []InputWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []InputScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []InputUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
+}
+
+type SelectWhereUniqueInput struct {
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+}
+
+type InputUpdateWithWhereUniqueNestedInput struct {
+	Where InputWhereUniqueInput `json:"where"`
+	Data  InputUpdateDataInput  `json:"data"`
+}
+
+type InputUpdateInput struct {
+	Name        *string                             `json:"name,omitempty"`
+	Category    *UnitCategoryUpdateOneRequiredInput `json:"category,omitempty"`
+	DefaultUnit *string                             `json:"defaultUnit,omitempty"`
+	Icon        *string                             `json:"icon,omitempty"`
+}
+
+type InputUpdateDataInput struct {
+	Name        *string                             `json:"name,omitempty"`
+	Category    *UnitCategoryUpdateOneRequiredInput `json:"category,omitempty"`
+	DefaultUnit *string                             `json:"defaultUnit,omitempty"`
+	Icon        *string                             `json:"icon,omitempty"`
+}
+
+type UnitWhereUniqueInput struct {
+	ID     *string `json:"id,omitempty"`
+	Name   *string `json:"name,omitempty"`
+	Symbol *string `json:"symbol,omitempty"`
+}
+
+type CalculatorCategoryUpdateInput struct {
+	Name        *string                                   `json:"name,omitempty"`
+	Icon        *string                                   `json:"icon,omitempty"`
+	Calculators *CalculatorUpdateManyWithoutCategoryInput `json:"calculators,omitempty"`
+}
+
+type CalculatorUpdateManyWithWhereNestedInput struct {
+	Where CalculatorScalarWhereInput    `json:"where"`
+	Data  CalculatorUpdateManyDataInput `json:"data"`
+}
+
+type UnitCategoryUpdateDataInput struct {
+	Name  *string                             `json:"name,omitempty"`
+	Units *UnitUpdateManyWithoutCategoryInput `json:"units,omitempty"`
+}
+
+type UnitCategoryWhereUniqueInput struct {
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+}
+
+type UnitUpdateManyWithoutCategoryInput struct {
+	Create     []UnitCreateWithoutCategoryInput                `json:"create,omitempty"`
+	Delete     []UnitWhereUniqueInput                          `json:"delete,omitempty"`
+	Connect    []UnitWhereUniqueInput                          `json:"connect,omitempty"`
+	Set        []UnitWhereUniqueInput                          `json:"set,omitempty"`
+	Disconnect []UnitWhereUniqueInput                          `json:"disconnect,omitempty"`
+	Update     []UnitUpdateWithWhereUniqueWithoutCategoryInput `json:"update,omitempty"`
+	Upsert     []UnitUpsertWithWhereUniqueWithoutCategoryInput `json:"upsert,omitempty"`
+	DeleteMany []UnitScalarWhereInput                          `json:"deleteMany,omitempty"`
+	UpdateMany []UnitUpdateManyWithWhereNestedInput            `json:"updateMany,omitempty"`
+}
+
+type CalculatorUpdateWithoutCategoryDataInput struct {
+	Key         *string                `json:"key,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	Description *string                `json:"description,omitempty"`
+	Inputs      *InputUpdateManyInput  `json:"inputs,omitempty"`
+	Selects     *SelectUpdateManyInput `json:"selects,omitempty"`
+	DefaultUnit *string                `json:"defaultUnit,omitempty"`
+}
+
+type UnitUpdateWithWhereUniqueWithoutCategoryInput struct {
+	Where UnitWhereUniqueInput               `json:"where"`
+	Data  UnitUpdateWithoutCategoryDataInput `json:"data"`
+}
+
+type CalculatorUpdateManyWithoutCategoryInput struct {
+	Create     []CalculatorCreateWithoutCategoryInput                `json:"create,omitempty"`
+	Delete     []CalculatorWhereUniqueInput                          `json:"delete,omitempty"`
+	Connect    []CalculatorWhereUniqueInput                          `json:"connect,omitempty"`
+	Set        []CalculatorWhereUniqueInput                          `json:"set,omitempty"`
+	Disconnect []CalculatorWhereUniqueInput                          `json:"disconnect,omitempty"`
+	Update     []CalculatorUpdateWithWhereUniqueWithoutCategoryInput `json:"update,omitempty"`
+	Upsert     []CalculatorUpsertWithWhereUniqueWithoutCategoryInput `json:"upsert,omitempty"`
+	DeleteMany []CalculatorScalarWhereInput                          `json:"deleteMany,omitempty"`
+	UpdateMany []CalculatorUpdateManyWithWhereNestedInput            `json:"updateMany,omitempty"`
+}
+
+type UnitUpdateWithoutCategoryDataInput struct {
+	Name   *string  `json:"name,omitempty"`
+	Symbol *string  `json:"symbol,omitempty"`
+	Factor *float64 `json:"factor,omitempty"`
+}
+
+type CalculatorCreateInput struct {
+	ID          *string                                            `json:"id,omitempty"`
+	Key         string                                             `json:"key"`
+	Name        string                                             `json:"name"`
+	Description string                                             `json:"description"`
+	Category    CalculatorCategoryCreateOneWithoutCalculatorsInput `json:"category"`
+	Inputs      *InputCreateManyInput                              `json:"inputs,omitempty"`
+	Selects     *SelectCreateManyInput                             `json:"selects,omitempty"`
+	DefaultUnit string                                             `json:"defaultUnit"`
 }
 
 type UnitWhereInput struct {
@@ -1611,6 +1824,12 @@ type UnitWhereInput struct {
 	Not                 []UnitWhereInput        `json:"NOT,omitempty"`
 }
 
+type CalculatorCategoryCreateWithoutCalculatorsInput struct {
+	ID   *string `json:"id,omitempty"`
+	Name string  `json:"name"`
+	Icon *string `json:"icon,omitempty"`
+}
+
 type SelectWhereInput struct {
 	ID                *string            `json:"id,omitempty"`
 	IDNot             *string            `json:"id_not,omitempty"`
@@ -1675,273 +1894,87 @@ type SelectWhereInput struct {
 	Not               []SelectWhereInput `json:"NOT,omitempty"`
 }
 
-type CalculatorCategoryWhereUniqueInput struct {
-	ID   *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-}
-
-type InputWhereUniqueInput struct {
-	ID   *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-}
-
-type SelectWhereUniqueInput struct {
-	ID   *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-}
-
-type UnitWhereUniqueInput struct {
-	ID     *string `json:"id,omitempty"`
-	Name   *string `json:"name,omitempty"`
-	Symbol *string `json:"symbol,omitempty"`
-}
-
-type UnitCategoryWhereUniqueInput struct {
-	ID   *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-}
-
-type CalculatorCreateInput struct {
-	ID          *string                                            `json:"id,omitempty"`
-	Key         string                                             `json:"key"`
-	Name        string                                             `json:"name"`
-	Description string                                             `json:"description"`
-	Category    CalculatorCategoryCreateOneWithoutCalculatorsInput `json:"category"`
-	Inputs      *InputCreateManyInput                              `json:"inputs,omitempty"`
-	Selects     *SelectCreateManyInput                             `json:"selects,omitempty"`
-	DefaultUnit string                                             `json:"defaultUnit"`
-}
-
-type CalculatorCategoryCreateOneWithoutCalculatorsInput struct {
-	Create  *CalculatorCategoryCreateWithoutCalculatorsInput `json:"create,omitempty"`
-	Connect *CalculatorCategoryWhereUniqueInput              `json:"connect,omitempty"`
-}
-
-type CalculatorCategoryCreateWithoutCalculatorsInput struct {
-	ID   *string `json:"id,omitempty"`
-	Name string  `json:"name"`
-	Icon *string `json:"icon,omitempty"`
-}
-
-type InputCreateManyInput struct {
-	Create  []InputCreateInput      `json:"create,omitempty"`
-	Connect []InputWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type InputCreateInput struct {
-	ID          *string                    `json:"id,omitempty"`
-	Name        string                     `json:"name"`
-	Category    UnitCategoryCreateOneInput `json:"category"`
-	DefaultUnit string                     `json:"defaultUnit"`
-	Icon        *string                    `json:"icon,omitempty"`
-}
-
-type UnitCategoryCreateOneInput struct {
-	Create  *UnitCategoryCreateInput      `json:"create,omitempty"`
-	Connect *UnitCategoryWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type UnitCategoryCreateInput struct {
-	ID    *string                             `json:"id,omitempty"`
-	Name  string                              `json:"name"`
-	Units *UnitCreateManyWithoutCategoryInput `json:"units,omitempty"`
-}
-
-type UnitCreateManyWithoutCategoryInput struct {
-	Create  []UnitCreateWithoutCategoryInput `json:"create,omitempty"`
-	Connect []UnitWhereUniqueInput           `json:"connect,omitempty"`
-}
-
-type UnitCreateWithoutCategoryInput struct {
-	ID     *string `json:"id,omitempty"`
-	Name   string  `json:"name"`
-	Symbol string  `json:"symbol"`
-	Factor float64 `json:"factor"`
-}
-
-type SelectCreateManyInput struct {
-	Create  []SelectCreateInput      `json:"create,omitempty"`
-	Connect []SelectWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type SelectCreateInput struct {
-	ID      *string                   `json:"id,omitempty"`
-	Name    string                    `json:"name"`
-	Options *SelectCreateoptionsInput `json:"options,omitempty"`
-	Icon    *string                   `json:"icon,omitempty"`
-}
-
-type SelectCreateoptionsInput struct {
-	Set []string `json:"set,omitempty"`
-}
-
-type CalculatorUpdateInput struct {
-	Key         *string                                                     `json:"key,omitempty"`
-	Name        *string                                                     `json:"name,omitempty"`
-	Description *string                                                     `json:"description,omitempty"`
-	Category    *CalculatorCategoryUpdateOneRequiredWithoutCalculatorsInput `json:"category,omitempty"`
-	Inputs      *InputUpdateManyInput                                       `json:"inputs,omitempty"`
-	Selects     *SelectUpdateManyInput                                      `json:"selects,omitempty"`
-	DefaultUnit *string                                                     `json:"defaultUnit,omitempty"`
-}
-
-type CalculatorCategoryUpdateOneRequiredWithoutCalculatorsInput struct {
-	Create  *CalculatorCategoryCreateWithoutCalculatorsInput     `json:"create,omitempty"`
-	Update  *CalculatorCategoryUpdateWithoutCalculatorsDataInput `json:"update,omitempty"`
-	Upsert  *CalculatorCategoryUpsertWithoutCalculatorsInput     `json:"upsert,omitempty"`
-	Connect *CalculatorCategoryWhereUniqueInput                  `json:"connect,omitempty"`
-}
-
-type CalculatorCategoryUpdateWithoutCalculatorsDataInput struct {
-	Name *string `json:"name,omitempty"`
-	Icon *string `json:"icon,omitempty"`
-}
-
-type CalculatorCategoryUpsertWithoutCalculatorsInput struct {
-	Update CalculatorCategoryUpdateWithoutCalculatorsDataInput `json:"update"`
-	Create CalculatorCategoryCreateWithoutCalculatorsInput     `json:"create"`
-}
-
-type InputUpdateManyInput struct {
-	Create     []InputCreateInput                      `json:"create,omitempty"`
-	Update     []InputUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
-	Upsert     []InputUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
-	Delete     []InputWhereUniqueInput                 `json:"delete,omitempty"`
-	Connect    []InputWhereUniqueInput                 `json:"connect,omitempty"`
-	Set        []InputWhereUniqueInput                 `json:"set,omitempty"`
-	Disconnect []InputWhereUniqueInput                 `json:"disconnect,omitempty"`
-	DeleteMany []InputScalarWhereInput                 `json:"deleteMany,omitempty"`
-	UpdateMany []InputUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
-}
-
-type InputUpdateWithWhereUniqueNestedInput struct {
-	Where InputWhereUniqueInput `json:"where"`
-	Data  InputUpdateDataInput  `json:"data"`
-}
-
-type InputUpdateDataInput struct {
-	Name        *string                             `json:"name,omitempty"`
-	Category    *UnitCategoryUpdateOneRequiredInput `json:"category,omitempty"`
-	DefaultUnit *string                             `json:"defaultUnit,omitempty"`
-	Icon        *string                             `json:"icon,omitempty"`
-}
-
-type UnitCategoryUpdateOneRequiredInput struct {
-	Create  *UnitCategoryCreateInput       `json:"create,omitempty"`
-	Update  *UnitCategoryUpdateDataInput   `json:"update,omitempty"`
-	Upsert  *UnitCategoryUpsertNestedInput `json:"upsert,omitempty"`
-	Connect *UnitCategoryWhereUniqueInput  `json:"connect,omitempty"`
-}
-
-type UnitCategoryUpdateDataInput struct {
-	Name  *string                             `json:"name,omitempty"`
-	Units *UnitUpdateManyWithoutCategoryInput `json:"units,omitempty"`
-}
-
-type UnitUpdateManyWithoutCategoryInput struct {
-	Create     []UnitCreateWithoutCategoryInput                `json:"create,omitempty"`
-	Delete     []UnitWhereUniqueInput                          `json:"delete,omitempty"`
-	Connect    []UnitWhereUniqueInput                          `json:"connect,omitempty"`
-	Set        []UnitWhereUniqueInput                          `json:"set,omitempty"`
-	Disconnect []UnitWhereUniqueInput                          `json:"disconnect,omitempty"`
-	Update     []UnitUpdateWithWhereUniqueWithoutCategoryInput `json:"update,omitempty"`
-	Upsert     []UnitUpsertWithWhereUniqueWithoutCategoryInput `json:"upsert,omitempty"`
-	DeleteMany []UnitScalarWhereInput                          `json:"deleteMany,omitempty"`
-	UpdateMany []UnitUpdateManyWithWhereNestedInput            `json:"updateMany,omitempty"`
-}
-
-type UnitUpdateWithWhereUniqueWithoutCategoryInput struct {
-	Where UnitWhereUniqueInput               `json:"where"`
-	Data  UnitUpdateWithoutCategoryDataInput `json:"data"`
-}
-
-type UnitUpdateWithoutCategoryDataInput struct {
-	Name   *string  `json:"name,omitempty"`
-	Symbol *string  `json:"symbol,omitempty"`
-	Factor *float64 `json:"factor,omitempty"`
-}
-
-type UnitUpsertWithWhereUniqueWithoutCategoryInput struct {
-	Where  UnitWhereUniqueInput               `json:"where"`
-	Update UnitUpdateWithoutCategoryDataInput `json:"update"`
-	Create UnitCreateWithoutCategoryInput     `json:"create"`
-}
-
-type UnitScalarWhereInput struct {
-	ID                  *string                `json:"id,omitempty"`
-	IDNot               *string                `json:"id_not,omitempty"`
-	IDIn                []string               `json:"id_in,omitempty"`
-	IDNotIn             []string               `json:"id_not_in,omitempty"`
-	IDLt                *string                `json:"id_lt,omitempty"`
-	IDLte               *string                `json:"id_lte,omitempty"`
-	IDGt                *string                `json:"id_gt,omitempty"`
-	IDGte               *string                `json:"id_gte,omitempty"`
-	IDContains          *string                `json:"id_contains,omitempty"`
-	IDNotContains       *string                `json:"id_not_contains,omitempty"`
-	IDStartsWith        *string                `json:"id_starts_with,omitempty"`
-	IDNotStartsWith     *string                `json:"id_not_starts_with,omitempty"`
-	IDEndsWith          *string                `json:"id_ends_with,omitempty"`
-	IDNotEndsWith       *string                `json:"id_not_ends_with,omitempty"`
-	CreatedAt           *string                `json:"createdAt,omitempty"`
-	CreatedAtNot        *string                `json:"createdAt_not,omitempty"`
-	CreatedAtIn         []string               `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn      []string               `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt         *string                `json:"createdAt_lt,omitempty"`
-	CreatedAtLte        *string                `json:"createdAt_lte,omitempty"`
-	CreatedAtGt         *string                `json:"createdAt_gt,omitempty"`
-	CreatedAtGte        *string                `json:"createdAt_gte,omitempty"`
-	UpdatedAt           *string                `json:"updatedAt,omitempty"`
-	UpdatedAtNot        *string                `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn         []string               `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn      []string               `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt         *string                `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte        *string                `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt         *string                `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte        *string                `json:"updatedAt_gte,omitempty"`
-	Name                *string                `json:"name,omitempty"`
-	NameNot             *string                `json:"name_not,omitempty"`
-	NameIn              []string               `json:"name_in,omitempty"`
-	NameNotIn           []string               `json:"name_not_in,omitempty"`
-	NameLt              *string                `json:"name_lt,omitempty"`
-	NameLte             *string                `json:"name_lte,omitempty"`
-	NameGt              *string                `json:"name_gt,omitempty"`
-	NameGte             *string                `json:"name_gte,omitempty"`
-	NameContains        *string                `json:"name_contains,omitempty"`
-	NameNotContains     *string                `json:"name_not_contains,omitempty"`
-	NameStartsWith      *string                `json:"name_starts_with,omitempty"`
-	NameNotStartsWith   *string                `json:"name_not_starts_with,omitempty"`
-	NameEndsWith        *string                `json:"name_ends_with,omitempty"`
-	NameNotEndsWith     *string                `json:"name_not_ends_with,omitempty"`
-	Symbol              *string                `json:"symbol,omitempty"`
-	SymbolNot           *string                `json:"symbol_not,omitempty"`
-	SymbolIn            []string               `json:"symbol_in,omitempty"`
-	SymbolNotIn         []string               `json:"symbol_not_in,omitempty"`
-	SymbolLt            *string                `json:"symbol_lt,omitempty"`
-	SymbolLte           *string                `json:"symbol_lte,omitempty"`
-	SymbolGt            *string                `json:"symbol_gt,omitempty"`
-	SymbolGte           *string                `json:"symbol_gte,omitempty"`
-	SymbolContains      *string                `json:"symbol_contains,omitempty"`
-	SymbolNotContains   *string                `json:"symbol_not_contains,omitempty"`
-	SymbolStartsWith    *string                `json:"symbol_starts_with,omitempty"`
-	SymbolNotStartsWith *string                `json:"symbol_not_starts_with,omitempty"`
-	SymbolEndsWith      *string                `json:"symbol_ends_with,omitempty"`
-	SymbolNotEndsWith   *string                `json:"symbol_not_ends_with,omitempty"`
-	Factor              *float64               `json:"factor,omitempty"`
-	FactorNot           *float64               `json:"factor_not,omitempty"`
-	FactorIn            []float64              `json:"factor_in,omitempty"`
-	FactorNotIn         []float64              `json:"factor_not_in,omitempty"`
-	FactorLt            *float64               `json:"factor_lt,omitempty"`
-	FactorLte           *float64               `json:"factor_lte,omitempty"`
-	FactorGt            *float64               `json:"factor_gt,omitempty"`
-	FactorGte           *float64               `json:"factor_gte,omitempty"`
-	And                 []UnitScalarWhereInput `json:"AND,omitempty"`
-	Or                  []UnitScalarWhereInput `json:"OR,omitempty"`
-	Not                 []UnitScalarWhereInput `json:"NOT,omitempty"`
+type CalculatorCategoryWhereInput struct {
+	ID                *string                        `json:"id,omitempty"`
+	IDNot             *string                        `json:"id_not,omitempty"`
+	IDIn              []string                       `json:"id_in,omitempty"`
+	IDNotIn           []string                       `json:"id_not_in,omitempty"`
+	IDLt              *string                        `json:"id_lt,omitempty"`
+	IDLte             *string                        `json:"id_lte,omitempty"`
+	IDGt              *string                        `json:"id_gt,omitempty"`
+	IDGte             *string                        `json:"id_gte,omitempty"`
+	IDContains        *string                        `json:"id_contains,omitempty"`
+	IDNotContains     *string                        `json:"id_not_contains,omitempty"`
+	IDStartsWith      *string                        `json:"id_starts_with,omitempty"`
+	IDNotStartsWith   *string                        `json:"id_not_starts_with,omitempty"`
+	IDEndsWith        *string                        `json:"id_ends_with,omitempty"`
+	IDNotEndsWith     *string                        `json:"id_not_ends_with,omitempty"`
+	CreatedAt         *string                        `json:"createdAt,omitempty"`
+	CreatedAtNot      *string                        `json:"createdAt_not,omitempty"`
+	CreatedAtIn       []string                       `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn    []string                       `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt       *string                        `json:"createdAt_lt,omitempty"`
+	CreatedAtLte      *string                        `json:"createdAt_lte,omitempty"`
+	CreatedAtGt       *string                        `json:"createdAt_gt,omitempty"`
+	CreatedAtGte      *string                        `json:"createdAt_gte,omitempty"`
+	UpdatedAt         *string                        `json:"updatedAt,omitempty"`
+	UpdatedAtNot      *string                        `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn       []string                       `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn    []string                       `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt       *string                        `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte      *string                        `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt       *string                        `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte      *string                        `json:"updatedAt_gte,omitempty"`
+	Name              *string                        `json:"name,omitempty"`
+	NameNot           *string                        `json:"name_not,omitempty"`
+	NameIn            []string                       `json:"name_in,omitempty"`
+	NameNotIn         []string                       `json:"name_not_in,omitempty"`
+	NameLt            *string                        `json:"name_lt,omitempty"`
+	NameLte           *string                        `json:"name_lte,omitempty"`
+	NameGt            *string                        `json:"name_gt,omitempty"`
+	NameGte           *string                        `json:"name_gte,omitempty"`
+	NameContains      *string                        `json:"name_contains,omitempty"`
+	NameNotContains   *string                        `json:"name_not_contains,omitempty"`
+	NameStartsWith    *string                        `json:"name_starts_with,omitempty"`
+	NameNotStartsWith *string                        `json:"name_not_starts_with,omitempty"`
+	NameEndsWith      *string                        `json:"name_ends_with,omitempty"`
+	NameNotEndsWith   *string                        `json:"name_not_ends_with,omitempty"`
+	Icon              *string                        `json:"icon,omitempty"`
+	IconNot           *string                        `json:"icon_not,omitempty"`
+	IconIn            []string                       `json:"icon_in,omitempty"`
+	IconNotIn         []string                       `json:"icon_not_in,omitempty"`
+	IconLt            *string                        `json:"icon_lt,omitempty"`
+	IconLte           *string                        `json:"icon_lte,omitempty"`
+	IconGt            *string                        `json:"icon_gt,omitempty"`
+	IconGte           *string                        `json:"icon_gte,omitempty"`
+	IconContains      *string                        `json:"icon_contains,omitempty"`
+	IconNotContains   *string                        `json:"icon_not_contains,omitempty"`
+	IconStartsWith    *string                        `json:"icon_starts_with,omitempty"`
+	IconNotStartsWith *string                        `json:"icon_not_starts_with,omitempty"`
+	IconEndsWith      *string                        `json:"icon_ends_with,omitempty"`
+	IconNotEndsWith   *string                        `json:"icon_not_ends_with,omitempty"`
+	CalculatorsEvery  *CalculatorWhereInput          `json:"calculators_every,omitempty"`
+	CalculatorsSome   *CalculatorWhereInput          `json:"calculators_some,omitempty"`
+	CalculatorsNone   *CalculatorWhereInput          `json:"calculators_none,omitempty"`
+	And               []CalculatorCategoryWhereInput `json:"AND,omitempty"`
+	Or                []CalculatorCategoryWhereInput `json:"OR,omitempty"`
+	Not               []CalculatorCategoryWhereInput `json:"NOT,omitempty"`
 }
 
 type UnitUpdateManyWithWhereNestedInput struct {
 	Where UnitScalarWhereInput    `json:"where"`
 	Data  UnitUpdateManyDataInput `json:"data"`
+}
+
+type InputSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                       `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                      `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                      `json:"updatedFields_contains_some,omitempty"`
+	Node                       *InputWhereInput              `json:"node,omitempty"`
+	And                        []InputSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []InputSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []InputSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
 type UnitUpdateManyDataInput struct {
@@ -1950,15 +1983,30 @@ type UnitUpdateManyDataInput struct {
 	Factor *float64 `json:"factor,omitempty"`
 }
 
+type UnitCategoryUpdateInput struct {
+	Name  *string                             `json:"name,omitempty"`
+	Units *UnitUpdateManyWithoutCategoryInput `json:"units,omitempty"`
+}
+
 type UnitCategoryUpsertNestedInput struct {
 	Update UnitCategoryUpdateDataInput `json:"update"`
 	Create UnitCategoryCreateInput     `json:"create"`
+}
+
+type CalculatorCategoryWhereUniqueInput struct {
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type InputUpsertWithWhereUniqueNestedInput struct {
 	Where  InputWhereUniqueInput `json:"where"`
 	Update InputUpdateDataInput  `json:"update"`
 	Create InputCreateInput      `json:"create"`
+}
+
+type UnitCategoryCreateOneWithoutUnitsInput struct {
+	Create  *UnitCategoryCreateWithoutUnitsInput `json:"create,omitempty"`
+	Connect *UnitCategoryWhereUniqueInput        `json:"connect,omitempty"`
 }
 
 type InputScalarWhereInput struct {
@@ -2039,190 +2087,26 @@ type InputScalarWhereInput struct {
 	Not                      []InputScalarWhereInput `json:"NOT,omitempty"`
 }
 
+type SelectUpdateInput struct {
+	Name    *string                   `json:"name,omitempty"`
+	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
+	Icon    *string                   `json:"icon,omitempty"`
+}
+
 type InputUpdateManyWithWhereNestedInput struct {
 	Where InputScalarWhereInput    `json:"where"`
 	Data  InputUpdateManyDataInput `json:"data"`
+}
+
+type CalculatorCategoryUpdateManyMutationInput struct {
+	Name *string `json:"name,omitempty"`
+	Icon *string `json:"icon,omitempty"`
 }
 
 type InputUpdateManyDataInput struct {
 	Name        *string `json:"name,omitempty"`
 	DefaultUnit *string `json:"defaultUnit,omitempty"`
 	Icon        *string `json:"icon,omitempty"`
-}
-
-type SelectUpdateManyInput struct {
-	Create     []SelectCreateInput                      `json:"create,omitempty"`
-	Update     []SelectUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
-	Upsert     []SelectUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
-	Delete     []SelectWhereUniqueInput                 `json:"delete,omitempty"`
-	Connect    []SelectWhereUniqueInput                 `json:"connect,omitempty"`
-	Set        []SelectWhereUniqueInput                 `json:"set,omitempty"`
-	Disconnect []SelectWhereUniqueInput                 `json:"disconnect,omitempty"`
-	DeleteMany []SelectScalarWhereInput                 `json:"deleteMany,omitempty"`
-	UpdateMany []SelectUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
-}
-
-type SelectUpdateWithWhereUniqueNestedInput struct {
-	Where SelectWhereUniqueInput `json:"where"`
-	Data  SelectUpdateDataInput  `json:"data"`
-}
-
-type SelectUpdateDataInput struct {
-	Name    *string                   `json:"name,omitempty"`
-	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
-	Icon    *string                   `json:"icon,omitempty"`
-}
-
-type SelectUpdateoptionsInput struct {
-	Set []string `json:"set,omitempty"`
-}
-
-type SelectUpsertWithWhereUniqueNestedInput struct {
-	Where  SelectWhereUniqueInput `json:"where"`
-	Update SelectUpdateDataInput  `json:"update"`
-	Create SelectCreateInput      `json:"create"`
-}
-
-type SelectScalarWhereInput struct {
-	ID                *string                  `json:"id,omitempty"`
-	IDNot             *string                  `json:"id_not,omitempty"`
-	IDIn              []string                 `json:"id_in,omitempty"`
-	IDNotIn           []string                 `json:"id_not_in,omitempty"`
-	IDLt              *string                  `json:"id_lt,omitempty"`
-	IDLte             *string                  `json:"id_lte,omitempty"`
-	IDGt              *string                  `json:"id_gt,omitempty"`
-	IDGte             *string                  `json:"id_gte,omitempty"`
-	IDContains        *string                  `json:"id_contains,omitempty"`
-	IDNotContains     *string                  `json:"id_not_contains,omitempty"`
-	IDStartsWith      *string                  `json:"id_starts_with,omitempty"`
-	IDNotStartsWith   *string                  `json:"id_not_starts_with,omitempty"`
-	IDEndsWith        *string                  `json:"id_ends_with,omitempty"`
-	IDNotEndsWith     *string                  `json:"id_not_ends_with,omitempty"`
-	CreatedAt         *string                  `json:"createdAt,omitempty"`
-	CreatedAtNot      *string                  `json:"createdAt_not,omitempty"`
-	CreatedAtIn       []string                 `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn    []string                 `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt       *string                  `json:"createdAt_lt,omitempty"`
-	CreatedAtLte      *string                  `json:"createdAt_lte,omitempty"`
-	CreatedAtGt       *string                  `json:"createdAt_gt,omitempty"`
-	CreatedAtGte      *string                  `json:"createdAt_gte,omitempty"`
-	UpdatedAt         *string                  `json:"updatedAt,omitempty"`
-	UpdatedAtNot      *string                  `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn       []string                 `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn    []string                 `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt       *string                  `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte      *string                  `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt       *string                  `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte      *string                  `json:"updatedAt_gte,omitempty"`
-	Name              *string                  `json:"name,omitempty"`
-	NameNot           *string                  `json:"name_not,omitempty"`
-	NameIn            []string                 `json:"name_in,omitempty"`
-	NameNotIn         []string                 `json:"name_not_in,omitempty"`
-	NameLt            *string                  `json:"name_lt,omitempty"`
-	NameLte           *string                  `json:"name_lte,omitempty"`
-	NameGt            *string                  `json:"name_gt,omitempty"`
-	NameGte           *string                  `json:"name_gte,omitempty"`
-	NameContains      *string                  `json:"name_contains,omitempty"`
-	NameNotContains   *string                  `json:"name_not_contains,omitempty"`
-	NameStartsWith    *string                  `json:"name_starts_with,omitempty"`
-	NameNotStartsWith *string                  `json:"name_not_starts_with,omitempty"`
-	NameEndsWith      *string                  `json:"name_ends_with,omitempty"`
-	NameNotEndsWith   *string                  `json:"name_not_ends_with,omitempty"`
-	Icon              *string                  `json:"icon,omitempty"`
-	IconNot           *string                  `json:"icon_not,omitempty"`
-	IconIn            []string                 `json:"icon_in,omitempty"`
-	IconNotIn         []string                 `json:"icon_not_in,omitempty"`
-	IconLt            *string                  `json:"icon_lt,omitempty"`
-	IconLte           *string                  `json:"icon_lte,omitempty"`
-	IconGt            *string                  `json:"icon_gt,omitempty"`
-	IconGte           *string                  `json:"icon_gte,omitempty"`
-	IconContains      *string                  `json:"icon_contains,omitempty"`
-	IconNotContains   *string                  `json:"icon_not_contains,omitempty"`
-	IconStartsWith    *string                  `json:"icon_starts_with,omitempty"`
-	IconNotStartsWith *string                  `json:"icon_not_starts_with,omitempty"`
-	IconEndsWith      *string                  `json:"icon_ends_with,omitempty"`
-	IconNotEndsWith   *string                  `json:"icon_not_ends_with,omitempty"`
-	And               []SelectScalarWhereInput `json:"AND,omitempty"`
-	Or                []SelectScalarWhereInput `json:"OR,omitempty"`
-	Not               []SelectScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type SelectUpdateManyWithWhereNestedInput struct {
-	Where SelectScalarWhereInput    `json:"where"`
-	Data  SelectUpdateManyDataInput `json:"data"`
-}
-
-type SelectUpdateManyDataInput struct {
-	Name    *string                   `json:"name,omitempty"`
-	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
-	Icon    *string                   `json:"icon,omitempty"`
-}
-
-type CalculatorUpdateManyMutationInput struct {
-	Key         *string `json:"key,omitempty"`
-	Name        *string `json:"name,omitempty"`
-	Description *string `json:"description,omitempty"`
-	DefaultUnit *string `json:"defaultUnit,omitempty"`
-}
-
-type CalculatorCategoryCreateInput struct {
-	ID          *string                                   `json:"id,omitempty"`
-	Name        string                                    `json:"name"`
-	Icon        *string                                   `json:"icon,omitempty"`
-	Calculators *CalculatorCreateManyWithoutCategoryInput `json:"calculators,omitempty"`
-}
-
-type CalculatorCreateManyWithoutCategoryInput struct {
-	Create  []CalculatorCreateWithoutCategoryInput `json:"create,omitempty"`
-	Connect []CalculatorWhereUniqueInput           `json:"connect,omitempty"`
-}
-
-type CalculatorCreateWithoutCategoryInput struct {
-	ID          *string                `json:"id,omitempty"`
-	Key         string                 `json:"key"`
-	Name        string                 `json:"name"`
-	Description string                 `json:"description"`
-	Inputs      *InputCreateManyInput  `json:"inputs,omitempty"`
-	Selects     *SelectCreateManyInput `json:"selects,omitempty"`
-	DefaultUnit string                 `json:"defaultUnit"`
-}
-
-type CalculatorCategoryUpdateInput struct {
-	Name        *string                                   `json:"name,omitempty"`
-	Icon        *string                                   `json:"icon,omitempty"`
-	Calculators *CalculatorUpdateManyWithoutCategoryInput `json:"calculators,omitempty"`
-}
-
-type CalculatorUpdateManyWithoutCategoryInput struct {
-	Create     []CalculatorCreateWithoutCategoryInput                `json:"create,omitempty"`
-	Delete     []CalculatorWhereUniqueInput                          `json:"delete,omitempty"`
-	Connect    []CalculatorWhereUniqueInput                          `json:"connect,omitempty"`
-	Set        []CalculatorWhereUniqueInput                          `json:"set,omitempty"`
-	Disconnect []CalculatorWhereUniqueInput                          `json:"disconnect,omitempty"`
-	Update     []CalculatorUpdateWithWhereUniqueWithoutCategoryInput `json:"update,omitempty"`
-	Upsert     []CalculatorUpsertWithWhereUniqueWithoutCategoryInput `json:"upsert,omitempty"`
-	DeleteMany []CalculatorScalarWhereInput                          `json:"deleteMany,omitempty"`
-	UpdateMany []CalculatorUpdateManyWithWhereNestedInput            `json:"updateMany,omitempty"`
-}
-
-type CalculatorUpdateWithWhereUniqueWithoutCategoryInput struct {
-	Where CalculatorWhereUniqueInput               `json:"where"`
-	Data  CalculatorUpdateWithoutCategoryDataInput `json:"data"`
-}
-
-type CalculatorUpdateWithoutCategoryDataInput struct {
-	Key         *string                `json:"key,omitempty"`
-	Name        *string                `json:"name,omitempty"`
-	Description *string                `json:"description,omitempty"`
-	Inputs      *InputUpdateManyInput  `json:"inputs,omitempty"`
-	Selects     *SelectUpdateManyInput `json:"selects,omitempty"`
-	DefaultUnit *string                `json:"defaultUnit,omitempty"`
-}
-
-type CalculatorUpsertWithWhereUniqueWithoutCategoryInput struct {
-	Where  CalculatorWhereUniqueInput               `json:"where"`
-	Update CalculatorUpdateWithoutCategoryDataInput `json:"update"`
-	Create CalculatorCreateWithoutCategoryInput     `json:"create"`
 }
 
 type CalculatorScalarWhereInput struct {
@@ -2317,135 +2201,37 @@ type CalculatorScalarWhereInput struct {
 	Not                      []CalculatorScalarWhereInput `json:"NOT,omitempty"`
 }
 
-type CalculatorUpdateManyWithWhereNestedInput struct {
-	Where CalculatorScalarWhereInput    `json:"where"`
-	Data  CalculatorUpdateManyDataInput `json:"data"`
+type SelectUpdateManyInput struct {
+	Create     []SelectCreateInput                      `json:"create,omitempty"`
+	Update     []SelectUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []SelectUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []SelectWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []SelectWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []SelectWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []SelectWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []SelectScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []SelectUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
 }
 
-type CalculatorUpdateManyDataInput struct {
-	Key         *string `json:"key,omitempty"`
-	Name        *string `json:"name,omitempty"`
-	Description *string `json:"description,omitempty"`
-	DefaultUnit *string `json:"defaultUnit,omitempty"`
+type CalculatorUpdateWithWhereUniqueWithoutCategoryInput struct {
+	Where CalculatorWhereUniqueInput               `json:"where"`
+	Data  CalculatorUpdateWithoutCategoryDataInput `json:"data"`
 }
 
-type CalculatorCategoryUpdateManyMutationInput struct {
-	Name *string `json:"name,omitempty"`
-	Icon *string `json:"icon,omitempty"`
+type SelectUpdateWithWhereUniqueNestedInput struct {
+	Where SelectWhereUniqueInput `json:"where"`
+	Data  SelectUpdateDataInput  `json:"data"`
 }
 
-type InputUpdateInput struct {
-	Name        *string                             `json:"name,omitempty"`
-	Category    *UnitCategoryUpdateOneRequiredInput `json:"category,omitempty"`
-	DefaultUnit *string                             `json:"defaultUnit,omitempty"`
-	Icon        *string                             `json:"icon,omitempty"`
+type CalculatorCategoryCreateOneWithoutCalculatorsInput struct {
+	Create  *CalculatorCategoryCreateWithoutCalculatorsInput `json:"create,omitempty"`
+	Connect *CalculatorCategoryWhereUniqueInput              `json:"connect,omitempty"`
 }
 
-type InputUpdateManyMutationInput struct {
-	Name        *string `json:"name,omitempty"`
-	DefaultUnit *string `json:"defaultUnit,omitempty"`
-	Icon        *string `json:"icon,omitempty"`
-}
-
-type SelectUpdateInput struct {
+type SelectUpdateDataInput struct {
 	Name    *string                   `json:"name,omitempty"`
 	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
 	Icon    *string                   `json:"icon,omitempty"`
-}
-
-type SelectUpdateManyMutationInput struct {
-	Name    *string                   `json:"name,omitempty"`
-	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
-	Icon    *string                   `json:"icon,omitempty"`
-}
-
-type UnitCreateInput struct {
-	ID       *string                                `json:"id,omitempty"`
-	Name     string                                 `json:"name"`
-	Symbol   string                                 `json:"symbol"`
-	Category UnitCategoryCreateOneWithoutUnitsInput `json:"category"`
-	Factor   float64                                `json:"factor"`
-}
-
-type UnitCategoryCreateOneWithoutUnitsInput struct {
-	Create  *UnitCategoryCreateWithoutUnitsInput `json:"create,omitempty"`
-	Connect *UnitCategoryWhereUniqueInput        `json:"connect,omitempty"`
-}
-
-type UnitCategoryCreateWithoutUnitsInput struct {
-	ID   *string `json:"id,omitempty"`
-	Name string  `json:"name"`
-}
-
-type UnitUpdateInput struct {
-	Name     *string                                         `json:"name,omitempty"`
-	Symbol   *string                                         `json:"symbol,omitempty"`
-	Category *UnitCategoryUpdateOneRequiredWithoutUnitsInput `json:"category,omitempty"`
-	Factor   *float64                                        `json:"factor,omitempty"`
-}
-
-type UnitCategoryUpdateOneRequiredWithoutUnitsInput struct {
-	Create  *UnitCategoryCreateWithoutUnitsInput     `json:"create,omitempty"`
-	Update  *UnitCategoryUpdateWithoutUnitsDataInput `json:"update,omitempty"`
-	Upsert  *UnitCategoryUpsertWithoutUnitsInput     `json:"upsert,omitempty"`
-	Connect *UnitCategoryWhereUniqueInput            `json:"connect,omitempty"`
-}
-
-type UnitCategoryUpdateWithoutUnitsDataInput struct {
-	Name *string `json:"name,omitempty"`
-}
-
-type UnitCategoryUpsertWithoutUnitsInput struct {
-	Update UnitCategoryUpdateWithoutUnitsDataInput `json:"update"`
-	Create UnitCategoryCreateWithoutUnitsInput     `json:"create"`
-}
-
-type UnitUpdateManyMutationInput struct {
-	Name   *string  `json:"name,omitempty"`
-	Symbol *string  `json:"symbol,omitempty"`
-	Factor *float64 `json:"factor,omitempty"`
-}
-
-type UnitCategoryUpdateInput struct {
-	Name  *string                             `json:"name,omitempty"`
-	Units *UnitUpdateManyWithoutCategoryInput `json:"units,omitempty"`
-}
-
-type UnitCategoryUpdateManyMutationInput struct {
-	Name *string `json:"name,omitempty"`
-}
-
-type CalculatorSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
-	Node                       *CalculatorWhereInput              `json:"node,omitempty"`
-	And                        []CalculatorSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []CalculatorSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []CalculatorSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type CalculatorCategorySubscriptionWhereInput struct {
-	MutationIn                 []MutationType                             `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                                    `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                                   `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                                   `json:"updatedFields_contains_some,omitempty"`
-	Node                       *CalculatorCategoryWhereInput              `json:"node,omitempty"`
-	And                        []CalculatorCategorySubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []CalculatorCategorySubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []CalculatorCategorySubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type InputSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                       `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                      `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                      `json:"updatedFields_contains_some,omitempty"`
-	Node                       *InputWhereInput              `json:"node,omitempty"`
-	And                        []InputSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []InputSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []InputSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
 type SelectSubscriptionWhereInput struct {
@@ -2459,26 +2245,1907 @@ type SelectSubscriptionWhereInput struct {
 	Not                        []SelectSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type UnitSubscriptionWhereInput struct {
-	MutationIn                 []MutationType               `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                      `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                     `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                     `json:"updatedFields_contains_some,omitempty"`
-	Node                       *UnitWhereInput              `json:"node,omitempty"`
-	And                        []UnitSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []UnitSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []UnitSubscriptionWhereInput `json:"NOT,omitempty"`
+type SelectUpdateoptionsInput struct {
+	Set []string `json:"set,omitempty"`
 }
 
-type UnitCategorySubscriptionWhereInput struct {
-	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
-	Node                       *UnitCategoryWhereInput              `json:"node,omitempty"`
-	And                        []UnitCategorySubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []UnitCategorySubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []UnitCategorySubscriptionWhereInput `json:"NOT,omitempty"`
+type UnitCategoryUpsertWithoutUnitsInput struct {
+	Update UnitCategoryUpdateWithoutUnitsDataInput `json:"update"`
+	Create UnitCategoryCreateWithoutUnitsInput     `json:"create"`
+}
+
+type SelectUpsertWithWhereUniqueNestedInput struct {
+	Where  SelectWhereUniqueInput `json:"where"`
+	Update SelectUpdateDataInput  `json:"update"`
+	Create SelectCreateInput      `json:"create"`
+}
+
+type UnitCreateInput struct {
+	ID       *string                                `json:"id,omitempty"`
+	Name     string                                 `json:"name"`
+	Symbol   string                                 `json:"symbol"`
+	Category UnitCategoryCreateOneWithoutUnitsInput `json:"category"`
+	Factor   float64                                `json:"factor"`
+}
+
+type SelectScalarWhereInput struct {
+	ID                *string                  `json:"id,omitempty"`
+	IDNot             *string                  `json:"id_not,omitempty"`
+	IDIn              []string                 `json:"id_in,omitempty"`
+	IDNotIn           []string                 `json:"id_not_in,omitempty"`
+	IDLt              *string                  `json:"id_lt,omitempty"`
+	IDLte             *string                  `json:"id_lte,omitempty"`
+	IDGt              *string                  `json:"id_gt,omitempty"`
+	IDGte             *string                  `json:"id_gte,omitempty"`
+	IDContains        *string                  `json:"id_contains,omitempty"`
+	IDNotContains     *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith      *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith   *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith        *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith     *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt         *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot      *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn       []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn    []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt       *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte      *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt       *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte      *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt         *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot      *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn       []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn    []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt       *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte      *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt       *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte      *string                  `json:"updatedAt_gte,omitempty"`
+	Name              *string                  `json:"name,omitempty"`
+	NameNot           *string                  `json:"name_not,omitempty"`
+	NameIn            []string                 `json:"name_in,omitempty"`
+	NameNotIn         []string                 `json:"name_not_in,omitempty"`
+	NameLt            *string                  `json:"name_lt,omitempty"`
+	NameLte           *string                  `json:"name_lte,omitempty"`
+	NameGt            *string                  `json:"name_gt,omitempty"`
+	NameGte           *string                  `json:"name_gte,omitempty"`
+	NameContains      *string                  `json:"name_contains,omitempty"`
+	NameNotContains   *string                  `json:"name_not_contains,omitempty"`
+	NameStartsWith    *string                  `json:"name_starts_with,omitempty"`
+	NameNotStartsWith *string                  `json:"name_not_starts_with,omitempty"`
+	NameEndsWith      *string                  `json:"name_ends_with,omitempty"`
+	NameNotEndsWith   *string                  `json:"name_not_ends_with,omitempty"`
+	Icon              *string                  `json:"icon,omitempty"`
+	IconNot           *string                  `json:"icon_not,omitempty"`
+	IconIn            []string                 `json:"icon_in,omitempty"`
+	IconNotIn         []string                 `json:"icon_not_in,omitempty"`
+	IconLt            *string                  `json:"icon_lt,omitempty"`
+	IconLte           *string                  `json:"icon_lte,omitempty"`
+	IconGt            *string                  `json:"icon_gt,omitempty"`
+	IconGte           *string                  `json:"icon_gte,omitempty"`
+	IconContains      *string                  `json:"icon_contains,omitempty"`
+	IconNotContains   *string                  `json:"icon_not_contains,omitempty"`
+	IconStartsWith    *string                  `json:"icon_starts_with,omitempty"`
+	IconNotStartsWith *string                  `json:"icon_not_starts_with,omitempty"`
+	IconEndsWith      *string                  `json:"icon_ends_with,omitempty"`
+	IconNotEndsWith   *string                  `json:"icon_not_ends_with,omitempty"`
+	And               []SelectScalarWhereInput `json:"AND,omitempty"`
+	Or                []SelectScalarWhereInput `json:"OR,omitempty"`
+	Not               []SelectScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type CalculatorUpdateManyDataInput struct {
+	Key         *string `json:"key,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DefaultUnit *string `json:"defaultUnit,omitempty"`
+}
+
+type SelectUpdateManyWithWhereNestedInput struct {
+	Where SelectScalarWhereInput    `json:"where"`
+	Data  SelectUpdateManyDataInput `json:"data"`
+}
+
+type CalculatorSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
+	Node                       *CalculatorWhereInput              `json:"node,omitempty"`
+	And                        []CalculatorSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []CalculatorSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []CalculatorSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type CalculatorCreateManyWithoutCategoryInput struct {
+	Create  []CalculatorCreateWithoutCategoryInput `json:"create,omitempty"`
+	Connect []CalculatorWhereUniqueInput           `json:"connect,omitempty"`
+}
+
+type CalculatorCreateWithoutCategoryInput struct {
+	ID          *string                `json:"id,omitempty"`
+	Key         string                 `json:"key"`
+	Name        string                 `json:"name"`
+	Description string                 `json:"description"`
+	Inputs      *InputCreateManyInput  `json:"inputs,omitempty"`
+	Selects     *SelectCreateManyInput `json:"selects,omitempty"`
+	DefaultUnit string                 `json:"defaultUnit"`
+}
+
+type CalculatorUpdateManyMutationInput struct {
+	Key         *string `json:"key,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DefaultUnit *string `json:"defaultUnit,omitempty"`
+}
+
+type SelectUpdateManyDataInput struct {
+	Name    *string                   `json:"name,omitempty"`
+	Options *SelectUpdateoptionsInput `json:"options,omitempty"`
+	Icon    *string                   `json:"icon,omitempty"`
+}
+
+type UnitUpdateInput struct {
+	Name     *string                                         `json:"name,omitempty"`
+	Symbol   *string                                         `json:"symbol,omitempty"`
+	Category *UnitCategoryUpdateOneRequiredWithoutUnitsInput `json:"category,omitempty"`
+	Factor   *float64                                        `json:"factor,omitempty"`
+}
+
+type InputWhereInput struct {
+	ID                       *string                 `json:"id,omitempty"`
+	IDNot                    *string                 `json:"id_not,omitempty"`
+	IDIn                     []string                `json:"id_in,omitempty"`
+	IDNotIn                  []string                `json:"id_not_in,omitempty"`
+	IDLt                     *string                 `json:"id_lt,omitempty"`
+	IDLte                    *string                 `json:"id_lte,omitempty"`
+	IDGt                     *string                 `json:"id_gt,omitempty"`
+	IDGte                    *string                 `json:"id_gte,omitempty"`
+	IDContains               *string                 `json:"id_contains,omitempty"`
+	IDNotContains            *string                 `json:"id_not_contains,omitempty"`
+	IDStartsWith             *string                 `json:"id_starts_with,omitempty"`
+	IDNotStartsWith          *string                 `json:"id_not_starts_with,omitempty"`
+	IDEndsWith               *string                 `json:"id_ends_with,omitempty"`
+	IDNotEndsWith            *string                 `json:"id_not_ends_with,omitempty"`
+	CreatedAt                *string                 `json:"createdAt,omitempty"`
+	CreatedAtNot             *string                 `json:"createdAt_not,omitempty"`
+	CreatedAtIn              []string                `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn           []string                `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt              *string                 `json:"createdAt_lt,omitempty"`
+	CreatedAtLte             *string                 `json:"createdAt_lte,omitempty"`
+	CreatedAtGt              *string                 `json:"createdAt_gt,omitempty"`
+	CreatedAtGte             *string                 `json:"createdAt_gte,omitempty"`
+	UpdatedAt                *string                 `json:"updatedAt,omitempty"`
+	UpdatedAtNot             *string                 `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn              []string                `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn           []string                `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt              *string                 `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte             *string                 `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt              *string                 `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte             *string                 `json:"updatedAt_gte,omitempty"`
+	Name                     *string                 `json:"name,omitempty"`
+	NameNot                  *string                 `json:"name_not,omitempty"`
+	NameIn                   []string                `json:"name_in,omitempty"`
+	NameNotIn                []string                `json:"name_not_in,omitempty"`
+	NameLt                   *string                 `json:"name_lt,omitempty"`
+	NameLte                  *string                 `json:"name_lte,omitempty"`
+	NameGt                   *string                 `json:"name_gt,omitempty"`
+	NameGte                  *string                 `json:"name_gte,omitempty"`
+	NameContains             *string                 `json:"name_contains,omitempty"`
+	NameNotContains          *string                 `json:"name_not_contains,omitempty"`
+	NameStartsWith           *string                 `json:"name_starts_with,omitempty"`
+	NameNotStartsWith        *string                 `json:"name_not_starts_with,omitempty"`
+	NameEndsWith             *string                 `json:"name_ends_with,omitempty"`
+	NameNotEndsWith          *string                 `json:"name_not_ends_with,omitempty"`
+	Category                 *UnitCategoryWhereInput `json:"category,omitempty"`
+	DefaultUnit              *string                 `json:"defaultUnit,omitempty"`
+	DefaultUnitNot           *string                 `json:"defaultUnit_not,omitempty"`
+	DefaultUnitIn            []string                `json:"defaultUnit_in,omitempty"`
+	DefaultUnitNotIn         []string                `json:"defaultUnit_not_in,omitempty"`
+	DefaultUnitLt            *string                 `json:"defaultUnit_lt,omitempty"`
+	DefaultUnitLte           *string                 `json:"defaultUnit_lte,omitempty"`
+	DefaultUnitGt            *string                 `json:"defaultUnit_gt,omitempty"`
+	DefaultUnitGte           *string                 `json:"defaultUnit_gte,omitempty"`
+	DefaultUnitContains      *string                 `json:"defaultUnit_contains,omitempty"`
+	DefaultUnitNotContains   *string                 `json:"defaultUnit_not_contains,omitempty"`
+	DefaultUnitStartsWith    *string                 `json:"defaultUnit_starts_with,omitempty"`
+	DefaultUnitNotStartsWith *string                 `json:"defaultUnit_not_starts_with,omitempty"`
+	DefaultUnitEndsWith      *string                 `json:"defaultUnit_ends_with,omitempty"`
+	DefaultUnitNotEndsWith   *string                 `json:"defaultUnit_not_ends_with,omitempty"`
+	Icon                     *string                 `json:"icon,omitempty"`
+	IconNot                  *string                 `json:"icon_not,omitempty"`
+	IconIn                   []string                `json:"icon_in,omitempty"`
+	IconNotIn                []string                `json:"icon_not_in,omitempty"`
+	IconLt                   *string                 `json:"icon_lt,omitempty"`
+	IconLte                  *string                 `json:"icon_lte,omitempty"`
+	IconGt                   *string                 `json:"icon_gt,omitempty"`
+	IconGte                  *string                 `json:"icon_gte,omitempty"`
+	IconContains             *string                 `json:"icon_contains,omitempty"`
+	IconNotContains          *string                 `json:"icon_not_contains,omitempty"`
+	IconStartsWith           *string                 `json:"icon_starts_with,omitempty"`
+	IconNotStartsWith        *string                 `json:"icon_not_starts_with,omitempty"`
+	IconEndsWith             *string                 `json:"icon_ends_with,omitempty"`
+	IconNotEndsWith          *string                 `json:"icon_not_ends_with,omitempty"`
+	And                      []InputWhereInput       `json:"AND,omitempty"`
+	Or                       []InputWhereInput       `json:"OR,omitempty"`
+	Not                      []InputWhereInput       `json:"NOT,omitempty"`
+}
+
+type CalculatorUpsertWithWhereUniqueWithoutCategoryInput struct {
+	Where  CalculatorWhereUniqueInput               `json:"where"`
+	Update CalculatorUpdateWithoutCategoryDataInput `json:"update"`
+	Create CalculatorCreateWithoutCategoryInput     `json:"create"`
+}
+
+type InputUpdateManyMutationInput struct {
+	Name        *string `json:"name,omitempty"`
+	DefaultUnit *string `json:"defaultUnit,omitempty"`
+	Icon        *string `json:"icon,omitempty"`
+}
+
+type UnitCategoryPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitCategoryPreviousValuesExec) Exec(ctx context.Context) (*UnitCategoryPreviousValues, error) {
+	var v UnitCategoryPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitCategoryPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitCategoryPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitCategoryPreviousValuesExecArray) Exec(ctx context.Context) ([]UnitCategoryPreviousValues, error) {
+	var v []UnitCategoryPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitCategoryPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name"}
+
+type UnitCategoryPreviousValues struct {
+	ID        string `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Name      string `json:"name"`
+}
+
+type InputExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *InputExec) Category() *UnitCategoryExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "UnitCategory"},
+		"category",
+		[]string{"id", "createdAt", "updatedAt", "name"})
+
+	return &UnitCategoryExec{ret}
+}
+
+func (instance InputExec) Exec(ctx context.Context) (*Input, error) {
+	var v Input
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance InputExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type InputExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance InputExecArray) Exec(ctx context.Context) ([]Input, error) {
+	var v []Input
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var InputFields = []string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"}
+
+type Input struct {
+	ID          string  `json:"id"`
+	CreatedAt   string  `json:"createdAt"`
+	UpdatedAt   string  `json:"updatedAt"`
+	Name        string  `json:"name"`
+	DefaultUnit string  `json:"defaultUnit"`
+	Icon        *string `json:"icon,omitempty"`
+}
+
+type CalculatorEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CalculatorEdgeExec) Node() *CalculatorExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Calculator"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
+
+	return &CalculatorExec{ret}
+}
+
+func (instance CalculatorEdgeExec) Exec(ctx context.Context) (*CalculatorEdge, error) {
+	var v CalculatorEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorEdgeExecArray) Exec(ctx context.Context) ([]CalculatorEdge, error) {
+	var v []CalculatorEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorEdgeFields = []string{"cursor"}
+
+type CalculatorEdge struct {
+	Node   Calculator `json:"node"`
+	Cursor string     `json:"cursor"`
+}
+
+type UnitCategoryConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *UnitCategoryConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *UnitCategoryConnectionExec) Edges() *UnitCategoryEdgeExecArray {
+	edges := instance.exec.Client.GetMany(
+		instance.exec,
+		nil,
+		[3]string{"UnitCategoryWhereInput", "UnitCategoryOrderByInput", "UnitCategoryEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	nodes := edges.Client.GetOne(
+		edges,
+		nil,
+		[2]string{"", "UnitCategory"},
+		"node",
+		UnitCategoryFields)
+
+	return &UnitCategoryEdgeExecArray{nodes}
+}
+
+func (instance *UnitCategoryConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateUnitCategory"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return &v, err
+}
+
+func (instance UnitCategoryConnectionExec) Exec(ctx context.Context) (*UnitCategoryConnection, error) {
+	edges, err := instance.Edges().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	pageInfo, err := instance.PageInfo().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &UnitCategoryConnection{
+		Edges:    edges,
+		PageInfo: *pageInfo,
+	}, nil
+}
+
+func (instance UnitCategoryConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitCategoryConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitCategoryConnectionExecArray) Exec(ctx context.Context) ([]UnitCategoryConnection, error) {
+	var v []UnitCategoryConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitCategoryConnectionFields = []string{}
+
+type UnitCategoryConnection struct {
+	PageInfo PageInfo           `json:"pageInfo"`
+	Edges    []UnitCategoryEdge `json:"edges"`
+}
+
+type PageInfoExec struct {
+	exec *prisma.Exec
+}
+
+func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
+	var v PageInfo
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance PageInfoExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type PageInfoExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance PageInfoExecArray) Exec(ctx context.Context) ([]PageInfo, error) {
+	var v []PageInfo
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var PageInfoFields = []string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"}
+
+type PageInfo struct {
+	HasNextPage     bool    `json:"hasNextPage"`
+	HasPreviousPage bool    `json:"hasPreviousPage"`
+	StartCursor     *string `json:"startCursor,omitempty"`
+	EndCursor       *string `json:"endCursor,omitempty"`
+}
+
+type CalculatorConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CalculatorConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *CalculatorConnectionExec) Edges() *CalculatorEdgeExecArray {
+	edges := instance.exec.Client.GetMany(
+		instance.exec,
+		nil,
+		[3]string{"CalculatorWhereInput", "CalculatorOrderByInput", "CalculatorEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	nodes := edges.Client.GetOne(
+		edges,
+		nil,
+		[2]string{"", "Calculator"},
+		"node",
+		CalculatorFields)
+
+	return &CalculatorEdgeExecArray{nodes}
+}
+
+func (instance *CalculatorConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateCalculator"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return &v, err
+}
+
+func (instance CalculatorConnectionExec) Exec(ctx context.Context) (*CalculatorConnection, error) {
+	edges, err := instance.Edges().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	pageInfo, err := instance.PageInfo().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &CalculatorConnection{
+		Edges:    edges,
+		PageInfo: *pageInfo,
+	}, nil
+}
+
+func (instance CalculatorConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorConnectionExecArray) Exec(ctx context.Context) ([]CalculatorConnection, error) {
+	var v []CalculatorConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorConnectionFields = []string{}
+
+type CalculatorConnection struct {
+	PageInfo PageInfo         `json:"pageInfo"`
+	Edges    []CalculatorEdge `json:"edges"`
+}
+
+type UnitConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *UnitConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *UnitConnectionExec) Edges() *UnitEdgeExecArray {
+	edges := instance.exec.Client.GetMany(
+		instance.exec,
+		nil,
+		[3]string{"UnitWhereInput", "UnitOrderByInput", "UnitEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	nodes := edges.Client.GetOne(
+		edges,
+		nil,
+		[2]string{"", "Unit"},
+		"node",
+		UnitFields)
+
+	return &UnitEdgeExecArray{nodes}
+}
+
+func (instance *UnitConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateUnit"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return &v, err
+}
+
+func (instance UnitConnectionExec) Exec(ctx context.Context) (*UnitConnection, error) {
+	edges, err := instance.Edges().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	pageInfo, err := instance.PageInfo().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &UnitConnection{
+		Edges:    edges,
+		PageInfo: *pageInfo,
+	}, nil
+}
+
+func (instance UnitConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitConnectionExecArray) Exec(ctx context.Context) ([]UnitConnection, error) {
+	var v []UnitConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitConnectionFields = []string{}
+
+type UnitConnection struct {
+	PageInfo PageInfo   `json:"pageInfo"`
+	Edges    []UnitEdge `json:"edges"`
+}
+
+type SelectExec struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectExec) Exec(ctx context.Context) (*Select, error) {
+	var v Select
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance SelectExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type SelectExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectExecArray) Exec(ctx context.Context) ([]Select, error) {
+	var v []Select
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var SelectFields = []string{"id", "createdAt", "updatedAt", "name", "options", "icon"}
+
+type Select struct {
+	ID        string   `json:"id"`
+	CreatedAt string   `json:"createdAt"`
+	UpdatedAt string   `json:"updatedAt"`
+	Name      string   `json:"name"`
+	Options   []string `json:"options,omitempty"`
+	Icon      *string  `json:"icon,omitempty"`
+}
+
+type SelectEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *SelectEdgeExec) Node() *SelectExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Select"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "options", "icon"})
+
+	return &SelectExec{ret}
+}
+
+func (instance SelectEdgeExec) Exec(ctx context.Context) (*SelectEdge, error) {
+	var v SelectEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance SelectEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type SelectEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectEdgeExecArray) Exec(ctx context.Context) ([]SelectEdge, error) {
+	var v []SelectEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var SelectEdgeFields = []string{"cursor"}
+
+type SelectEdge struct {
+	Node   Select `json:"node"`
+	Cursor string `json:"cursor"`
+}
+
+type UnitSubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *UnitSubscriptionPayloadExec) Node() *UnitExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Unit"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
+
+	return &UnitExec{ret}
+}
+
+func (instance *UnitSubscriptionPayloadExec) PreviousValues() *UnitPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "UnitPreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
+
+	return &UnitPreviousValuesExec{ret}
+}
+
+func (instance UnitSubscriptionPayloadExec) Exec(ctx context.Context) (*UnitSubscriptionPayload, error) {
+	var v UnitSubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitSubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]UnitSubscriptionPayload, error) {
+	var v []UnitSubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
+
+type UnitSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	Node          *Unit        `json:"node,omitempty"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type CalculatorSubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CalculatorSubscriptionPayloadExec) Node() *CalculatorExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Calculator"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
+
+	return &CalculatorExec{ret}
+}
+
+func (instance *CalculatorSubscriptionPayloadExec) PreviousValues() *CalculatorPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "CalculatorPreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
+
+	return &CalculatorPreviousValuesExec{ret}
+}
+
+func (instance CalculatorSubscriptionPayloadExec) Exec(ctx context.Context) (*CalculatorSubscriptionPayload, error) {
+	var v CalculatorSubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorSubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]CalculatorSubscriptionPayload, error) {
+	var v []CalculatorSubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
+
+type CalculatorSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	Node          *Calculator  `json:"node,omitempty"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type InputConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *InputConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *InputConnectionExec) Edges() *InputEdgeExecArray {
+	edges := instance.exec.Client.GetMany(
+		instance.exec,
+		nil,
+		[3]string{"InputWhereInput", "InputOrderByInput", "InputEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	nodes := edges.Client.GetOne(
+		edges,
+		nil,
+		[2]string{"", "Input"},
+		"node",
+		InputFields)
+
+	return &InputEdgeExecArray{nodes}
+}
+
+func (instance *InputConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateInput"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return &v, err
+}
+
+func (instance InputConnectionExec) Exec(ctx context.Context) (*InputConnection, error) {
+	edges, err := instance.Edges().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	pageInfo, err := instance.PageInfo().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &InputConnection{
+		Edges:    edges,
+		PageInfo: *pageInfo,
+	}, nil
+}
+
+func (instance InputConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type InputConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance InputConnectionExecArray) Exec(ctx context.Context) ([]InputConnection, error) {
+	var v []InputConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var InputConnectionFields = []string{}
+
+type InputConnection struct {
+	PageInfo PageInfo    `json:"pageInfo"`
+	Edges    []InputEdge `json:"edges"`
+}
+
+type CalculatorPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorPreviousValuesExec) Exec(ctx context.Context) (*CalculatorPreviousValues, error) {
+	var v CalculatorPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorPreviousValuesExecArray) Exec(ctx context.Context) ([]CalculatorPreviousValues, error) {
+	var v []CalculatorPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"}
+
+type CalculatorPreviousValues struct {
+	ID          string `json:"id"`
+	CreatedAt   string `json:"createdAt"`
+	UpdatedAt   string `json:"updatedAt"`
+	Key         string `json:"key"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	DefaultUnit string `json:"defaultUnit"`
+}
+
+type CalculatorCategoryEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CalculatorCategoryEdgeExec) Node() *CalculatorCategoryExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "CalculatorCategory"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "icon"})
+
+	return &CalculatorCategoryExec{ret}
+}
+
+func (instance CalculatorCategoryEdgeExec) Exec(ctx context.Context) (*CalculatorCategoryEdge, error) {
+	var v CalculatorCategoryEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorCategoryEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorCategoryEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorCategoryEdgeExecArray) Exec(ctx context.Context) ([]CalculatorCategoryEdge, error) {
+	var v []CalculatorCategoryEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorCategoryEdgeFields = []string{"cursor"}
+
+type CalculatorCategoryEdge struct {
+	Node   CalculatorCategory `json:"node"`
+	Cursor string             `json:"cursor"`
+}
+
+type CalculatorCategoryExec struct {
+	exec *prisma.Exec
+}
+
+type CalculatorsParamsExec struct {
+	Where   *CalculatorWhereInput
+	OrderBy *CalculatorOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *CalculatorCategoryExec) Calculators(params *CalculatorsParamsExec) *CalculatorExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"CalculatorWhereInput", "CalculatorOrderByInput", "Calculator"},
+		"calculators",
+		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
+
+	return &CalculatorExecArray{ret}
+}
+
+func (instance CalculatorCategoryExec) Exec(ctx context.Context) (*CalculatorCategory, error) {
+	var v CalculatorCategory
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorCategoryExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorCategoryExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorCategoryExecArray) Exec(ctx context.Context) ([]CalculatorCategory, error) {
+	var v []CalculatorCategory
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorCategoryFields = []string{"id", "createdAt", "updatedAt", "name", "icon"}
+
+type CalculatorCategory struct {
+	ID        string  `json:"id"`
+	CreatedAt string  `json:"createdAt"`
+	UpdatedAt string  `json:"updatedAt"`
+	Name      string  `json:"name"`
+	Icon      *string `json:"icon,omitempty"`
+}
+
+type UnitPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitPreviousValuesExec) Exec(ctx context.Context) (*UnitPreviousValues, error) {
+	var v UnitPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitPreviousValuesExecArray) Exec(ctx context.Context) ([]UnitPreviousValues, error) {
+	var v []UnitPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"}
+
+type UnitPreviousValues struct {
+	ID        string  `json:"id"`
+	CreatedAt string  `json:"createdAt"`
+	UpdatedAt string  `json:"updatedAt"`
+	Name      string  `json:"name"`
+	Symbol    string  `json:"symbol"`
+	Factor    float64 `json:"factor"`
+}
+
+type CalculatorCategorySubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CalculatorCategorySubscriptionPayloadExec) Node() *CalculatorCategoryExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "CalculatorCategory"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "icon"})
+
+	return &CalculatorCategoryExec{ret}
+}
+
+func (instance *CalculatorCategorySubscriptionPayloadExec) PreviousValues() *CalculatorCategoryPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "CalculatorCategoryPreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "name", "icon"})
+
+	return &CalculatorCategoryPreviousValuesExec{ret}
+}
+
+func (instance CalculatorCategorySubscriptionPayloadExec) Exec(ctx context.Context) (*CalculatorCategorySubscriptionPayload, error) {
+	var v CalculatorCategorySubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorCategorySubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorCategorySubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorCategorySubscriptionPayloadExecArray) Exec(ctx context.Context) ([]CalculatorCategorySubscriptionPayload, error) {
+	var v []CalculatorCategorySubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorCategorySubscriptionPayloadFields = []string{"mutation", "updatedFields"}
+
+type CalculatorCategorySubscriptionPayload struct {
+	Mutation      MutationType        `json:"mutation"`
+	Node          *CalculatorCategory `json:"node,omitempty"`
+	UpdatedFields []string            `json:"updatedFields,omitempty"`
+}
+
+type UnitCategoryEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *UnitCategoryEdgeExec) Node() *UnitCategoryExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "UnitCategory"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name"})
+
+	return &UnitCategoryExec{ret}
+}
+
+func (instance UnitCategoryEdgeExec) Exec(ctx context.Context) (*UnitCategoryEdge, error) {
+	var v UnitCategoryEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitCategoryEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitCategoryEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitCategoryEdgeExecArray) Exec(ctx context.Context) ([]UnitCategoryEdge, error) {
+	var v []UnitCategoryEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitCategoryEdgeFields = []string{"cursor"}
+
+type UnitCategoryEdge struct {
+	Node   UnitCategory `json:"node"`
+	Cursor string       `json:"cursor"`
+}
+
+type CalculatorCategoryPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorCategoryPreviousValuesExec) Exec(ctx context.Context) (*CalculatorCategoryPreviousValues, error) {
+	var v CalculatorCategoryPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CalculatorCategoryPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorCategoryPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorCategoryPreviousValuesExecArray) Exec(ctx context.Context) ([]CalculatorCategoryPreviousValues, error) {
+	var v []CalculatorCategoryPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorCategoryPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "icon"}
+
+type CalculatorCategoryPreviousValues struct {
+	ID        string  `json:"id"`
+	CreatedAt string  `json:"createdAt"`
+	UpdatedAt string  `json:"updatedAt"`
+	Name      string  `json:"name"`
+	Icon      *string `json:"icon,omitempty"`
+}
+
+type UnitEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *UnitEdgeExec) Node() *UnitExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Unit"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
+
+	return &UnitExec{ret}
+}
+
+func (instance UnitEdgeExec) Exec(ctx context.Context) (*UnitEdge, error) {
+	var v UnitEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitEdgeExecArray) Exec(ctx context.Context) ([]UnitEdge, error) {
+	var v []UnitEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitEdgeFields = []string{"cursor"}
+
+type UnitEdge struct {
+	Node   Unit   `json:"node"`
+	Cursor string `json:"cursor"`
+}
+
+type UnitExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *UnitExec) Category() *UnitCategoryExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "UnitCategory"},
+		"category",
+		[]string{"id", "createdAt", "updatedAt", "name"})
+
+	return &UnitCategoryExec{ret}
+}
+
+func (instance UnitExec) Exec(ctx context.Context) (*Unit, error) {
+	var v Unit
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitExecArray) Exec(ctx context.Context) ([]Unit, error) {
+	var v []Unit
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitFields = []string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"}
+
+type Unit struct {
+	ID        string  `json:"id"`
+	CreatedAt string  `json:"createdAt"`
+	UpdatedAt string  `json:"updatedAt"`
+	Name      string  `json:"name"`
+	Symbol    string  `json:"symbol"`
+	Factor    float64 `json:"factor"`
+}
+
+type SelectConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *SelectConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *SelectConnectionExec) Edges() *SelectEdgeExecArray {
+	edges := instance.exec.Client.GetMany(
+		instance.exec,
+		nil,
+		[3]string{"SelectWhereInput", "SelectOrderByInput", "SelectEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	nodes := edges.Client.GetOne(
+		edges,
+		nil,
+		[2]string{"", "Select"},
+		"node",
+		SelectFields)
+
+	return &SelectEdgeExecArray{nodes}
+}
+
+func (instance *SelectConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateSelect"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return &v, err
+}
+
+func (instance SelectConnectionExec) Exec(ctx context.Context) (*SelectConnection, error) {
+	edges, err := instance.Edges().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	pageInfo, err := instance.PageInfo().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &SelectConnection{
+		Edges:    edges,
+		PageInfo: *pageInfo,
+	}, nil
+}
+
+func (instance SelectConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type SelectConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectConnectionExecArray) Exec(ctx context.Context) ([]SelectConnection, error) {
+	var v []SelectConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var SelectConnectionFields = []string{}
+
+type SelectConnection struct {
+	PageInfo PageInfo     `json:"pageInfo"`
+	Edges    []SelectEdge `json:"edges"`
+}
+
+type InputSubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *InputSubscriptionPayloadExec) Node() *InputExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Input"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"})
+
+	return &InputExec{ret}
+}
+
+func (instance *InputSubscriptionPayloadExec) PreviousValues() *InputPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "InputPreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"})
+
+	return &InputPreviousValuesExec{ret}
+}
+
+func (instance InputSubscriptionPayloadExec) Exec(ctx context.Context) (*InputSubscriptionPayload, error) {
+	var v InputSubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance InputSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type InputSubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance InputSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]InputSubscriptionPayload, error) {
+	var v []InputSubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var InputSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
+
+type InputSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	Node          *Input       `json:"node,omitempty"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type SelectPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectPreviousValuesExec) Exec(ctx context.Context) (*SelectPreviousValues, error) {
+	var v SelectPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance SelectPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type SelectPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectPreviousValuesExecArray) Exec(ctx context.Context) ([]SelectPreviousValues, error) {
+	var v []SelectPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var SelectPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "options", "icon"}
+
+type SelectPreviousValues struct {
+	ID        string   `json:"id"`
+	CreatedAt string   `json:"createdAt"`
+	UpdatedAt string   `json:"updatedAt"`
+	Name      string   `json:"name"`
+	Options   []string `json:"options,omitempty"`
+	Icon      *string  `json:"icon,omitempty"`
+}
+
+type SelectSubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *SelectSubscriptionPayloadExec) Node() *SelectExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Select"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "options", "icon"})
+
+	return &SelectExec{ret}
+}
+
+func (instance *SelectSubscriptionPayloadExec) PreviousValues() *SelectPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "SelectPreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "name", "options", "icon"})
+
+	return &SelectPreviousValuesExec{ret}
+}
+
+func (instance SelectSubscriptionPayloadExec) Exec(ctx context.Context) (*SelectSubscriptionPayload, error) {
+	var v SelectSubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance SelectSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type SelectSubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance SelectSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]SelectSubscriptionPayload, error) {
+	var v []SelectSubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var SelectSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
+
+type SelectSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	Node          *Select      `json:"node,omitempty"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type UnitCategoryExec struct {
+	exec *prisma.Exec
+}
+
+type UnitsParamsExec struct {
+	Where   *UnitWhereInput
+	OrderBy *UnitOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *UnitCategoryExec) Units(params *UnitsParamsExec) *UnitExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"UnitWhereInput", "UnitOrderByInput", "Unit"},
+		"units",
+		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
+
+	return &UnitExecArray{ret}
+}
+
+func (instance UnitCategoryExec) Exec(ctx context.Context) (*UnitCategory, error) {
+	var v UnitCategory
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance UnitCategoryExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type UnitCategoryExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance UnitCategoryExecArray) Exec(ctx context.Context) ([]UnitCategory, error) {
+	var v []UnitCategory
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var UnitCategoryFields = []string{"id", "createdAt", "updatedAt", "name"}
+
+type UnitCategory struct {
+	ID        string `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Name      string `json:"name"`
+}
+
+type InputPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance InputPreviousValuesExec) Exec(ctx context.Context) (*InputPreviousValues, error) {
+	var v InputPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance InputPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type InputPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance InputPreviousValuesExecArray) Exec(ctx context.Context) ([]InputPreviousValues, error) {
+	var v []InputPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var InputPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"}
+
+type InputPreviousValues struct {
+	ID          string  `json:"id"`
+	CreatedAt   string  `json:"createdAt"`
+	UpdatedAt   string  `json:"updatedAt"`
+	Name        string  `json:"name"`
+	DefaultUnit string  `json:"defaultUnit"`
+	Icon        *string `json:"icon,omitempty"`
+}
+
+type CalculatorCategoryConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CalculatorCategoryConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *CalculatorCategoryConnectionExec) Edges() *CalculatorCategoryEdgeExecArray {
+	edges := instance.exec.Client.GetMany(
+		instance.exec,
+		nil,
+		[3]string{"CalculatorCategoryWhereInput", "CalculatorCategoryOrderByInput", "CalculatorCategoryEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	nodes := edges.Client.GetOne(
+		edges,
+		nil,
+		[2]string{"", "CalculatorCategory"},
+		"node",
+		CalculatorCategoryFields)
+
+	return &CalculatorCategoryEdgeExecArray{nodes}
+}
+
+func (instance *CalculatorCategoryConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateCalculatorCategory"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return &v, err
+}
+
+func (instance CalculatorCategoryConnectionExec) Exec(ctx context.Context) (*CalculatorCategoryConnection, error) {
+	edges, err := instance.Edges().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	pageInfo, err := instance.PageInfo().Exec(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &CalculatorCategoryConnection{
+		Edges:    edges,
+		PageInfo: *pageInfo,
+	}, nil
+}
+
+func (instance CalculatorCategoryConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CalculatorCategoryConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CalculatorCategoryConnectionExecArray) Exec(ctx context.Context) ([]CalculatorCategoryConnection, error) {
+	var v []CalculatorCategoryConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var CalculatorCategoryConnectionFields = []string{}
+
+type CalculatorCategoryConnection struct {
+	PageInfo PageInfo                 `json:"pageInfo"`
+	Edges    []CalculatorCategoryEdge `json:"edges"`
+}
+
+type InputEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *InputEdgeExec) Node() *InputExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Input"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"})
+
+	return &InputExec{ret}
+}
+
+func (instance InputEdgeExec) Exec(ctx context.Context) (*InputEdge, error) {
+	var v InputEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance InputEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type InputEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance InputEdgeExecArray) Exec(ctx context.Context) ([]InputEdge, error) {
+	var v []InputEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+var InputEdgeFields = []string{"cursor"}
+
+type InputEdge struct {
+	Node   Input  `json:"node"`
+	Cursor string `json:"cursor"`
 }
 
 type CalculatorExec struct {
@@ -2602,1634 +4269,6 @@ type Calculator struct {
 	DefaultUnit string `json:"defaultUnit"`
 }
 
-type CalculatorCategoryExec struct {
-	exec *prisma.Exec
-}
-
-type CalculatorsParamsExec struct {
-	Where   *CalculatorWhereInput
-	OrderBy *CalculatorOrderByInput
-	Skip    *int32
-	After   *string
-	Before  *string
-	First   *int32
-	Last    *int32
-}
-
-func (instance *CalculatorCategoryExec) Calculators(params *CalculatorsParamsExec) *CalculatorExecArray {
-	var wparams *prisma.WhereParams
-	if params != nil {
-		wparams = &prisma.WhereParams{
-			Where:   params.Where,
-			OrderBy: (*string)(params.OrderBy),
-			Skip:    params.Skip,
-			After:   params.After,
-			Before:  params.Before,
-			First:   params.First,
-			Last:    params.Last,
-		}
-	}
-
-	ret := instance.exec.Client.GetMany(
-		instance.exec,
-		wparams,
-		[3]string{"CalculatorWhereInput", "CalculatorOrderByInput", "Calculator"},
-		"calculators",
-		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
-
-	return &CalculatorExecArray{ret}
-}
-
-func (instance CalculatorCategoryExec) Exec(ctx context.Context) (*CalculatorCategory, error) {
-	var v CalculatorCategory
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorCategoryExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorCategoryExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorCategoryExecArray) Exec(ctx context.Context) ([]CalculatorCategory, error) {
-	var v []CalculatorCategory
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorCategoryFields = []string{"id", "createdAt", "updatedAt", "name", "icon"}
-
-type CalculatorCategory struct {
-	ID        string  `json:"id"`
-	CreatedAt string  `json:"createdAt"`
-	UpdatedAt string  `json:"updatedAt"`
-	Name      string  `json:"name"`
-	Icon      *string `json:"icon,omitempty"`
-}
-
-type InputExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *InputExec) Category() *UnitCategoryExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "UnitCategory"},
-		"category",
-		[]string{"id", "createdAt", "updatedAt", "name"})
-
-	return &UnitCategoryExec{ret}
-}
-
-func (instance InputExec) Exec(ctx context.Context) (*Input, error) {
-	var v Input
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance InputExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type InputExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance InputExecArray) Exec(ctx context.Context) ([]Input, error) {
-	var v []Input
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var InputFields = []string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"}
-
-type Input struct {
-	ID          string  `json:"id"`
-	CreatedAt   string  `json:"createdAt"`
-	UpdatedAt   string  `json:"updatedAt"`
-	Name        string  `json:"name"`
-	DefaultUnit string  `json:"defaultUnit"`
-	Icon        *string `json:"icon,omitempty"`
-}
-
-type UnitCategoryExec struct {
-	exec *prisma.Exec
-}
-
-type UnitsParamsExec struct {
-	Where   *UnitWhereInput
-	OrderBy *UnitOrderByInput
-	Skip    *int32
-	After   *string
-	Before  *string
-	First   *int32
-	Last    *int32
-}
-
-func (instance *UnitCategoryExec) Units(params *UnitsParamsExec) *UnitExecArray {
-	var wparams *prisma.WhereParams
-	if params != nil {
-		wparams = &prisma.WhereParams{
-			Where:   params.Where,
-			OrderBy: (*string)(params.OrderBy),
-			Skip:    params.Skip,
-			After:   params.After,
-			Before:  params.Before,
-			First:   params.First,
-			Last:    params.Last,
-		}
-	}
-
-	ret := instance.exec.Client.GetMany(
-		instance.exec,
-		wparams,
-		[3]string{"UnitWhereInput", "UnitOrderByInput", "Unit"},
-		"units",
-		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
-
-	return &UnitExecArray{ret}
-}
-
-func (instance UnitCategoryExec) Exec(ctx context.Context) (*UnitCategory, error) {
-	var v UnitCategory
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitCategoryExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitCategoryExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitCategoryExecArray) Exec(ctx context.Context) ([]UnitCategory, error) {
-	var v []UnitCategory
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitCategoryFields = []string{"id", "createdAt", "updatedAt", "name"}
-
-type UnitCategory struct {
-	ID        string `json:"id"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	Name      string `json:"name"`
-}
-
-type UnitExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *UnitExec) Category() *UnitCategoryExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "UnitCategory"},
-		"category",
-		[]string{"id", "createdAt", "updatedAt", "name"})
-
-	return &UnitCategoryExec{ret}
-}
-
-func (instance UnitExec) Exec(ctx context.Context) (*Unit, error) {
-	var v Unit
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitExecArray) Exec(ctx context.Context) ([]Unit, error) {
-	var v []Unit
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitFields = []string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"}
-
-type Unit struct {
-	ID        string  `json:"id"`
-	CreatedAt string  `json:"createdAt"`
-	UpdatedAt string  `json:"updatedAt"`
-	Name      string  `json:"name"`
-	Symbol    string  `json:"symbol"`
-	Factor    float64 `json:"factor"`
-}
-
-type SelectExec struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectExec) Exec(ctx context.Context) (*Select, error) {
-	var v Select
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance SelectExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type SelectExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectExecArray) Exec(ctx context.Context) ([]Select, error) {
-	var v []Select
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var SelectFields = []string{"id", "createdAt", "updatedAt", "name", "options", "icon"}
-
-type Select struct {
-	ID        string   `json:"id"`
-	CreatedAt string   `json:"createdAt"`
-	UpdatedAt string   `json:"updatedAt"`
-	Name      string   `json:"name"`
-	Options   []string `json:"options,omitempty"`
-	Icon      *string  `json:"icon,omitempty"`
-}
-
-type CalculatorConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CalculatorConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *CalculatorConnectionExec) Edges() *CalculatorEdgeExecArray {
-	edges := instance.exec.Client.GetMany(
-		instance.exec,
-		nil,
-		[3]string{"CalculatorWhereInput", "CalculatorOrderByInput", "CalculatorEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	nodes := edges.Client.GetOne(
-		edges,
-		nil,
-		[2]string{"", "Calculator"},
-		"node",
-		CalculatorFields)
-
-	return &CalculatorEdgeExecArray{nodes}
-}
-
-func (instance *CalculatorConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateCalculator"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return &v, err
-}
-
-func (instance CalculatorConnectionExec) Exec(ctx context.Context) (*CalculatorConnection, error) {
-	edges, err := instance.Edges().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	pageInfo, err := instance.PageInfo().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return &CalculatorConnection{
-		Edges:    edges,
-		PageInfo: *pageInfo,
-	}, nil
-}
-
-func (instance CalculatorConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorConnectionExecArray) Exec(ctx context.Context) ([]CalculatorConnection, error) {
-	var v []CalculatorConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorConnectionFields = []string{}
-
-type CalculatorConnection struct {
-	PageInfo PageInfo         `json:"pageInfo"`
-	Edges    []CalculatorEdge `json:"edges"`
-}
-
-type PageInfoExec struct {
-	exec *prisma.Exec
-}
-
-func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
-	var v PageInfo
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance PageInfoExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type PageInfoExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance PageInfoExecArray) Exec(ctx context.Context) ([]PageInfo, error) {
-	var v []PageInfo
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var PageInfoFields = []string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"}
-
-type PageInfo struct {
-	HasNextPage     bool    `json:"hasNextPage"`
-	HasPreviousPage bool    `json:"hasPreviousPage"`
-	StartCursor     *string `json:"startCursor,omitempty"`
-	EndCursor       *string `json:"endCursor,omitempty"`
-}
-
-type CalculatorEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CalculatorEdgeExec) Node() *CalculatorExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Calculator"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
-
-	return &CalculatorExec{ret}
-}
-
-func (instance CalculatorEdgeExec) Exec(ctx context.Context) (*CalculatorEdge, error) {
-	var v CalculatorEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorEdgeExecArray) Exec(ctx context.Context) ([]CalculatorEdge, error) {
-	var v []CalculatorEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorEdgeFields = []string{"cursor"}
-
-type CalculatorEdge struct {
-	Node   Calculator `json:"node"`
-	Cursor string     `json:"cursor"`
-}
-
-type CalculatorCategoryConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CalculatorCategoryConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *CalculatorCategoryConnectionExec) Edges() *CalculatorCategoryEdgeExecArray {
-	edges := instance.exec.Client.GetMany(
-		instance.exec,
-		nil,
-		[3]string{"CalculatorCategoryWhereInput", "CalculatorCategoryOrderByInput", "CalculatorCategoryEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	nodes := edges.Client.GetOne(
-		edges,
-		nil,
-		[2]string{"", "CalculatorCategory"},
-		"node",
-		CalculatorCategoryFields)
-
-	return &CalculatorCategoryEdgeExecArray{nodes}
-}
-
-func (instance *CalculatorCategoryConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateCalculatorCategory"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return &v, err
-}
-
-func (instance CalculatorCategoryConnectionExec) Exec(ctx context.Context) (*CalculatorCategoryConnection, error) {
-	edges, err := instance.Edges().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	pageInfo, err := instance.PageInfo().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return &CalculatorCategoryConnection{
-		Edges:    edges,
-		PageInfo: *pageInfo,
-	}, nil
-}
-
-func (instance CalculatorCategoryConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorCategoryConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorCategoryConnectionExecArray) Exec(ctx context.Context) ([]CalculatorCategoryConnection, error) {
-	var v []CalculatorCategoryConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorCategoryConnectionFields = []string{}
-
-type CalculatorCategoryConnection struct {
-	PageInfo PageInfo                 `json:"pageInfo"`
-	Edges    []CalculatorCategoryEdge `json:"edges"`
-}
-
-type CalculatorCategoryEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CalculatorCategoryEdgeExec) Node() *CalculatorCategoryExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "CalculatorCategory"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "icon"})
-
-	return &CalculatorCategoryExec{ret}
-}
-
-func (instance CalculatorCategoryEdgeExec) Exec(ctx context.Context) (*CalculatorCategoryEdge, error) {
-	var v CalculatorCategoryEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorCategoryEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorCategoryEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorCategoryEdgeExecArray) Exec(ctx context.Context) ([]CalculatorCategoryEdge, error) {
-	var v []CalculatorCategoryEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorCategoryEdgeFields = []string{"cursor"}
-
-type CalculatorCategoryEdge struct {
-	Node   CalculatorCategory `json:"node"`
-	Cursor string             `json:"cursor"`
-}
-
-type InputConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *InputConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *InputConnectionExec) Edges() *InputEdgeExecArray {
-	edges := instance.exec.Client.GetMany(
-		instance.exec,
-		nil,
-		[3]string{"InputWhereInput", "InputOrderByInput", "InputEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	nodes := edges.Client.GetOne(
-		edges,
-		nil,
-		[2]string{"", "Input"},
-		"node",
-		InputFields)
-
-	return &InputEdgeExecArray{nodes}
-}
-
-func (instance *InputConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateInput"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return &v, err
-}
-
-func (instance InputConnectionExec) Exec(ctx context.Context) (*InputConnection, error) {
-	edges, err := instance.Edges().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	pageInfo, err := instance.PageInfo().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return &InputConnection{
-		Edges:    edges,
-		PageInfo: *pageInfo,
-	}, nil
-}
-
-func (instance InputConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type InputConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance InputConnectionExecArray) Exec(ctx context.Context) ([]InputConnection, error) {
-	var v []InputConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var InputConnectionFields = []string{}
-
-type InputConnection struct {
-	PageInfo PageInfo    `json:"pageInfo"`
-	Edges    []InputEdge `json:"edges"`
-}
-
-type InputEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *InputEdgeExec) Node() *InputExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Input"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"})
-
-	return &InputExec{ret}
-}
-
-func (instance InputEdgeExec) Exec(ctx context.Context) (*InputEdge, error) {
-	var v InputEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance InputEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type InputEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance InputEdgeExecArray) Exec(ctx context.Context) ([]InputEdge, error) {
-	var v []InputEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var InputEdgeFields = []string{"cursor"}
-
-type InputEdge struct {
-	Node   Input  `json:"node"`
-	Cursor string `json:"cursor"`
-}
-
-type SelectConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *SelectConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *SelectConnectionExec) Edges() *SelectEdgeExecArray {
-	edges := instance.exec.Client.GetMany(
-		instance.exec,
-		nil,
-		[3]string{"SelectWhereInput", "SelectOrderByInput", "SelectEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	nodes := edges.Client.GetOne(
-		edges,
-		nil,
-		[2]string{"", "Select"},
-		"node",
-		SelectFields)
-
-	return &SelectEdgeExecArray{nodes}
-}
-
-func (instance *SelectConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateSelect"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return &v, err
-}
-
-func (instance SelectConnectionExec) Exec(ctx context.Context) (*SelectConnection, error) {
-	edges, err := instance.Edges().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	pageInfo, err := instance.PageInfo().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return &SelectConnection{
-		Edges:    edges,
-		PageInfo: *pageInfo,
-	}, nil
-}
-
-func (instance SelectConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type SelectConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectConnectionExecArray) Exec(ctx context.Context) ([]SelectConnection, error) {
-	var v []SelectConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var SelectConnectionFields = []string{}
-
-type SelectConnection struct {
-	PageInfo PageInfo     `json:"pageInfo"`
-	Edges    []SelectEdge `json:"edges"`
-}
-
-type SelectEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *SelectEdgeExec) Node() *SelectExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Select"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "options", "icon"})
-
-	return &SelectExec{ret}
-}
-
-func (instance SelectEdgeExec) Exec(ctx context.Context) (*SelectEdge, error) {
-	var v SelectEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance SelectEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type SelectEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectEdgeExecArray) Exec(ctx context.Context) ([]SelectEdge, error) {
-	var v []SelectEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var SelectEdgeFields = []string{"cursor"}
-
-type SelectEdge struct {
-	Node   Select `json:"node"`
-	Cursor string `json:"cursor"`
-}
-
-type UnitConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *UnitConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *UnitConnectionExec) Edges() *UnitEdgeExecArray {
-	edges := instance.exec.Client.GetMany(
-		instance.exec,
-		nil,
-		[3]string{"UnitWhereInput", "UnitOrderByInput", "UnitEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	nodes := edges.Client.GetOne(
-		edges,
-		nil,
-		[2]string{"", "Unit"},
-		"node",
-		UnitFields)
-
-	return &UnitEdgeExecArray{nodes}
-}
-
-func (instance *UnitConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateUnit"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return &v, err
-}
-
-func (instance UnitConnectionExec) Exec(ctx context.Context) (*UnitConnection, error) {
-	edges, err := instance.Edges().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	pageInfo, err := instance.PageInfo().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return &UnitConnection{
-		Edges:    edges,
-		PageInfo: *pageInfo,
-	}, nil
-}
-
-func (instance UnitConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitConnectionExecArray) Exec(ctx context.Context) ([]UnitConnection, error) {
-	var v []UnitConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitConnectionFields = []string{}
-
-type UnitConnection struct {
-	PageInfo PageInfo   `json:"pageInfo"`
-	Edges    []UnitEdge `json:"edges"`
-}
-
-type UnitEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *UnitEdgeExec) Node() *UnitExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Unit"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
-
-	return &UnitExec{ret}
-}
-
-func (instance UnitEdgeExec) Exec(ctx context.Context) (*UnitEdge, error) {
-	var v UnitEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitEdgeExecArray) Exec(ctx context.Context) ([]UnitEdge, error) {
-	var v []UnitEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitEdgeFields = []string{"cursor"}
-
-type UnitEdge struct {
-	Node   Unit   `json:"node"`
-	Cursor string `json:"cursor"`
-}
-
-type UnitCategoryConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *UnitCategoryConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *UnitCategoryConnectionExec) Edges() *UnitCategoryEdgeExecArray {
-	edges := instance.exec.Client.GetMany(
-		instance.exec,
-		nil,
-		[3]string{"UnitCategoryWhereInput", "UnitCategoryOrderByInput", "UnitCategoryEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	nodes := edges.Client.GetOne(
-		edges,
-		nil,
-		[2]string{"", "UnitCategory"},
-		"node",
-		UnitCategoryFields)
-
-	return &UnitCategoryEdgeExecArray{nodes}
-}
-
-func (instance *UnitCategoryConnectionExec) Aggregate(ctx context.Context) (*Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateUnitCategory"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return &v, err
-}
-
-func (instance UnitCategoryConnectionExec) Exec(ctx context.Context) (*UnitCategoryConnection, error) {
-	edges, err := instance.Edges().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	pageInfo, err := instance.PageInfo().Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return &UnitCategoryConnection{
-		Edges:    edges,
-		PageInfo: *pageInfo,
-	}, nil
-}
-
-func (instance UnitCategoryConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitCategoryConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitCategoryConnectionExecArray) Exec(ctx context.Context) ([]UnitCategoryConnection, error) {
-	var v []UnitCategoryConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitCategoryConnectionFields = []string{}
-
-type UnitCategoryConnection struct {
-	PageInfo PageInfo           `json:"pageInfo"`
-	Edges    []UnitCategoryEdge `json:"edges"`
-}
-
-type UnitCategoryEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *UnitCategoryEdgeExec) Node() *UnitCategoryExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "UnitCategory"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name"})
-
-	return &UnitCategoryExec{ret}
-}
-
-func (instance UnitCategoryEdgeExec) Exec(ctx context.Context) (*UnitCategoryEdge, error) {
-	var v UnitCategoryEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitCategoryEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitCategoryEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitCategoryEdgeExecArray) Exec(ctx context.Context) ([]UnitCategoryEdge, error) {
-	var v []UnitCategoryEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitCategoryEdgeFields = []string{"cursor"}
-
-type UnitCategoryEdge struct {
-	Node   UnitCategory `json:"node"`
-	Cursor string       `json:"cursor"`
-}
-
-type CalculatorSubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CalculatorSubscriptionPayloadExec) Node() *CalculatorExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Calculator"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
-
-	return &CalculatorExec{ret}
-}
-
-func (instance *CalculatorSubscriptionPayloadExec) PreviousValues() *CalculatorPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "CalculatorPreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"})
-
-	return &CalculatorPreviousValuesExec{ret}
-}
-
-func (instance CalculatorSubscriptionPayloadExec) Exec(ctx context.Context) (*CalculatorSubscriptionPayload, error) {
-	var v CalculatorSubscriptionPayload
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorSubscriptionPayloadExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]CalculatorSubscriptionPayload, error) {
-	var v []CalculatorSubscriptionPayload
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
-
-type CalculatorSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	Node          *Calculator  `json:"node,omitempty"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type CalculatorPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorPreviousValuesExec) Exec(ctx context.Context) (*CalculatorPreviousValues, error) {
-	var v CalculatorPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorPreviousValuesExecArray) Exec(ctx context.Context) ([]CalculatorPreviousValues, error) {
-	var v []CalculatorPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "key", "name", "description", "defaultUnit"}
-
-type CalculatorPreviousValues struct {
-	ID          string `json:"id"`
-	CreatedAt   string `json:"createdAt"`
-	UpdatedAt   string `json:"updatedAt"`
-	Key         string `json:"key"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	DefaultUnit string `json:"defaultUnit"`
-}
-
-type CalculatorCategorySubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CalculatorCategorySubscriptionPayloadExec) Node() *CalculatorCategoryExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "CalculatorCategory"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "icon"})
-
-	return &CalculatorCategoryExec{ret}
-}
-
-func (instance *CalculatorCategorySubscriptionPayloadExec) PreviousValues() *CalculatorCategoryPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "CalculatorCategoryPreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "name", "icon"})
-
-	return &CalculatorCategoryPreviousValuesExec{ret}
-}
-
-func (instance CalculatorCategorySubscriptionPayloadExec) Exec(ctx context.Context) (*CalculatorCategorySubscriptionPayload, error) {
-	var v CalculatorCategorySubscriptionPayload
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorCategorySubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorCategorySubscriptionPayloadExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorCategorySubscriptionPayloadExecArray) Exec(ctx context.Context) ([]CalculatorCategorySubscriptionPayload, error) {
-	var v []CalculatorCategorySubscriptionPayload
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorCategorySubscriptionPayloadFields = []string{"mutation", "updatedFields"}
-
-type CalculatorCategorySubscriptionPayload struct {
-	Mutation      MutationType        `json:"mutation"`
-	Node          *CalculatorCategory `json:"node,omitempty"`
-	UpdatedFields []string            `json:"updatedFields,omitempty"`
-}
-
-type CalculatorCategoryPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorCategoryPreviousValuesExec) Exec(ctx context.Context) (*CalculatorCategoryPreviousValues, error) {
-	var v CalculatorCategoryPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CalculatorCategoryPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CalculatorCategoryPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CalculatorCategoryPreviousValuesExecArray) Exec(ctx context.Context) ([]CalculatorCategoryPreviousValues, error) {
-	var v []CalculatorCategoryPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var CalculatorCategoryPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "icon"}
-
-type CalculatorCategoryPreviousValues struct {
-	ID        string  `json:"id"`
-	CreatedAt string  `json:"createdAt"`
-	UpdatedAt string  `json:"updatedAt"`
-	Name      string  `json:"name"`
-	Icon      *string `json:"icon,omitempty"`
-}
-
-type InputSubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *InputSubscriptionPayloadExec) Node() *InputExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Input"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"})
-
-	return &InputExec{ret}
-}
-
-func (instance *InputSubscriptionPayloadExec) PreviousValues() *InputPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "InputPreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"})
-
-	return &InputPreviousValuesExec{ret}
-}
-
-func (instance InputSubscriptionPayloadExec) Exec(ctx context.Context) (*InputSubscriptionPayload, error) {
-	var v InputSubscriptionPayload
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance InputSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type InputSubscriptionPayloadExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance InputSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]InputSubscriptionPayload, error) {
-	var v []InputSubscriptionPayload
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var InputSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
-
-type InputSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	Node          *Input       `json:"node,omitempty"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type InputPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance InputPreviousValuesExec) Exec(ctx context.Context) (*InputPreviousValues, error) {
-	var v InputPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance InputPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type InputPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance InputPreviousValuesExecArray) Exec(ctx context.Context) ([]InputPreviousValues, error) {
-	var v []InputPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var InputPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "defaultUnit", "icon"}
-
-type InputPreviousValues struct {
-	ID          string  `json:"id"`
-	CreatedAt   string  `json:"createdAt"`
-	UpdatedAt   string  `json:"updatedAt"`
-	Name        string  `json:"name"`
-	DefaultUnit string  `json:"defaultUnit"`
-	Icon        *string `json:"icon,omitempty"`
-}
-
-type SelectSubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *SelectSubscriptionPayloadExec) Node() *SelectExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Select"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "options", "icon"})
-
-	return &SelectExec{ret}
-}
-
-func (instance *SelectSubscriptionPayloadExec) PreviousValues() *SelectPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "SelectPreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "name", "options", "icon"})
-
-	return &SelectPreviousValuesExec{ret}
-}
-
-func (instance SelectSubscriptionPayloadExec) Exec(ctx context.Context) (*SelectSubscriptionPayload, error) {
-	var v SelectSubscriptionPayload
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance SelectSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type SelectSubscriptionPayloadExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]SelectSubscriptionPayload, error) {
-	var v []SelectSubscriptionPayload
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var SelectSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
-
-type SelectSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	Node          *Select      `json:"node,omitempty"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type SelectPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectPreviousValuesExec) Exec(ctx context.Context) (*SelectPreviousValues, error) {
-	var v SelectPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance SelectPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type SelectPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance SelectPreviousValuesExecArray) Exec(ctx context.Context) ([]SelectPreviousValues, error) {
-	var v []SelectPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var SelectPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "options", "icon"}
-
-type SelectPreviousValues struct {
-	ID        string   `json:"id"`
-	CreatedAt string   `json:"createdAt"`
-	UpdatedAt string   `json:"updatedAt"`
-	Name      string   `json:"name"`
-	Options   []string `json:"options,omitempty"`
-	Icon      *string  `json:"icon,omitempty"`
-}
-
-type UnitSubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *UnitSubscriptionPayloadExec) Node() *UnitExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Unit"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
-
-	return &UnitExec{ret}
-}
-
-func (instance *UnitSubscriptionPayloadExec) PreviousValues() *UnitPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "UnitPreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"})
-
-	return &UnitPreviousValuesExec{ret}
-}
-
-func (instance UnitSubscriptionPayloadExec) Exec(ctx context.Context) (*UnitSubscriptionPayload, error) {
-	var v UnitSubscriptionPayload
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitSubscriptionPayloadExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]UnitSubscriptionPayload, error) {
-	var v []UnitSubscriptionPayload
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitSubscriptionPayloadFields = []string{"mutation", "updatedFields"}
-
-type UnitSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	Node          *Unit        `json:"node,omitempty"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type UnitPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitPreviousValuesExec) Exec(ctx context.Context) (*UnitPreviousValues, error) {
-	var v UnitPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitPreviousValuesExecArray) Exec(ctx context.Context) ([]UnitPreviousValues, error) {
-	var v []UnitPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name", "symbol", "factor"}
-
-type UnitPreviousValues struct {
-	ID        string  `json:"id"`
-	CreatedAt string  `json:"createdAt"`
-	UpdatedAt string  `json:"updatedAt"`
-	Name      string  `json:"name"`
-	Symbol    string  `json:"symbol"`
-	Factor    float64 `json:"factor"`
-}
-
 type UnitCategorySubscriptionPayloadExec struct {
 	exec *prisma.Exec
 }
@@ -4288,43 +4327,4 @@ type UnitCategorySubscriptionPayload struct {
 	Mutation      MutationType  `json:"mutation"`
 	Node          *UnitCategory `json:"node,omitempty"`
 	UpdatedFields []string      `json:"updatedFields,omitempty"`
-}
-
-type UnitCategoryPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitCategoryPreviousValuesExec) Exec(ctx context.Context) (*UnitCategoryPreviousValues, error) {
-	var v UnitCategoryPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance UnitCategoryPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type UnitCategoryPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance UnitCategoryPreviousValuesExecArray) Exec(ctx context.Context) ([]UnitCategoryPreviousValues, error) {
-	var v []UnitCategoryPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-var UnitCategoryPreviousValuesFields = []string{"id", "createdAt", "updatedAt", "name"}
-
-type UnitCategoryPreviousValues struct {
-	ID        string `json:"id"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	Name      string `json:"name"`
 }

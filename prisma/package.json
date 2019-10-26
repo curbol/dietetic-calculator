@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "docker-compose up -d",
     "deploy": "prisma deploy",
     "seed": "prisma seed",
     "generate": "prisma generate"
