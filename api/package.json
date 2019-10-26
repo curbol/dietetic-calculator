@@ -3,6 +3,7 @@
     "build": "go build",
     "start": "go run main.go",
     "tidy": "go mod tidy",
-    "vendor": "go mod vendor"
+    "vendor": "go mod vendor",
+    "gen": "go run scripts/gqlgen.go"
   }
 }
