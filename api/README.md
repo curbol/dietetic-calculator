@@ -1,0 +1,258 @@
+# Dietetic Calculator API
+
+This API is used to retrieve calculator data for **Dietetic Calculator**.
+Based on [Prisma Client](https://github.com/prisma/prisma2/blob/master/docs/prisma-client-js/api.md), [graphql-yoga](https://github.com/prisma/graphql-yoga) and [GraphQL Nexus](https://nexus.js.org/).
+
+## How to use
+
+### 1. Download & install dependencies
+
+Clone this repository:
+
+```
+git clone https://gitlab.com/curtis.bollinger/dietetic-calculator.git
+```
+
+Install Node dependencies:
+
+```
+cd api
+npm install
+```
+
+Note that this also generates Prisma Client JS into `node_modules/@prisma/client` via a `postinstall` hook of the `@prisma/client` package from your `package.json`.
+
+### 2. Migrate your database schema
+
+Perform an initial schema migration against your database using the following commands:
+
+```
+npx prisma2 migrate save --name 'init' --experimental
+npx prisma2 migrate up --experimental
+```
+
+The first step will save the migration in the `prisma/migrations` folder. The second step will execute the migrations.
+
+> **Note**: You're using [npx](https://github.com/npm/npx) to run Prisma 2 CLI that's listed as a development dependency in [`package.json`](./package.json). Alternatively, you can install the CLI globally using `npm install -g prisma2`. When using Yarn, you can run: `yarn prisma2 dev`.
+
+<Details>
+<Summary><b>Alternative: </b>Connect to your own database</Summary>
+
+Prisma supports MySQL and PostgreSQL at the moment. If you would like to connect to your own database, you can do so by specifying a different data source in the [Prisma schema file](prisma/schema.prisma).
+
+For a MySQL provider:
+
+```prisma
+datasource mysql {
+    provider = "mysql"
+    url      = "mysql://johndoe:secret42@localhost:3306/mydatabase"
+}
+```
+
+_OR_
+
+For a PostgreSQL provider:
+
+```prisma
+datasource postgresql {
+  provider = "postgresql"
+  url      = "postgresql://johndoe:secret42@localhost:5432/mydatabase?schema=public"
+}
+```
+
+> **Note**: In the above example connection strings, `johndoe` would be the username to your database, `secret42` the password, `mydatabase` the name of your database, and `public` the [PostgreSQL schema](https://www.postgresql.org/docs/9.1/ddl-schemas.html).
+
+</Details>
+
+### 3. Generate Prisma Client
+
+Run the following command to generate your Prisma Client API:
+
+```
+npx prisma2 generate
+```
+
+This command updated the Prisma Client API in `node_modules/@prisma/client`.
+
+### 4. Seed the database with test data
+
+The `seed` script from `package.json` contains some code to seed the database with test data. Execute it with the following command:
+
+```
+npm run seed
+```
+
+### 5. Start the GraphQL server
+
+Launch your GraphQL server with this command:
+
+```
+npm run dev
+```
+
+Navigate to [http://localhost:4000](http://localhost:4000) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
+
+## Using the GraphQL API
+
+The schema that specifies the API operations of your GraphQL server is defined in [`./schema.graphql`](./schema.graphql). Below are a number of operations that you can send to the API using the GraphQL Playground.
+
+Feel free to adjust any operation by adding or removing fields. The GraphQL Playground helps you with its auto-completion and query validation features.
+
+## Evolving the app with Prisma Migrate
+
+Evolving the application typically requires four subsequent steps:
+
+1. Update your Prisma schema
+1. Save and migrate the database schema using Prisma Migrate
+1. Generate Prisma Client to match the new schema with `prisma2 generate`
+1. Use the updated Prisma Client in your application code
+
+For the following example scenario, assume you want to add a "profile" feature to the app where users can create a single profile (1:1 relationship) and write a short bio about themselves and add a link to an image.
+
+### 1. Update your Prisma schema
+
+The first step would be to add a new model to the Prisma schema, e.g. called `Profile`. Prisma Migrate will create a corresponding table in the database.
+
+To define a `1:1` relationship between `User` and `Profile`, you need to specify the relation field on both models as follows:
+
+Add the Profile model with a `user` field of type `User`:
+
+```prisma
+model Profile {
+  id       Int    @id @default(autoincrement())
+  user     User
+  bio      String
+  imageURL String?
+}
+```
+
+Add the `Profile` relation field to the `User` model:
+
+```diff
+model User {
+   id      Int      @id @default(autoincrement())
+   email   String   @unique
+   name    String?
+   posts   Post[]
++  profile Profile?
+}
+```
+
+### 2. Save and run the migration
+
+#### Save the migration
+
+To migrate the database schema you first need to save the migration as follows:
+
+```
+npx prisma2 migrate save --name 'add-profile' --experimental
+```
+
+The CLI will output the planned changes and save the migration files in `prisma/migrations/20200313000000-add-profile/` (they contain details about required migrations steps and SQL operations).
+
+#### Run the migration
+
+Now that the migration has been saved you can run the migration as follows:
+
+```
+npx prisma2 migrate up --experimental
+```
+
+This will actually perform the schema migration against the database.
+
+Assuming everything went right, the CLI should output:
+
+```
+🚀    Done with 1 migration
+```
+
+### 3. Generate Prisma Client
+
+With the updated Prisma schema, you can now also update the Prisma Client API with the following command:
+
+```
+npx prisma2 generate
+```
+
+This command updated the Prisma Client API in `node_modules/@prisma/client`.
+
+### 4. Use the updated Prisma Client in your application code
+
+You can now use your `PrismaClient` instance to perform operations against the new `Profile` table.
+
+#### Exposing profile on the GraphQL API
+
+With the `nexus-prisma` package, exposing the new `Profile` model in the API involves the following:
+
+1. Project the `Profile` model onto your GraphQL schema
+2. Add the `profile` field to the `User` GraphQL object
+3. Add `profile` query type for fetching single profiles
+4. Add the `Profile` object to your GraphQL schema
+
+##### 1. Project the `Profile` model onto your GraphQL schema
+
+To project the `Profile` model, define a new object type:
+
+```js
+const Profile = objectType({
+  name: 'Profile',
+  definition(t) {
+    t.model.id()
+    t.model.user()
+    t.model.bio()
+    t.model.imageURL()
+  },
+})
+```
+
+Here we project the profile model fields from the Prisma schema with the `t.model` methods, which are exposed by [nexus-prisma](https://github.com/graphql-nexus/nexus-prisma).
+
+##### 2. Add the `profile` field to the `User` GraphQL object
+
+```diff
+const User = objectType({
+  name: 'User',
+  definition(t) {
+    // existing fields omitted
++   t.model.profile()
+  },
+})
+```
+
+This allows selecting associated profile fields when fetching a user.
+
+##### 3. Add `profile` query type for fetching single profiles
+
+Add the `t.crud.profile()` to the `Query` object type:
+
+```diff
+const Query = objectType({
+  name: 'Query',
+  definition(t) {
+    // ...
++   t.crud.profile()
+```
+
+This allows querying single profiles as follows:
+
+```graphql
+{
+  profile(where: { id: 1 }) {
+    id
+    bio
+  }
+}
+```
+
+##### 4. Add the `Profile` object to your GraphQL schema
+
+Pass the `Profile` object defined in step 1 to the `makeSchema` `types` parameter:
+
+```diff
+makeSchema({
+-    types: [Query, Mutation, Post, User],
++    types: [Query, Mutation, Post, User, Profile],
+})
+```
+
+Note that the [`dev`](./package.json) script starts a development server that automatically updates your schema every time you save a file. This way, the auto-generated [GraphQL schema](./schema.graphql) updates whenever you make changes the `Query` or `Mutation` types inside your code.

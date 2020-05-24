@@ -6,12 +6,12 @@ export default {
       category: undefined,
       from: {
         value: undefined,
-        unit: undefined
+        unit: undefined,
       },
       to: {
         value: undefined,
-        unit: undefined
-      }
+        unit: undefined,
+      },
     }
   },
 
@@ -30,11 +30,11 @@ export default {
     },
     Set_To_Unit(state, unit) {
       state.to.unit = unit
-    }
+    },
   },
 
   actions: {
-    setCategory({ rootGetters, commit, dispatch }, category) {
+    setCategory({ commit, dispatch, rootGetters }, category) {
       commit('Set_Category', category)
 
       const unitsInCategory = rootGetters['units/unitsInCategory'](category)
@@ -71,22 +71,22 @@ export default {
 
       dispatch('calculateToValue')
     },
-    calculateFromValue({ rootGetters, state, commit }) {
+    calculateFromValue({ state, commit, rootGetters }) {
       const fromValue = convert({
-        unitData: rootGetters['units/unitsInCategory'](state.category),
+        units: rootGetters['units/unitsInCategory'](state.category),
         value: state.to.value,
         fromUnit: state.to.unit,
-        toUnit: state.from.unit
+        toUnit: state.from.unit,
       })
       commit('Set_From_Value', fromValue)
     },
-    calculateToValue({ rootGetters, state, commit }) {
+    calculateToValue({ state, commit, rootGetters }) {
       const toValue = state.from.value
         ? convert({
-            unitData: rootGetters['units/unitsInCategory'](state.category),
+            units: rootGetters['units/unitsInCategory'](state.category),
             value: state.from.value,
             fromUnit: state.from.unit,
-            toUnit: state.to.unit
+            toUnit: state.to.unit,
           })
         : undefined
       const rounded = isNaN(toValue) ? toValue : parseFloat(toValue.toFixed(5))
@@ -95,8 +95,8 @@ export default {
     clearValues({ dispatch }) {
       dispatch('setFromValue', undefined)
       dispatch('setToValue', undefined)
-    }
+    },
   },
 
-  getters: {}
+  getters: {},
 }

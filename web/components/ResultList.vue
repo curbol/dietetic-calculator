@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="3">
+  <v-card color="app darken-3" elevation="3">
     <v-toolbar flat dense color="primary">
       <v-toolbar-title v-text="title" />
     </v-toolbar>
@@ -12,8 +12,8 @@
           class="layout align-start justify-left wrap"
         >
           <v-flex
-            v-for="calc in activeCalcs"
-            :key="calc.key"
+            v-for="calc in activeCalculators"
+            :key="calc.name"
             xs12
             sm6
             md12
@@ -29,15 +29,20 @@
             ></v-text-field>
 
             <v-select
-              v-if="unitsInCategoryWithSymbol(calc.defaultUnit).length > 1"
+              v-if="
+                unitsInCategoryWithSymbol(calc.defaultOutputUnit).length > 1
+              "
               class="units"
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsInCategoryWithSymbol(calc.defaultUnit)"
-              :value="calc.selectedUnit"
+              :items="unitsInCategoryWithSymbol(calc.defaultOutputUnit)"
+              :value="calc.selectedOutputUnit"
               @input="
-                setResultSelectedUnit({ key: calc.key, selectedUnit: $event })
+                setCalculatorSelectedOutputUnit({
+                  id: calc.id,
+                  selectedOutputUnit: $event,
+                })
               "
             >
               <template slot="item" slot-scope="data">
@@ -50,7 +55,7 @@
               readonly
               class="units"
               label="Units"
-              :value="calc.selectedUnit"
+              :value="calc.selectedOutputUnit"
             ></v-text-field>
           </v-flex>
         </transition-group>
@@ -63,16 +68,17 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'ResultList',
   data: () => ({
-    title: 'Results'
+    title: 'Results',
   }),
   computed: {
-    ...mapGetters('calcs', ['activeCalcs']),
-    ...mapGetters('units', ['unitsInCategoryWithSymbol'])
+    ...mapGetters('calculators', ['activeCalculators']),
+    ...mapGetters('units', ['unitsInCategoryWithSymbol']),
   },
   methods: {
-    ...mapActions('calcs', ['setResultSelectedUnit'])
-  }
+    ...mapActions('calculators', ['setCalculatorSelectedOutputUnit']),
+  },
 }
 </script>
 

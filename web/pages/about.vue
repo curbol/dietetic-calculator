@@ -1,7 +1,7 @@
 <template>
   <v-container class="container" my-1 fill-height>
     <v-layout align-start justify-center>
-      <v-card elevation="3">
+      <v-card color="app darken-3" elevation="3">
         <v-toolbar flat color="primary">
           <v-toolbar-title class="headline" v-text="title" />
         </v-toolbar>
@@ -21,17 +21,17 @@
               align-center
               justify-center
               ma-0
-              class="secondary darken-4"
+              class="app darken-2"
             >
-              <v-progress-circular indeterminate color="secondary" />
+              <v-progress-circular indeterminate color="icon" />
             </v-layout>
           </template>
         </v-img>
 
         <v-layout justify-space-around wrap>
           <v-flex
-            v-for="(person, key) in [curtis, chelsey]"
-            :key="key"
+            v-for="person in [curtis, chelsey]"
+            :key="person.name"
             :href="person.link"
             target="_blank"
             tag="a"
@@ -40,7 +40,7 @@
             align-center
           >
             <v-btn small text icon color="primary">
-              <v-icon>mdi-linkedin-box</v-icon>
+              <v-icon>mdi-linkedin</v-icon>
             </v-btn>
             <span>{{ person.name }}</span>
           </v-flex>
@@ -64,32 +64,32 @@
 
 <script>
 export default {
+  data: () => ({
+    title: 'About',
+    curtis: {
+      name: 'Curtis Bollinger',
+      link: 'https://www.linkedin.com/in/curtis-bollinger/',
+    },
+    chelsey: {
+      name: 'Chelsey Bollinger',
+      link: 'https://www.linkedin.com/in/chelsey-bollinger-ms-rd-ld-a2879bb7/',
+    },
+  }),
+  computed: {
+    alt() {
+      return `${this.curtis.name} - ${this.curtis.title}, ${this.chelsey.name} - ${this.chelsey.title}`
+    },
+  },
   head: () => ({
     title: 'About',
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: 'Information about this site'
-      }
-    ]
+        content: 'Information about this site',
+      },
+    ],
   }),
-  data: () => ({
-    title: 'About',
-    curtis: {
-      name: 'Curtis Bollinger',
-      link: 'https://www.linkedin.com/in/curtis-bollinger/'
-    },
-    chelsey: {
-      name: 'Chelsey Bollinger',
-      link: 'https://www.linkedin.com/in/chelsey-bollinger-ms-rd-ld-a2879bb7/'
-    }
-  }),
-  computed: {
-    alt() {
-      return `${this.curtis.name} - ${this.curtis.title}, ${this.chelsey.name} - ${this.chelsey.title}`
-    }
-  }
 }
 </script>
 

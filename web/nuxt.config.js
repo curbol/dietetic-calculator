@@ -1,7 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
 
-require('dotenv').config()
-
 export default {
   mode: 'universal',
   /*
@@ -16,10 +14,10 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color
@@ -32,19 +30,22 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/filters.js'],
+  plugins: [
+    '~/plugins/filters.ts',
+    { src: '~/plugins/vuex-cache.js', ssr: false },
+  ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
-  ],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa'],
+  modules: [
+    '@nuxtjs/pwa',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
+  ],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -53,18 +54,23 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
+      options: {
+        customProperties: true,
+      },
       themes: {
         dark: {
-          primary: colors.cyan.darken2,
-          secondary: colors.blueGrey.lighten4,
-          accent: colors.orange.darken3,
-          error: colors.deepOrange.darken2,
-          warning: colors.amber.base,
-          info: colors.teal.base,
-          success: colors.green.base
-        }
-      }
-    }
+          app: colors.cyan.darken3,
+          icon: colors.blueGrey.lighten5,
+          primary: colors.cyan.darken1,
+          secondary: colors.orange.darken1,
+          accent: colors.pink.darken1,
+          error: colors.red.darken1,
+          warning: colors.amber.darken2,
+          info: colors.blueGrey.base,
+          success: colors.lightGreen.darken1,
+        },
+      },
+    },
   },
   /*
    ** Build configuration
@@ -73,6 +79,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }

@@ -10,47 +10,31 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "test": "ava",
-    "docker-build": "docker build -t dietetic-calculator-web .",
-    "docker-tag": "docker tag dietetic-calculator-web gcr.io/dietetic-calculator/dietetic-calculator-web:latest",
-    "docker-push": "docker push gcr.io/dietetic-calculator/dietetic-calculator-web:latest",
-    "docker-run": "docker run --name dietetic-calculator-web --env-file .env -p 3000:3000 -d dietetic-calculator-web",
-    "deploy": "docker-build && docker-tag && docker-push"
-  },
-  "lint-staged": {
-    "*.{js,vue}": "eslint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test": "jest"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^3.0.0-beta.19",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "@vuex-orm/core": "^0.36.3",
     "graphql-request": "^1.8.2",
-    "nuxt": "^2.10.1",
-    "ramda": "^0.26.1"
+    "nuxt": "^2.12.2",
+    "vuex-cache": "^3.1.1"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^1.1.2",
+    "@nuxt/typescript-build": "^0.6.5",
+    "@nuxtjs/vuetify": "^1.11.0",
+    "@nuxtjs/eslint-config-typescript": "^1.0.2",
     "@nuxtjs/eslint-module": "^1.1.0",
-    "@nuxtjs/vuetify": "^1.9.0",
-    "@vue/test-utils": "^1.0.0-beta.29",
-    "ava": "^2.4.0",
-    "babel-eslint": "^10.0.3",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "browser-env": "^3.2.6",
-    "dotenv": "^8.2.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-nuxt": "^0.4.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "husky": "^3.0.9",
-    "lint-staged": "^9.4.2",
-    "node-sass": "^4.12.0",
-    "prettier": "^1.18.2",
-    "require-extension-hooks": "^0.3.3",
-    "require-extension-hooks-babel": "^1.0.0",
-    "require-extension-hooks-vue": "^3.0.0"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-nuxt": "^0.5.2",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.4",
+    "@vue/test-utils": "^1.0.0-beta.33",
+    "babel-jest": "^25.3.0",
+    "jest": "^25.3.0",
+    "vue-jest": "^4.0.0-0",
+    "ts-jest": "^25.3.1"
   }
 }

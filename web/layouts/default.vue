@@ -1,10 +1,16 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" width="200" clipped app>
+    <v-navigation-drawer
+      v-model="drawer"
+      width="200"
+      color="app darken-2"
+      clipped
+      app
+    >
       <v-list shaped>
-        <v-list-item v-for="(link, i) in links" :key="i" nuxt :to="link.to">
+        <v-list-item v-for="link in links" :key="link.title" nuxt :to="link.to">
           <v-list-item-action>
-            <v-icon color="secondary">{{ link.icon }}</v-icon>
+            <v-icon color="icon">{{ link.icon }}</v-icon>
           </v-list-item-action>
 
           <v-list-item-content>
@@ -26,12 +32,7 @@
       <v-divider class="mx-4 hidden-sm-and-down" inset vertical></v-divider>
 
       <span
-        class="
-          subtitle-1
-          text-truncate
-          font-weight-light
-          hidden-sm-and-down
-        "
+        class="subtitle-1 text-truncate font-weight-light hidden-sm-and-down"
       >
         {{ subtitle }}
       </span>
@@ -39,9 +40,14 @@
       <v-spacer />
 
       <span v-show="$vuetify.breakpoint.smAndUp">
-        <v-tooltip v-for="(link, i) in links" :key="i" bottom>
+        <v-tooltip
+          color="app darken-2"
+          v-for="link in links"
+          :key="link.title"
+          bottom
+        >
           <template v-slot:activator="{ on }">
-            <v-btn icon color="secondary" nuxt :to="link.to" v-on="on">
+            <v-btn icon color="icon" nuxt :to="link.to" v-on="on">
               <v-icon>{{ link.icon }}</v-icon>
             </v-btn>
           </template>
@@ -55,7 +61,7 @@
       <nuxt />
     </v-content>
 
-    <v-footer color="primary py-4" width="auto" inset absolute app>
+    <v-footer color="primary" class="py-4" width="auto" inset absolute app>
       <v-layout justify-center>
         <span class="font-weight-light">&copy; 2019 - Curtis Bollinger</span>
       </v-layout>
@@ -64,14 +70,7 @@
 </template>
 
 <script>
-// TODO: Tests
-// !BUG: get rid of scroll bar on right (related to @nuxtjs/vuetify module) - need to submit bug report if none exists
-// !BUG: toolbar does not darken when nav drawer opens - need to submit bug report if none exists
-
 export default {
-  head: () => ({
-    titleTemplate: '%s - Dietetic Calculator'
-  }),
   data() {
     return {
       drawer: false,
@@ -81,21 +80,24 @@ export default {
         {
           icon: 'mdi-calculator-variant',
           title: 'Calculate',
-          to: '/'
+          to: '/',
         },
         {
           icon: 'mdi-sync',
           title: 'Convert',
-          to: '/convert'
+          to: '/convert',
         },
         {
           icon: 'mdi-information-outline',
           title: 'About',
-          to: '/about'
-        }
-      ]
+          to: '/about',
+        },
+      ],
     }
-  }
+  },
+  head: () => ({
+    titleTemplate: '%s - Dietetic Calculator',
+  }),
 }
 </script>
 

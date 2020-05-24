@@ -1,11 +1,11 @@
 <template>
-  <v-card elevation="3">
+  <v-card color="app darken-3" elevation="3">
     <v-toolbar flat dense color="primary">
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-tooltip bottom open-delay="800">
+      <v-tooltip color="app darken-2" bottom open-delay="800">
         <template v-slot:activator="{ on }">
-          <v-btn text icon color="secondary" v-on="on" @click="clear()">
+          <v-btn text icon color="icon" v-on="on" @click="clear()">
             <v-icon>mdi-delete-sweep</v-icon>
           </v-btn>
         </template>
@@ -33,14 +33,14 @@
             <v-select
               :label="select.name"
               :items="select.options"
+              item-text="text"
+              item-value="text"
               :value="select.value"
               :rules="selectRules(select.name)"
               required
-              @change="setSelectValue({ name: select.name, value: $event })"
+              @change="setSelectValue({ id: select.id, value: $event })"
             >
-              <v-icon slot="prepend" color="secondary">{{
-                select.icon
-              }}</v-icon>
+              <v-icon slot="prepend" color="icon">{{ select.icon }}</v-icon>
             </v-select>
           </v-flex>
 
@@ -61,9 +61,9 @@
               :rules="numberRules(input.name)"
               required
               @focus="$event.target.select()"
-              @input="setInputValue({ name: input.name, value: $event })"
+              @input="setInputValue({ id: input.id, value: $event })"
             >
-              <v-icon slot="prepend" color="secondary">{{ input.icon }}</v-icon>
+              <v-icon slot="prepend" color="icon">{{ input.icon }}</v-icon>
             </v-text-field>
 
             <v-select
@@ -71,10 +71,10 @@
               item-text="symbol"
               item-value="symbol"
               label="Units"
-              :items="unitsInCategory(input.category.name)"
+              :items="input.unitCategory.units"
               :value="input.selectedUnit"
               @change="
-                setInputSelectedUnit({ name: input.name, selectedUnit: $event })
+                setInputSelectedUnit({ id: input.id, selectedUnit: $event })
               "
             >
               <template slot="item" slot-scope="data">
@@ -92,31 +92,32 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'InputList',
   data: () => ({
     title: 'Inputs',
-    valid: true
+    valid: true,
   }),
   computed: {
-    ...mapGetters('calcs', ['activeSelects', 'activeInputs']),
-    ...mapGetters('units', ['unitsInCategory'])
+    ...mapGetters('calculators', ['activeInputs', 'activeSelects']),
+    ...mapGetters('entities', ['query']),
   },
   methods: {
-    ...mapActions('calcs', [
+    ...mapActions('calculators', [
       'setSelectValue',
       'setInputValue',
       'setInputSelectedUnit',
-      'clearInputs'
+      'clearInputs',
     ]),
     selectRules: (label) => [(x) => !!x || `${label} is required`],
     numberRules: (label) => [
       (x) => !!x || `${label} is required`,
-      (x) => x > 0 || `${label} must be greater than zero`
+      (x) => x > 0 || `${label} must be greater than zero`,
     ],
     clear() {
       this.clearInputs()
       this.$refs.form.resetValidation()
-    }
-  }
+    },
+  },
 }
 </script>
 
