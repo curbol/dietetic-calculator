@@ -40,8 +40,12 @@ export default {
         }
       }
     `
-    const data = await api.request(query)
-    return data.calculators
+    try {
+      const data = await api.request(query)
+      return data.calculators
+    } catch (e) {
+      console.log(e)
+    }
   },
 
   async getUnits() {
@@ -59,7 +63,11 @@ export default {
         }
       }
     `
-    const data = await api.request(query)
-    return data.units
+    try {
+      const data = await api.request(query)
+      return data.units
+    } catch (e) {
+      console.log(e)
+    }
   },
 }
