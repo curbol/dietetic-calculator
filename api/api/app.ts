@@ -10,11 +10,13 @@ settings.change({
   },
 })
 
-server.express.use(
-  cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  }),
-)
+if (process.env.CORS_ORIGIN) {
+  server.express.use(
+    cors({
+      origin: process.env.CORS_ORIGIN,
+    }),
+  )
+}
 
 console.log('PLAYGROUND:', process.env.PLAYGROUND)
 console.log('DATABASE_URL:', process.env.DATABASE_URL)

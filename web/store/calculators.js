@@ -9,7 +9,7 @@ export default {
       dispatch(
         'entities/insertOrUpdate',
         { entity: 'calculators', data },
-        { root: true }
+        { root: true },
       )
     },
     toggleCalculatorCategoryActive({ dispatch }, id) {
@@ -22,7 +22,7 @@ export default {
             c.active = !c.active
           },
         },
-        { root: true }
+        { root: true },
       )
     },
     toggleCalculatorActive({ dispatch }, id) {
@@ -35,7 +35,7 @@ export default {
             c.active = !c.active
           },
         },
-        { root: true }
+        { root: true },
       )
     },
     setAllCalculatorsActive({ dispatch }, active) {
@@ -45,10 +45,10 @@ export default {
           entity: 'calculators',
           where: () => true,
           data: {
-            active: active,
+            active,
           },
         },
-        { root: true }
+        { root: true },
       )
       dispatch(
         'entities/update',
@@ -59,7 +59,7 @@ export default {
             c.active = active || c.active
           },
         },
-        { root: true }
+        { root: true },
       )
     },
     setSelectValue({ dispatch }, { id, value }) {
@@ -70,7 +70,7 @@ export default {
           where: id,
           data: { value },
         },
-        { root: true }
+        { root: true },
       )
       dispatch('calculateResults')
     },
@@ -82,7 +82,7 @@ export default {
           where: id,
           data: { value },
         },
-        { root: true }
+        { root: true },
       )
       dispatch('calculateResults')
     },
@@ -94,7 +94,7 @@ export default {
           where: id,
           data: { selectedUnit },
         },
-        { root: true }
+        { root: true },
       )
       dispatch('calculateResults')
     },
@@ -106,7 +106,7 @@ export default {
           where: () => true,
           data: { value: null },
         },
-        { root: true }
+        { root: true },
       )
       dispatch(
         'entities/update',
@@ -115,7 +115,7 @@ export default {
           where: () => true,
           data: { value: null },
         },
-        { root: true }
+        { root: true },
       )
       dispatch('calculateResults')
     },
@@ -127,7 +127,7 @@ export default {
           where: id,
           data: { selectedOutputUnit },
         },
-        { root: true }
+        { root: true },
       )
       dispatch('calculateResults')
     },
@@ -150,7 +150,7 @@ export default {
             where: calculator.id,
             data: { result: rounded },
           },
-          { root: true }
+          { root: true },
         )
       })
     },

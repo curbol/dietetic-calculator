@@ -7,7 +7,8 @@
   "scripts": {
     "format": "npx prettier --write './**/*.{ts,md}'",
     "dev": "nexus dev",
-    "build": "nexus build",
+    "build": "nexus build && npm run cp-data",
+    "cp-data": "cp ./prisma/data.db .nexus/build/api",
     "start": "node .nexus/build/api",
     "migrate-save": "npx prisma migrate save --experimental",
     "migrate-up": "npx prisma migrate up --experimental",
