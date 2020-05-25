@@ -31,14 +31,13 @@ export default {
     ResultList,
   },
   async middleware({ store, error }) {
-    const dispatcher = process.server ? store : store.cache
     try {
-      await dispatcher.dispatch('calculators/fetchCalculators')
+      await store.dispatch('calculators/fetchCalculators')
     } catch (e) {
       error({ statusCode: 503, message: `Unable to fetch calculators` })
     }
     try {
-      await dispatcher.dispatch('units/fetchUnits')
+      await store.dispatch('units/fetchUnits')
     } catch (e) {
       error({ statusCode: 503, message: `Unable to fetch units` })
     }

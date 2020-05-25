@@ -41,9 +41,9 @@
 
       <span v-show="$vuetify.breakpoint.smAndUp">
         <v-tooltip
-          color="app darken-2"
           v-for="link in links"
           :key="link.title"
+          color="app darken-2"
           bottom
         >
           <template v-slot:activator="{ on }">
@@ -63,7 +63,9 @@
 
     <v-footer color="primary" class="py-4" width="auto" inset absolute app>
       <v-layout justify-center>
-        <span class="font-weight-light">&copy; 2019 - Curtis Bollinger</span>
+        <span class="font-weight-light"
+          >&copy; {{ year }} - Curtis Bollinger</span
+        >
       </v-layout>
     </v-footer>
   </v-app>
@@ -93,6 +95,7 @@ export default {
           to: '/about',
         },
       ],
+      year: new Date().getFullYear(),
     }
   },
   head: () => ({

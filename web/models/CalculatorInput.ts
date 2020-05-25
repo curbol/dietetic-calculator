@@ -1,5 +1,4 @@
 import { Model } from '@vuex-orm/core'
-import Calculator from './Calculator'
 
 export default class CalculatorInput extends Model {
   static entity = 'calculatorInputs'

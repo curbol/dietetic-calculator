@@ -17,8 +17,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@vuex-orm/core": "^0.36.3",
     "graphql-request": "^1.8.2",
-    "nuxt": "^2.12.2",
-    "vuex-cache": "^3.2.0"
+    "nuxt": "^2.12.2"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.0",

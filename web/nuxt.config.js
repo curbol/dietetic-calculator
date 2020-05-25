@@ -30,10 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/filters.ts',
-    { src: '~/plugins/vuex-cache.js', ssr: false },
-  ],
+  plugins: ['~/plugins/filters.ts'],
   /*
    ** Nuxt.js dev-modules
    */
