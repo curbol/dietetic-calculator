@@ -46,7 +46,6 @@
               class="units"
               item-text="symbol"
               item-value="symbol"
-              label="Units"
               :items="unitsInCategory(category)"
               :value="from.unit"
               @change="setFromUnit($event)"
@@ -75,7 +74,6 @@
               class="units"
               item-text="symbol"
               item-value="symbol"
-              label="Units"
               :items="unitsInCategory(category)"
               :value="to.unit"
               @change="setToUnit($event)"
@@ -130,7 +128,7 @@ export default {
       const typeText = this.category && this.category.toLowerCase()
       return fromFactor >= toFactor
         ? `multiply the ${typeText} value by ${this.round(
-            fromFactor / toFactor
+            fromFactor / toFactor,
           )}`
         : `divide the ${typeText} value by ${this.round(toFactor / fromFactor)}`
     },
