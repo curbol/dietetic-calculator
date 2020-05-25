@@ -40,7 +40,6 @@ export default {
         }
       }
     `
-
     const data = await api.request(query)
     return data.calculators
   },

@@ -16,10 +16,12 @@
     "trailingComma": "all"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "nexus": "^0.22.0",
     "nexus-plugin-prisma": "^0.8.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
     "prettier": "^2.0.5"
   }
 }
