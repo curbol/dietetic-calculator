@@ -1,6 +1,6 @@
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator prisma_client {
@@ -8,7 +8,7 @@ generator prisma_client {
 }
 
 model CalculatorCategory {
-  id          Int          @id
+  id          Int          @default(uuid()) @id
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   name        String       @unique
@@ -17,7 +17,7 @@ model CalculatorCategory {
 }
 
 model Calculator {
-  id                Int                 @id
+  id                Int                 @default(uuid()) @id
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   key               String              @unique
@@ -31,7 +31,7 @@ model Calculator {
 }
 
 model Input {
-  id             Int           @id
+  id             Int           @default(uuid()) @id
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   name           String        @unique
@@ -43,7 +43,7 @@ model Input {
 }
 
 model SelectOption {
-  id        Int      @id
+  id        Int      @default(uuid()) @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   text      String
@@ -52,7 +52,7 @@ model SelectOption {
 }
 
 model Select {
-  id          Int            @id
+  id          Int            @default(uuid()) @id
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   name        String         @unique
@@ -62,7 +62,7 @@ model Select {
 }
 
 model UnitCategory {
-  id        Int      @id
+  id        Int      @default(uuid()) @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String   @unique
@@ -71,7 +71,7 @@ model UnitCategory {
 }
 
 model Unit {
-  id         Int           @id
+  id         Int           @default(uuid()) @id
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @updatedAt
   name       String        @unique

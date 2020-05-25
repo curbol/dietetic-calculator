@@ -18,23 +18,23 @@
     "@vuex-orm/core": "^0.36.3",
     "graphql-request": "^1.8.2",
     "nuxt": "^2.12.2",
-    "vuex-cache": "^3.1.1"
+    "vuex-cache": "^3.2.0"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.6.5",
-    "@nuxtjs/vuetify": "^1.11.0",
-    "@nuxtjs/eslint-config-typescript": "^1.0.2",
-    "@nuxtjs/eslint-module": "^1.1.0",
+    "@nuxt/typescript-build": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "@nuxtjs/eslint-config-typescript": "^2.0.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-nuxt": "^0.5.2",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^2.0.4",
-    "@vue/test-utils": "^1.0.0-beta.33",
-    "babel-jest": "^25.3.0",
-    "jest": "^25.3.0",
+    "eslint": "^7.1.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "prettier": "^2.0.5",
+    "@vue/test-utils": "^1.0.3",
+    "babel-jest": "^26.0.1",
+    "jest": "^26.0.1",
     "vue-jest": "^4.0.0-0",
-    "ts-jest": "^25.3.1"
+    "ts-jest": "^26.0.0"
   }
 }

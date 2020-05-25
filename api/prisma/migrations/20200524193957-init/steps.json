@@ -21,16 +21,7 @@
         "source": "db"
       },
       "argument": "url",
-      "value": "\"file:./data.db\""
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Source",
-        "source": "db"
-      },
-      "argument": "default",
-      "value": "true"
+      "value": "env(\"DATABASE_URL\")"
     },
     {
       "tag": "CreateModel",
@@ -66,7 +57,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -195,7 +186,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -311,38 +302,6 @@
     {
       "tag": "CreateField",
       "model": "Calculator",
-      "field": "category",
-      "type": "CalculatorCategory",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Calculator",
-          "field": "category"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Calculator",
-          "field": "category"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Calculator",
       "field": "inputs",
       "type": "Input",
       "arity": "List"
@@ -405,6 +364,59 @@
       "value": "[id]"
     },
     {
+      "tag": "CreateField",
+      "model": "Calculator",
+      "field": "category",
+      "type": "CalculatorCategory",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Calculator",
+          "field": "category"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Calculator",
+          "field": "category"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[categoryId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Calculator",
+          "field": "category"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Calculator",
+      "field": "categoryId",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
       "tag": "CreateModel",
       "model": "Input"
     },
@@ -438,7 +450,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -536,38 +548,6 @@
     {
       "tag": "CreateField",
       "model": "Input",
-      "field": "unitCategory",
-      "type": "UnitCategory",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Input",
-          "field": "unitCategory"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Input",
-          "field": "unitCategory"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Input",
       "field": "calculators",
       "type": "Calculator",
       "arity": "List"
@@ -596,6 +576,59 @@
       },
       "argument": "references",
       "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Input",
+      "field": "unitCategory",
+      "type": "UnitCategory",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Input",
+          "field": "unitCategory"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Input",
+          "field": "unitCategory"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[unitCategoryId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Input",
+          "field": "unitCategory"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Input",
+      "field": "unitCategoryId",
+      "type": "Int",
+      "arity": "Optional"
     },
     {
       "tag": "CreateModel",
@@ -631,7 +664,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -706,7 +739,7 @@
       "model": "SelectOption",
       "field": "select",
       "type": "Select",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -730,24 +763,29 @@
         },
         "directive": "relation"
       },
+      "argument": "fields",
+      "value": "[selectId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SelectOption",
+          "field": "select"
+        },
+        "directive": "relation"
+      },
       "argument": "references",
       "value": "[id]"
     },
     {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "SelectOption",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[select, text]"
-            }
-          ]
-        },
-        "directive": "unique"
-      }
+      "tag": "CreateField",
+      "model": "SelectOption",
+      "field": "selectId",
+      "type": "Int",
+      "arity": "Optional"
     },
     {
       "tag": "CreateModel",
@@ -783,7 +821,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -944,7 +982,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -1073,7 +1111,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "uuid()"
     },
     {
       "tag": "CreateDirective",
@@ -1184,7 +1222,7 @@
       "model": "Unit",
       "field": "category",
       "type": "UnitCategory",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -1208,8 +1246,29 @@
         },
         "directive": "relation"
       },
+      "argument": "fields",
+      "value": "[categoryId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Unit",
+          "field": "category"
+        },
+        "directive": "relation"
+      },
       "argument": "references",
       "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Unit",
+      "field": "categoryId",
+      "type": "Int",
+      "arity": "Optional"
     }
   ]
 }
