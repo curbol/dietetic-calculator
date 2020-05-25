@@ -18,6 +18,6 @@ if (process.env.CORS_ORIGIN) {
   )
 }
 
-console.log('PLAYGROUND:', process.env.PLAYGROUND)
+console.log('PLAYGROUND:', !!process.env.PLAYGROUND)
 console.log('DATABASE_URL:', process.env.DATABASE_URL)
 console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN)
