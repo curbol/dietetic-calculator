@@ -1,4 +1,4 @@
-import { convert } from '@/services/equation-processor.js'
+import { convert } from '@/functions/equation-processor.js'
 
 export default {
   state() {

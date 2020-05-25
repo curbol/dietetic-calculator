@@ -1,5 +1,5 @@
 import CalculatorRepository from '@/repositories/calculator.repository.ts'
-import { equationProcessor } from '@/services/equation-processor.js'
+import { equationProcessor } from '@/functions/equation-processor.js'
 import { INVALID_INPUTS } from '@/models/Calculator'
 
 export default {
