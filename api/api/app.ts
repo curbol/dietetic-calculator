@@ -10,3 +10,6 @@ server.express.use(
     origin: cors_origin,
   }),
 )
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL)
+console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN)

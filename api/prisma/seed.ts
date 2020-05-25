@@ -6,7 +6,7 @@ main().then(() => prisma.disconnect())
 
 async function main() {
   let count = 1
-  console.log(`${count++}. UnitCategory: Mass`)
+  console.log(count++, 'UnitCategory: Mass')
   const massUnitCategory = await prisma.unitCategory.create({
     data: {
       name: 'Mass',
@@ -46,7 +46,7 @@ async function main() {
       },
     },
   })
-  console.log(`${count++}. UnitCategory: Length`)
+  console.log(count++, count++, 'UnitCategory: Length')
   const lengthUnitCategory = await prisma.unitCategory.create({
     data: {
       name: 'Length',
@@ -86,7 +86,7 @@ async function main() {
       },
     },
   })
-  console.log(`${count++}. UnitCategory: Time`)
+  console.log(count++, UnitCategory: Time')
   const timeUnitCategory = await prisma.unitCategory.create({
     data: {
       name: 'Time',
@@ -136,7 +136,7 @@ async function main() {
       },
     },
   })
-  console.log(`${count++}. UnitCategory: Energy`)
+  console.log(count++, 'UnitCategory: Energy')
   const energyUnitCategory = await prisma.unitCategory.create({
     data: {
       name: 'Energy',
@@ -151,7 +151,7 @@ async function main() {
       },
     },
   })
-  console.log(`${count++}. UnitCategory: Volume`)
+  console.log(count++, 'UnitCategory: Volume')
   const volumeUnitCategory = await prisma.unitCategory.create({
     data: {
       name: 'Volume',
@@ -207,7 +207,7 @@ async function main() {
     },
   })
 
-  console.log(`${count++}. Select: Gender`)
+  console.log(count++, 'Select: Gender')
   const genderSelect = await prisma.select.create({
     data: {
       name: 'Gender',
@@ -217,7 +217,7 @@ async function main() {
       icon: 'mdi-human-male-female',
     },
   })
-  console.log(`${count++}. Input: Weight`)
+  console.log(count++, 'Input: Weight')
   const weightInput = await prisma.input.create({
     data: {
       name: 'Weight',
@@ -226,7 +226,7 @@ async function main() {
       icon: 'mdi-weight',
     },
   })
-  console.log(`${count++}. Input: Height`)
+  console.log(count++, 'Input: Height')
   const heightInput = await prisma.input.create({
     data: {
       name: 'Height',
@@ -235,7 +235,7 @@ async function main() {
       icon: 'mdi-human-male-height',
     },
   })
-  console.log(`${count++}. Age Input`)
+  console.log(count++, 'Age Input')
   const ageInput = await prisma.input.create({
     data: {
       name: 'Age',
@@ -245,7 +245,7 @@ async function main() {
     },
   })
 
-  console.log(`${count++}. CalculatorCategory: Anthropometric`)
+  console.log(count++, 'CalculatorCategory: Anthropometric')
   const anthropometricCalculatorCategory = await prisma.calculatorCategory.create(
     {
       data: {
@@ -282,7 +282,7 @@ async function main() {
       },
     },
   )
-  console.log(`${count++}. CalculatorCategory: Nutritional Needs`)
+  console.log(count++, 'CalculatorCategory: Nutritional Needs')
   const nutritionalNeedsCalculatorCategory = await prisma.calculatorCategory.create(
     {
       data: {

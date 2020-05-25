@@ -1,11 +1,11 @@
-import Calculators from '@/enums/calculators.ts'
-import Inputs from '@/enums/inputs.ts'
 import {
   bodyMassIndex,
   idealBodyWeight,
   adjustedBodyWeight,
   mifflinStJeor,
-} from '@/equations'
+} from './equations.ts'
+import Calculators from '@/enums/calculators.ts'
+import Inputs from '@/enums/inputs.ts'
 
 export function equationProcessor({ units = [], inputs = [], selects = [] }) {
   return (calculator) => {

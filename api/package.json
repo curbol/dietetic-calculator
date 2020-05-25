@@ -1,6 +1,9 @@
 {
-  "name": "my-nexus-app-30065397133065463",
-  "license": "UNLICENSED",
+  "name": "dietetic-calculator-api",
+  "version": "1.0.0",
+  "description": "Tool For Common Dietetic Calculations",
+  "author": "Curtis Bollinger",
+  "private": true,
   "scripts": {
     "format": "npx prettier --write './**/*.{ts,md}'",
     "dev": "nexus dev",
@@ -13,7 +16,8 @@
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "arrowParens": "always"
   },
   "dependencies": {
     "cors": "^2.8.5",

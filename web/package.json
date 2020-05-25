@@ -1,5 +1,5 @@
 {
-  "name": "dietetic-calculator",
+  "name": "dietetic-calculator-web",
   "version": "1.0.0",
   "description": "Tool For Common Dietetic Calculations",
   "author": "Curtis Bollinger",
@@ -11,6 +11,12 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "jest"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",

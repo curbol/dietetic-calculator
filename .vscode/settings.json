@@ -21,5 +21,6 @@
     "tab.activeBorder": "#00c5da",
     "titleBar.border": "#0097a7"
   },
-  "peacock.color": "#0097A7"
+  "peacock.color": "#0097A7",
+  "peacock.remoteColor": "#5dc9e2"
 }
