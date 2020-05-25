@@ -1,15 +1,21 @@
-import { use, server } from 'nexus'
+import { use, settings, server } from 'nexus'
 import { prisma } from 'nexus-plugin-prisma'
 import * as cors from 'cors'
 
 use(prisma())
 
-const cors_origin = process.env.CORS_ORIGIN || 'http://localhost:3000'
+settings.change({
+  server: {
+    playground: !!process.env.PLAYGROUND || false,
+  },
+})
+
 server.express.use(
   cors({
-    origin: cors_origin,
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
   }),
 )
 
+console.log('PLAYGROUND:', process.env.PLAYGROUND)
 console.log('DATABASE_URL:', process.env.DATABASE_URL)
 console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN)
