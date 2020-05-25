@@ -1,6 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
 
 const endpoint = process.env.CALC_API_URL || ''
+console.log('CALC_API_URL:', process.env.CALC_API_URL)
 const api = new GraphQLClient(endpoint)
 
 export default {
