@@ -38,10 +38,8 @@ export default {
       commit('Set_Category', category)
 
       const unitsInCategory = rootGetters['units/unitsInCategory'](category)
-      if (unitsInCategory[0]) {
+      if (unitsInCategory.length >= 2) {
         dispatch('setFromUnit', unitsInCategory[0].symbol)
-      }
-      if (unitsInCategory[1]) {
         dispatch('setToUnit', unitsInCategory[1].symbol)
       }
 
