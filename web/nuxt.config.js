@@ -81,7 +81,9 @@ export default {
   hooks: {
     generate: {
       routeCreated({ route, path, errors }) {
-        console.log('ERROR:', errors)
+        if (errors.length) {
+          console.log('ERROR:', errors)
+        }
       },
     },
   },
