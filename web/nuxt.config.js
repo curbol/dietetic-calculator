@@ -78,4 +78,11 @@ export default {
      */
     extend(config, ctx) {},
   },
+  hooks: {
+    generate: {
+      routeCreated({ route, path, errors }) {
+        console.log('ERROR:', errors)
+      },
+    },
+  },
 }

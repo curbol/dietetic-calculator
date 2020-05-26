@@ -13,6 +13,7 @@ export default {
           name
           description
           defaultOutputUnit
+          categoryId
           category {
             id
             name
@@ -21,6 +22,7 @@ export default {
           inputs {
             id
             name
+            unitCategoryId
             unitCategory {
               id
               name
@@ -34,18 +36,15 @@ export default {
             options {
               id
               text
+              selectId
             }
             icon
           }
         }
       }
     `
-    try {
-      const data = await api.request(query)
-      return data.calculators
-    } catch (e) {
-      console.log(e)
-    }
+    const data = await api.request(query)
+    return data.calculators
   },
 
   async getUnits() {
@@ -56,6 +55,7 @@ export default {
           name
           symbol
           factor
+          categoryId
           category {
             id
             name
@@ -63,11 +63,7 @@ export default {
         }
       }
     `
-    try {
-      const data = await api.request(query)
-      return data.units
-    } catch (e) {
-      console.log(e)
-    }
+    const data = await api.request(query)
+    return data.units
   },
 }

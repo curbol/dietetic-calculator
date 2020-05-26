@@ -7,7 +7,7 @@ export default {
       dispatch(
         'entities/insertOrUpdate',
         { entity: 'units', data },
-        { root: true }
+        { root: true },
       )
 
       const selectedCategory = rootState.convert.category
