@@ -1,7 +1,8 @@
 import { GraphQLClient } from 'graphql-request'
 
-const endpoint = 'https://dietetic-calculator-prod.herokuapp.com/graphql'
-const api = new GraphQLClient(endpoint)
+const endpoint = process.env.CALC_API_URL
+console.log('Endpoint: ', endpoint)
+const api = endpoint ? new GraphQLClient(endpoint) : undefined
 
 export default {
   async getCalculators() {
