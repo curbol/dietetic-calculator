@@ -1,8 +1,8 @@
 import { GraphQLClient } from 'graphql-request'
 
-const endpoint = process.env.CALC_API_URL
+const endpoint = process.env.CALC_API_URL || ''
 console.log('Endpoint: ', endpoint)
-const api = endpoint ? new GraphQLClient(endpoint) : undefined
+const api = new GraphQLClient(endpoint)
 
 export default {
   async getCalculators() {
