@@ -34,7 +34,7 @@
       <span
         class="subtitle-1 text-truncate font-weight-light hidden-sm-and-down"
       >
-        {{ subtitle }}
+        {{ subtitle }} {{ process.env.CALC_API_URL }}
       </span>
 
       <v-spacer />
