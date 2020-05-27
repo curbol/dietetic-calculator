@@ -34,7 +34,7 @@
       <span
         class="subtitle-1 text-truncate font-weight-light hidden-sm-and-down"
       >
-        {{ subtitle }} url: {{ url }}
+        {{ subtitle }}
       </span>
 
       <v-spacer />
@@ -75,7 +75,6 @@
 export default {
   data() {
     return {
-      url: process.env.CALC_API_URL,
       drawer: false,
       title: 'Dietetic Calculator',
       subtitle: 'Tool For Common Dietitian Calculations',

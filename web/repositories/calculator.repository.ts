@@ -1,7 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 
 const endpoint = process.env.CALC_API_URL || ''
-console.log('Endpoint: ', endpoint)
 const api = new GraphQLClient(endpoint)
 
 export default {
@@ -44,7 +43,6 @@ export default {
         }
       }
     `
-    console.log('Endpoint: ', endpoint)
     const data = await api.request(query)
     return data.calculators
   },
@@ -65,7 +63,6 @@ export default {
         }
       }
     `
-    console.log('Endpoint: ', endpoint)
     const data = await api.request(query)
     return data.units
   },
