@@ -44,6 +44,7 @@ export default {
         }
       }
     `
+    console.log('Endpoint: ', endpoint)
     const data = await api.request(query)
     return data.calculators
   },
@@ -64,6 +65,7 @@ export default {
         }
       }
     `
+    console.log('Endpoint: ', endpoint)
     const data = await api.request(query)
     return data.units
   },
